@@ -1,0 +1,73 @@
+{
+    "TEST_DATA": {
+        "patient_name": "Mahendra Amarnath",
+        "gender": "Female",
+        "patient_age": 65,
+        "weight": 65.5,
+        "start": 1742798846372,
+        "end": 1742798906372,
+        "indicators": [
+          
+        ],
+        "symptoms": [
+            "palpitation",
+            "dysepsia"
+        ],
+        "test_parameters": [
+            {
+                "name": "C Reative  Protien",
+                "value": "45",
+                "unit": "mg"
+            }
+        ],
+        "medical_history": [
+            {
+                "name": "hypothyroidsm",
+                "duration": 10,
+                "durationType": "Year"
+            },
+             {
+                "name" : "diabetes",
+                "duration" : 4,
+                "durationType": "Year"
+             }
+        ],
+       
+        "notes": [
+            "Review after  months"
+        ],
+        "prescription": [
+            {
+                "status": "New",
+                "name": "Thyronorm",
+                "dosage": 1,
+                "unit": "tabs",
+                "preparation": "Tablet",
+                "frequency_type": "Qd_1XDay",
+                "duration_type": "Year",
+                "duration": 8,
+                "direction": "not applicable",
+                "times": [
+                    "daybreak"
+                ],
+                "isHalf": false
+            },
+            {
+                "status": "New",
+                "name": "Moisol",
+                "dosage": 2,
+                "unit": "drops",
+                "preparation": "EyeDrops",
+                "frequency_type": "Bid_2XDay",
+                "duration_type": "Year",
+                "duration": 1,
+                "direction": "not applicable",
+                "times": [
+                    "daybreak" ,   "afternoon"
+                ],
+                "isHalf": false
+            }
+        ],
+        "status": "InProgress"
+    }
+}

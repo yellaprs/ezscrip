@@ -1,0 +1,61 @@
+{
+    "TEST_DATA": {
+        "patient_name": "John Doe",
+        "gender": "Male",
+        "patient_age": 56,
+        "weight": 82.5,
+        "start": 1742798846372,
+        "end": 1742798906372,
+        "indicators": [
+           
+        ],
+        "symptoms": [
+            "fever",
+            "cough"
+        ],
+        "test_parameters": [
+            {
+                "name": "Serum Creatinine",
+                "value": "1.0"
+            }
+        ],
+        "medical_history": [
+            {
+                "name": "Diabetes",
+                "duration": 15,
+                "durationType": "Year"
+            },
+            {
+                "name": "neuropathy",
+                "duration": 2,
+                "durationType": "Month"
+            }
+        ],
+        "tests": [
+            "H1BAC"
+        ],
+        "notes": [
+            "Review after months"
+        ],
+        "prescription": [
+            {
+                "status": "New",
+                "name": "Dolo 650 mg",
+                "dosage": 1,
+                "unit": "tabs",
+                "preparation": "Tablet",
+                "frequency_type": "Tid_3XDay",
+                "duration_type": "Day",
+                "duration": 8,
+                "direction": "not applicable",
+                "times": [
+                    "daybreak",
+                    "afternoon",
+                    "night"
+                ],
+                "isHalf": false
+            }
+        ],
+        "status": "InProgress"
+    }
+}

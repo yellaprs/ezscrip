@@ -1,0 +1,17 @@
+{
+  "DB_NAME": "ezscrip.db",
+  "AUDIT_FILE_NAME": "audit_log.json",
+  "DEFAULT_TEMPLATE": "assets/images/templates/letterhead_blank.jpg",
+  "TASK_NAME": "DataRententionPeriodicTask",
+  "DEBUG": false,
+  "REMOTE_LOG" : true,
+  "MAX_SYMPTOMS": 10,
+  "MAX_MEDICAL_HISTORY": 10,
+  "MAX_INVESTIGATIONS": 10,
+  "MAX_NOTES": 5,
+  "MAX_PRESCRIPTION": 10, 
+  "MAX_PARAMETERS" : 10,
+  "IS_SIGNATURE_ENABLED" : false,
+  "PRESCRIPTION_BLOCK_LENGTH" : 8,
+  "PRESCRIPTION_BLOCK_WEIGHT" : 1
+}

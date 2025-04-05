@@ -1,0 +1,19 @@
+{
+ "diastolic" : {"max" : 180, "min" : 30} , 
+ "systolic" : {"max" : 250, "min" : 70},
+ "heartrate" : {"max": 140, "min": 40},
+ "temperature" : {"max": 110, "min": 80},
+ "spo2" :  {"max":100, "min": 0},
+ "tablet": {"max": 3, "min": 1},
+ "capsule" :{"max": 3, "min": 1},
+ "injectionim" : {"max": 100, "min": 5},
+ "injectioniv" :{"max": 200, "min": 5},
+ "eyedrops" : {"max": 4, "min": 1},
+ "eardrops": {"max": 4, "min": 1},
+ "oralsyrup" :{"max": 4, "min": 1},
+ "symptoms" : {"max" : 10, "min": 1},
+ "notes" : {"max": 10, "min" : 0 },
+ "medicalhistory" : {"max" : 10, "min": 0} ,
+ "tests" : {"max" : 10, "min": 0}
+ 
+}

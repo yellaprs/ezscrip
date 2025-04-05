@@ -1,0 +1,1 @@
+enum Time { daybreak, morning, afternoon, evening, night }

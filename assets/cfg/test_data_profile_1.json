@@ -1,0 +1,8 @@
+{ "TEST_DATA" :{
+    "firstname" : "Ravi",
+    "lastname" : "Shastri",
+    "specialization" : "Dental",
+    "credentials" : "m,b.b.s",
+    "clinic" : "Pragati Clinic",
+    "contact_no" : 9885137241
+}}

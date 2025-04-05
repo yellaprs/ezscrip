@@ -1,0 +1,464 @@
+1,25-Dihydroxyvitamin (1,25-dihydroxycholecalciferol), serum
+1,25-Dihydroxyvitamin D (1,25-dihydroxycholecalciferol)
+25-Hydroxyvitamin D (25-hydroxycholecalciferol)
+1,5-Anhydroglucitol, serum or plasma
+17-Hydroxycorticosteroids (Porter-Silber), urine
+17-Hydroxyprogesterone, serum
+1,5-Anhydroglucitol, serum or plasma
+17-Hydroxycorticosteroids (Porter-Silber), urine
+17-Hydroxyprogesterone, serum
+25-Hydroxyvitamin D
+(25-hydroxycholecalciferol), serum
+25-hydroxycholecalciferol), serum
+5-Hydroxyindoleacetic acid, urine
+5'-Nucleotidase, serum
+6-Thioguanine, whole blood
+Absolute neutrophil count (ANC)
+Acid phosphatase, serum
+Prostatic fraction
+Prostatic fraction
+ACTH, plasma
+Activated partial thromboplastin time
+ADAMTS13 activity
+Adrenocorticotropic hormone (ACTH), plasma
+Albumin, serum
+Albumin, urine
+Albumin-to-creatinine ratio, urine
+Aldolase, serum
+Aldosterone, plasma
+Aldosterone, urine
+Alkaline phosphatase, serum
+Aldosterone, urine
+Alkaline phosphetase serum
+Alpha1-antitrypsin (AAT), serum
+Alpha2-antiplasmin activity, plasma
+Alpha-amino nitrogen, urine
+Alpha-fetoprotein, serum
+Amino acids, urine
+Aminotransferase, serum alanine (ALT, SGPT)
+Aminotransferase, serum aspartate (AST, SGOT)
+Ammonia, plasma
+Amylase, serum
+Amylase, urine
+Androstenedione, serum
+Angiotensin-converting enzyme, serum
+Anion gap, serum
+Antibodies to double-stranded DNA
+Amylase, serum
+Amylase, 
+ACTH, plasma
+Activated partial thromboplastin time
+ADAMTS13 activity
+Adrenocorticotropic hormone (ACTH), plasma
+Albumin, serum
+Albumin, urine
+Albumin-to-creatinine ratio, urine
+Aldolase, serum
+Aldosterone, plasma
+5-Hydroxyindoleacetic acid, urine
+5-Nucleotidase, serum
+6-Thioguanine, whole blood
+Absolute neutrophil count (ANC)
+Acid phosphatase, serum
+1,25-Dihydroxyvitamin D
+Anticardiolipin antibodies
+IgG
+IgM
+Anti-cyclic citrullinated peptide antibodies
+Antideoxyribonuclease B
+Anti-F-actin antibodies, serum
+Antihistone antibodies
+Anti-liver-kidney microsomal antibodies (anti-LKM)
+Antimitochondrial antibodies
+Anti–myelin associated glycoprotein antibody
+Antimyeloperoxidase antibodies
+Antinuclear antibodies
+Anti-phospholipase A2 receptor (PLA2R) antibodies,
+serum
+[ELISA]
+Anti-RNP antibodies[by chemiluminescence method]
+Anti-RNP antibodies[by multiplex flow immunoassay]
+Anti-Scl-70 antibodies (topoisomerase 1 antibodies), IgG,serum
+Anti–smooth muscle antibodies
+Anti-SSA/Ro & anti-SSB antibodies
+[by chemiluminescence method]
+Anti-SSA/Ro & anti-SSB antibodies
+[by multiplex flow immunoassay]
+Antistreptolysin O titer
+Antithrombin activity
+Antithyroglobulin antibodies
+Antithyroid peroxidase antibodies
+Anti-tissue transglutaminase antibodies
+Apolipoprotein A-1, serum
+Apolipoprotein B, serum
+pH
+PaCO2
+PaO2
+Bicarbonate
+Oxygen saturation
+Methemoglobin
+Ascorbic acid (vitamin C), blood
+Ascorbic acid, leukocyte
+Beta-human chorionic gonadotropin (beta-hCG), serum Female, premenopausal nonpregnant: ˂1.0 U/L;
+female, postmenopausal: ˂7.0 U/L; male: ˂1.4 U/L
+Beta-human chorionic gonadotropin (beta-hCG), urine
+Beta2-glycoprotein I antibodies:
+IgG
+IgM
+Beta-hydroxybutyrate, serum
+Beta2-microglobulin, serum
+Bicarbonate, serum
+Bilirubin, serum
+Total
+Direct
+Indirect
+Bleeding time (template)
+Blood urea nitrogen (BUN), serum or plasma
+Bone-specific alkaline phosphatase, serum
+B-type natriuretic peptide, plasma
+C peptide, serum
+Calcitonin, serum
+Calcium, ionized, serum
+Calcium, serum
+Calcium, urine
+Carbohydrate antigens, serum
+CA 19-9
+CA 27-29
+CA 125
+Carbon dioxide, serum
+Carboxyhemoglobin, blood
+Carcinoembryonic antigen, plasma
+Carotene, serum
+Catecholamines, plasma
+Dopamine
+Epinephrine
+Supine
+Standing
+Norepinephrine
+Supine
+Standing
+Catecholamines, urine
+Dopamine
+Epinephrine
+Norepinephrine
+Total
+CD4 T-lymphocyte count
+Cell count, CSF:
+Leukocytes (WBCs)
+Erythrocytes (RBCs)
+Ceruloplasmin, serum (plasma)
+Chloride, CSF
+Chloride, serum
+Chloride, urine
+Cholesterol, serum
+Cholinesterase, serum (pseudocholinesterase)
+Chorionic gonadotropin, beta-human(beta-hCG), serum
+Chorionic gonadotropin, beta-human(beta-hCG), urine
+Chromogranin A, serum
+Citrate, urine
+Coagulation factors, plasma
+Factor I (fibrinogen)
+Factor II (prothrombin)
+Factor V (accelerator globulin)
+Factor VII (proconvertin)
+Factor VIII (antihemophilic globulin)
+Factor IX (plasma thromboplastin component)
+Factor X (Stuart factor)
+Factor XI (plasma thromboplastin antecedent)
+Factor XII (Hageman factor)
+Factor XIII
+Cold agglutinin titer
+Complement components, serum
+C3
+C4
+CH50
+Copper, serum
+Copper, urine
+Coproporphyrin, urine
+Cortisol, free, urine
+Cortisol, plasma serum
+C-reactive protein, serum
+≤0.8 mg/dL
+C-reactive protein (high sensitivity), serum
+Creatine kinase, serum
+Total
+MB isoenzymes
+Creatine, urine
+Creatinine clearance, urine
+Creatinine, serum
+Creatinine, urine
+Random ("spot")
+24-hour measurement
+D-dimer, plasma
+Dehydroepiandrosterone sulfate (DHEA-S), serum
+Delta-aminolevulinic acid, serum
+Dihydrotestosterone, serum
+Dopamine, plasma
+Dopamine, urine
+D-Xylose absorption
+(after ingestion of 25 g of D-xylose)
+Serum
+Urinary excretion
+Electrolytes, serum
+Sodium
+Potassium
+Chloride
+Bicarbonate
+Epinephrine, plasma
+Epinephrine, urine
+Erythrocyte count
+Erythrocyte sedimentation rate (Westergren)
+Erythrocyte survival rate (51Cr)
+Erythropoietin, serum
+Estradiol, serum
+Female, follicular
+Mid-cycle peak
+Luteal
+Postmenopausal
+Male
+Estriol, urine
+Estrogen receptor protein
+Estrone, serum
+Ethanol, blood
+Coma level
+Intoxication
+Euglobulin clot lysis time
+Factor XIII, B subunit, plasma
+Fecal fat
+Fecal pH
+Fecal weight
+Ferritin, serum
+Fibrin(ogen) degradation products
+Fibrinogen, plasma
+Fibroblast growth factor-23, serum
+Folate, red cell
+Folate, serum
+Follicle-stimulating hormone, serum
+Female, follicular/luteal
+Female, mid-cycle peak
+Female, postmenopausal
+Male (adult)
+Children, Tanner stages 1, 2
+Children, Tanner stages 3, 4, 5
+Free kappa light chain, serum
+Free kappa-to-free lambda light chain ratio, serum
+Free lambda light chain, serum
+Gamma globulin, CSF
+Gamma-glutamyltransferase(gamma-glutamyl transpeptidase), serum
+Gastrin, serum
+Glucose, CSF
+Glucose, plasma (fasting)
+Glucose-6-phosphate dehydrogenase, blood
+Glycoprotein α-subunit, serum
+Growth hormone, serum
+Haptoglobin, serum
+Hematocrit, blood
+Hemoglobin A1C
+Hemoglobin, blood
+Hemoglobin fractionation
+Hb A
+Hb A2
+Hb F
+Hemoglobin, plasma
+Heparin–anti-factor Xa assay, plasma
+Heparin–platelet factor 4 antibody, serum
+Hepatic copper
+Hepatic iron index
+Histamine excretion, urine
+Homocysteine, plasma
+β-Human chorionic gonadotropin (β-hCG), serum
+β-Human chorionic gonadotropin (β-hCG), urine
+Hydroxyproline, urine
+Immature platelet fraction
+Immune complexes, serum
+Immunoglobulins, serum
+IgA
+IgE
+IgG
+IgM
+Immunoglobulin free light chains, serum
+Kappa
+Lambda
+Kappa-to-lambda ratio
+Insulin, serum (fasting)
+Insulin-like growth factor 1 (IGF-1)
+(somatomedin-C), serum
+Iodine, urine
+Random ("spot")
+Iron, serum
+Iron-binding capacity, serum (total)
+Lactate dehydrogenase, serum
+Lactate, arterial blood
+Lactate, serum or plasma
+Lactate, venous blood
+Lactic acid, serum
+Lactose tolerance test, GI
+Lead, blood
+Leukocyte count
+Segmented neutrophils
+Band forms
+Lymphocytes
+Monocytes
+Basophils
+Eosinophils
+Lipase, serum
+Lipoprotein(a), serum
+Luteinizing hormone (LH), serum
+Female, follicular/luteal
+Female, mid-cycle peak
+Female, postmenopausal
+Male (adult)
+Children, Tanner stages 1, 2, 3
+Children, Tanner stages 4, 5
+Lymphocyte subsets
+CD3
+CD4
+CD8
+CD19
+CD56
+Magnesium, serum
+Magnesium, urine
+1.6–2.6 mg/dL
+Mean corpuscular hemoglobin
+Mean corpuscular hemoglobin concentration
+Mean corpuscular volume
+Mean platelet volume
+Metanephrines, fractionated, plasma
+Metanephrine
+Normetanephrine
+Metanephrines, fractionated, 24-hour urine
+Metanephrine
+Normetanephrine
+Methylmalonic acid, serum
+Myoglobin, serum
+Norepinephrine, plasma
+Supine
+Standing
+Norepinephrine, urine
+Normetanephrine, fractionated, plasma
+Normetanephrine, fractionated, 24-hour urine
+N -telopeptide, urine
+N -terminal-pro-B-type natriuretic peptide (NT-pro-BNP),
+Osmolality, serum
+Osmolality, urine
+Osmotic fragility of erythrocytes
+Osteocalcin, serum
+Oxalate, urine
+Oxygen consumption
+Oxygen saturation, arterial blood
+Parathyroid hormone, serum
+C -terminal
+Intact
+Intact (dialysis patients only)
+Parathyroid hormone-related protein, serum
+Partial thromboplastin time (activated)
+pH, urine
+Phenolsulfonphthalein, urine
+Phosphatase (acid), serumTotal
+Prostatic fraction
+Phosphatase (alkaline), serum
+Phospholipids, serum (total)
+Phosphorus, serum
+Phosphorus, urine
+Platelet count
+Platelet function analysis (PFA-100):
+Collagen–epinephrine closure time
+Collagen–ADP closure time
+Platelet survival rate (51Cr)
+Potassium, serum
+Potassium, urine
+Random ("spot")
+24-hour measurement
+Prealbumin, serum
+Pregnanetriol, urine
+Pressure (opening) [initial], CSF
+Procalcitonin, serum
+Progesterone, serum
+Proinsulin, serum
+Prolactin, serum
+Prostate-specific antigen, serum
+Protein C activity, plasma
+Protein C antigen, plasma
+Protein catabolic rate, urine
+Protein S activity, plasma
+Protein S antigen, plasma
+Protein, urine
+Proteins, CSF total
+Proteins, serum
+Albumin
+Globulin
+Alpha1
+Alpha2
+Beta
+Gamma
+Protein-to-creatinine ratio, urine
+Prothrombin time, plasma
+Pyruvic acid, blood
+Red cell distribution width (RDW)
+Red cell mass
+Renin activity (angiotensin-I radioimmunoassay)
+Peripheral plasma
+Renal vein concentration
+Reptilase time
+Reticulocyte count
+Reticulocyte count, absolute
+Rheumatoid factor (nephelometry)
+Rheumatoid factor, latex test for
+Ristocetin cofactor activity of plasma
+Russell viper venom time, dilute
+Sex hormone-binding globulin
+Sodium, serum
+Sodium, urine
+Random ("spot")
+Specific gravity, urine
+Sperm density
+Sweat test for sodium and chloride
+T3 resin uptake
+T-lymphocyte count, CD4
+Testosterone, serum
+Testosterone, bioavailable, serum
+Testosterone, free, serum
+Thrombin time
+Thyroid function studies
+T3 resin uptake
+Thyroglobulin, serum
+Thyroidal iodine (123I) uptake
+Thyroid-stimulating hormone (TSH), serum
+Thyroid-stimulating immunoglobulin (TSI)
+Thyroxine-binding globulin, serum
+Thyroxine index, free (estimate)
+Thyroxine (T4), serum
+Triiodothyronine (T3), serum
+Tissue transglutaminase antibody, IgA
+Tissue transglutaminase antibody, IgG
+Tissue transglutaminase antibody, IgA
+Tissue transglutaminase antibody, IgG
+Total proteins, CSF
+Transaminase, serum glutamic oxaloacetic (SGOT)
+Transaminase, serum glutamic pyruvic (SGPT)
+Transferrin saturation
+Transferrin, serum
+Triglycerides, serum (fasting)
+Troponin I, cardiac, serum
+Troponin T, cardiac, serum
+Troponin I, cardiac, high-sensitivity, plasma
+Troponin T, cardiac, high-sensitivity, plasma
+Tryptase, serum
+Urea clearance, urine
+Urea nitrogen, blood
+Urea nitrogen, urine
+Uric acid, serum
+Uric acid, urine
+Uroporphyrin, urine
+Vanillylmandelic acid, urine
+Venous oxygen content, mixed
+Venous studies, mixed, blood
+pH
+PCO2
+PO2
+Bicarbonate
+Oxygen saturation (SvO2)
+Viscosity, serum
+Vitamin A, serum:
+Vitamin B12, serum
+Vitamin D metabolites, serum

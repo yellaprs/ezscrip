@@ -1,0 +1,64 @@
+typedef C = Constants;
+
+class Constants {
+  const Constants();
+
+  static const PIN = "PIN";
+  static const FIRSTNAME = "FIRSTNAME";
+  static const LASTNAME = "LASTNAME";
+  static const CREDENTIAL = "CREDENTIAL";
+  static const SPECIALIZATION = "SPECIALIZATION";
+  static const CLINIC = "CLINIC";
+  static const CONTACT_NO = "CONTACT_NO";
+  static const REMINDER_DATE = "REMINDER_DATE";
+  static const PIN_OPTION = "PIN_OPTION";
+  static const TEMPLATE = "TEMPLATE";
+  static const FORMAT = "FORMAT";
+  static const DATA_RETENTION_TASK_NAME = "DATA_RETENTION_TASK_NAME";
+  static const IS_SIGNATURE_ENABLED = "IS_SIGNATURE_ENABLED";
+  static const SIGNATURE = "SIGNATURE";
+  static const IS_DATA_RETENTION_ENABLED = "IS_DATA_RETENTION_ENABLED";
+  static const IS_DATA_RETENTION_TASK_SET = "IS_DATA_RETENTION_TASK_SET";
+  static const IS_DEMO_SHOWN = "IS_DEMO_SHOWN";
+  static const LOCALE = "LOCALE";
+  static const DATE_FORMAT = "DATE_FORMAT";
+  static const DATA_RETENTION_DURATION = "DATA_RETENTION_DURATION";
+  static const APP_SETTINGS = "app_settings";
+  static const TEST_DATA = "test_data";
+  static const TEST_DATA_JSON = "TEST_DATA";
+  static const TEST_DATA_CONSULTATION = "test_data_consultation";
+  static const TEST_DATA_CONSULTATION_1 = "test_data_consultation_1";
+  static const TEST_DATA_CONSULTATION_2 = "test_data_consultation_2";
+  static const TEST_DATA_CONSULTATION_3 = "test_data_consultation_3";
+  static const TEST_DATA_CONSULTATION_4 = "test_data_consultation_4";
+  static const TEST_DATA_CONSULTATION_5 = "test_data_consultation_5";
+  static const TEST_DATA_CONSULTATION_SEARCH = "test_data_consultation_search";
+  static const TEST_DATA_PROFILE = "test_data_profile";
+  static const TEST_DATA_PROFILE_1 = "test_Data_profile_1";
+  static const TEST_DATA_CONSULTATION_SEARCH_1 =
+      "test_data_consultation_search_1";
+  static const DEMO_DATA = "DEMO_DATA";
+  static const DEFAULT_TEMPLATE = "DEFAULT_TEMPLATE";
+  static const DB_NAME = "DB_NAME";
+  static const AUDIT_FILE_NAME = "AUDIT_FILE_NAME";
+  static const TASK_NAME = "TASK_NAME";
+  static const DEBUG = "DEBUG";
+  static const REMOTE_LOG = "REMOTE_LOG";
+  static const MAX_SYMPTOMS = "MAX_SYMPTOMS";
+  static const MAX_PARAMETERS = "MAX_PARAMETERS";
+  static const MAX_MEDICAL_HISTORY = "MAX_MEDICAL_HISTORY";
+  static const MAX_INVESTIGATIONS = "MAX_INVESTIGATIONS";
+  static const INSTALL_DATE = "INSTALL_DATE";
+  static const PRESCRIPTION_BLOCK_LENGTH = "PRESCRIPTION_BLOCK_LENGTH";
+  static const PRESCRIPTION_BLOCK_WEIGHT = "PRESCRIPTION_BLOCK_WEIGHT";
+  static const MAX_NOTES = "MAX_NOTES";
+  static const MAX_PRESCRIPTION = "MAX_PRESCRIPTION";
+  static const TASK_SCHEDULED_TIME = "TASK_SCHEDULEED_TIME";
+  static const DEFAULT_FONT = " Courier";
+  static const MEDICAL_DICIONARY_FILE = "medical.txt";
+  static const DISEASE_GLOSSARY_FILE = "diseases.txt";
+  static const PRESCRIPTION_FORMAT_1 = "1";
+  static const PRESCRIPTION_FORMAT_2 = "2";
+  static const TEST_PARMETERS_FILE = "testparameters.txt";
+  static const PRESCRIPTION_FORMAT_DEMO_FILE = "demo.pdf";
+}

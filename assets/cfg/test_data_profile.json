@@ -1,0 +1,10 @@
+{
+  "TEST_DATA" : {
+    "firstname" : "Rajesh",
+    "lastname" : "Khanna",
+    "specialization" : "Cardiology",
+    "credentials" : "M.D",
+    "office" : "Doctors Plaza",
+    "contact_no" : 9182389054
+  }
+}

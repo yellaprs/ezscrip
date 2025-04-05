@@ -1,0 +1,1 @@
+enum TimePeriodEnum { Start, End }

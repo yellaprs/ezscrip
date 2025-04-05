@@ -1,0 +1,731 @@
+{
+  "@@locale": "en_GB",
+  "about": "About",
+  "@about": {
+    "description": "about"
+  },
+  "active": "Active",
+  "@active": {
+    "description": "Active"
+  },
+  "add": "add",
+  "@add": {
+    "description": "Add"
+  },
+  
+  "addMedication": "Add Medication",
+  "@addMedication": {
+    "description": " Add Medication"
+  },
+
+  "addParameter" : "Add Parameter",
+  "@addParameter" :{
+    "description" : " Add Parameter"
+  },
+
+  "addSymptom": "Add Symptom",
+  "@addSymptom": {
+    "description": " Add Symptom"
+  },
+
+  "addInvestigation": "Add Investigation",
+  "@addInvestigation": {
+    "description": " Add Investigation"
+  },
+
+  "addMedicalHistory": "Add Medical History",
+  "@addMedicalHistory": {
+    "description": " Add Medical History"
+  },
+
+  "addNote": "Add Note",
+  "@addNote": {
+    "description": " Add Note"
+  },
+
+  "after": "After",
+  "@after": {
+    "description": "After"
+  },
+  "age": "Age",
+  "@age": {
+    "description": "age"
+  },
+  "allocatingStorage": "Initializing encrypted storage",
+  "@allocatingStorage": {
+    "description": "Allocating Storage"
+  },
+  "am": "AM",
+  "@am": {
+    "description": "AM"
+  },
+  "bedtime": "Bedtime",
+  "@bedtime": {
+    "description": "Bedtime"
+  },
+  "before": "Before",
+  "@before": {
+    "description": "before"
+  },
+  "between": "Between",
+  "@between": {
+    "description": "Between"
+  },
+  "bp": "B.P",
+  "@bp": {
+    "description": "Blood Pressure"
+  },
+  "calendarColorSettings": "Calendra Color Settings",
+  "@calendarColorSettings": {
+    "description": "clinic"
+  },
+  "change": "Change",
+  "@change": {
+    "description": "change"
+  },
+  "changePin": "change pin",
+  "@changePin": {
+    "description": "change pin"
+  },
+  "chooseDate": "Choose a date you remember(e.g Birthday). ",
+  "@chooseDate": {
+    "description": "choose  date"
+  },
+  "clinic": "clinic",
+  "@clinic": {
+    "description": "clinic"
+  },
+  "clinicErrMsg": "Please enter your clinic mame",
+  "@clinicErrMsg": {
+    "description": "clinic"
+  },
+  "complete": "Complete",
+  "@complete": {
+    "description": "Complete"
+  },
+  "completeSetup": "Finishing Setup",
+  "@completeSetup": {
+    "description": "Finishing Setup"
+  },
+  "consultation": "consultation",
+  "@consultation": {
+    "description": "Consultation"
+  },
+  "consultationSearch": "search consultations",
+  "@consultationSearch": {
+    "description": "Consultation Search"
+  },
+  "contactNo": "Contact No",
+  "@contactNo": {
+    "description": "Contact No"
+  },
+  "credentailsErrMsg": "Please enter your specialization",
+  "@credentailsErrMsg": {
+    "description": "clinic"
+  },
+  "daily": "Daily",
+  "@daily": {
+    "description": "Daily"
+  },
+  "data": "Data",
+  "@data": {
+    "description": "Data"
+  },
+  "date": "Date",
+  "@date": {
+    "description": "Date"
+  },
+  "days": "Days",
+  "@days": {
+    "description": "Days"
+  },
+  "delete": "delete",
+  "@delete": {
+    "description": "Delete"
+  },
+  "demo": "Demo",
+  "@demo": {
+    "description": "Demo"
+  },
+  "diastolic": "Diastolic",
+  "@diastolic": {
+    "description": "Diastolic"
+  },
+  "directions": "Directions",
+  "@directions": {
+    "description": "Directions"
+  },
+  "ezscrip": "ezscrip",
+  "@ezscrip": {
+    "description": "ezscrip"
+  },
+  "ezscripSummary1": "ezscrip is an easy to use app for medical practioners to create a consultation record  and generate  clear and consice prescriptions in pdf format for sharing with patients and pharmacies. ",
+  "@ezscripSummary1": {
+    "description": "Doassist Introduction summary 1st paragraph"
+  },
+  "ezscripSummary2": "Create consulting notes with patient information from a glossary of medical terms.",
+  "@ezscripSummary2": {
+    "description": "Doassist Introduction summary 2nd paragraph"
+  },
+  "ezscripSummary3": "Generate and share prescription in PDF format from a list of templates.",
+  "@ezscripSummary3": {
+    "description": "Doassist Introduction summary 3rd paragraph"
+  },
+  "doctorsProfile": "Doctor's Profile",
+  "@doctorsProfile": {
+    "description": "Doctors Profile Title"
+  },
+  "done": "Done",
+  "@done": {
+    "description": "Done"
+  },
+  "dosage": "Dosage",
+  "@dosage": {
+    "description": "Dosage"
+  },
+  "drug": "Drug",
+  "@drug": {
+    "description": "Drug"
+  },
+  "duration": "Duration",
+  "@duration": {
+    "description": "Duration"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Edit"
+  },
+  "email": "e-mail",
+  "@email": {
+    "description": "e-mail"
+  },
+  "emailErrMsg": "Please enter your e-mail address",
+  "@emailErrMsg": {
+    "description": "clinic"
+  },
+  "encryption": "Encryption",
+  "@encryption": {
+    "description": "Encryption"
+  },
+  "enterMedicationErrMsg": "Please enter a medication name",
+  "@enterMedicationErrMsg": {
+    "description": "Enter Medication error message"
+  },
+  "enterPinReminderMsg": "enter pin reset reminder date",
+  "@enterPinReminderMsg": {
+    "description": "enterPinReminderMsg"
+  },
+  "every": "Every",
+  "@every": {
+    "description": "Every"
+  },
+  "exit": "Exit",
+  "@exit": {
+    "description": "Exit"
+  },
+  "female": "Female",
+  "@female": {
+    "description": "Female"
+  },
+
+  "first" : "first",
+  "@first" : {
+    "description": "first"
+  },
+
+  "fieldLabelMessage": "Please enter {field}",
+  "@fieldLabelMessage": {
+    "description": "Please enter field",
+    "placeholders": {
+      "field": {}
+    }
+  },
+  "frequency": "frequency",
+  "@frequency": {
+    "description": "Frequency"
+  },
+  "friday": "Friday",
+  "@friday": {
+    "description": "Friday"
+  },
+  "gender": "Gender",
+  "@gender": {
+    "description": "gender"
+  },
+  "hour": "Hour",
+  "@hour": {
+    "description": "Hour"
+  },
+  "hr": "HR",
+  "@hr": {
+    "description": "Heart Rate"
+  },
+  "inComplete": "InComplete",
+  "@inComplete": {
+    "description": "InComplete"
+  },
+  "initCalSavingPrefs": "Saving settings and prefences....",
+  "@initCalSavingPrefs": {
+    "description": "Saving settings and prefences"
+  },
+  "inProgress": "In-Progress",
+  "@inProgress": {
+    "description": "InProgress"
+  },
+  "invalidCombination": "invalid combination of  {field1} and {field2}",
+  "@invalidCombination": {
+    "description": "Required error message",
+    "placeholders": {
+      "field1": {},
+      "field2": {}
+    }
+  },
+  "investigations": "Investigations",
+  "@investigations": {
+    "description": "Investigations"
+  },
+  "isInvalid": "{field} is invalid",
+  "@isInvalid": {
+    "description": "Invalid error message",
+    "placeholders": {
+      "field": {}
+    }
+  },
+  "isRequired": "{field} is required",
+  "@isRequired": {
+    "description": "Required error message",
+    "placeholders": {
+      "field": {}
+    }
+  },
+
+  "kg": "Kg",
+  "@kg": {
+      "description": "Kg"
+  },
+
+  "last": "last",
+  "@last": {
+    "description": "last"
+  },
+
+  "loading": "Loading ....",
+  "@loading": {
+    "description": "Loading ...."
+  },
+
+  "logout": "Logout",
+  "@logout": {
+    "description": "Logout"
+  },
+
+  "male": "Male",
+  "@male": {
+    "description": "Male"
+  },
+  "maxLength": "{field} length must be less than {max}",
+  "@maxLength": {
+    "description": "Required error message",
+    "placeholders": {
+      "field": {},
+      "max": {}
+    }
+  },
+  "medicalHistory": "Medical History",
+  "@medicalHistory": {
+    "description": "Medcial History"
+  },
+  "medication": "Medication",
+  "@medication": {
+    "description": "Medication"
+  },
+  "medicationErrMsg": "Please enter a medication",
+  "@medicationErrMsg": {
+    "description": "Medication missing error meddage"
+  },
+  "minimumScheduleInterval": "Please enter your e-mail address",
+  "@minimumScheduleInterval": {
+    "description": "clinic"
+  },
+  "minute": "Minute",
+  "@minute": {
+    "description": "Minute"
+  },
+  "monday": "Monday",
+  "@monday": {
+    "description": "Monday"
+  },
+  "month": "Month",
+  "@month": {
+    "description": "Month"
+  },
+  "morning": "Morning",
+  "@morning": {
+    "description": "Morning"
+  },
+  "name": "Name",
+  "@name": {
+    "description": "name"
+  },
+  "noOfMinutes": "{no} Min",
+  "@noOfMinutes": {
+    "description": "{no} Minutes",
+    "placeholders": {
+      "no": {}
+    }
+  },
+  "notes": "Notes",
+  "@notes": {
+    "description": "Notes"
+  },
+  "onceInDays": "Once in {no} days",
+  "@onceInDays": {
+    "description": "Once In days",
+    "placeholders": {
+      "no": {}
+    }
+  },
+  "pad": "Pad",
+  "@pad": {
+    "description": "pad"
+  },
+  
+  "parameters": "Parameters",
+  "@parameters": {
+    "description": "parameters"
+  },
+  "parameterName": "Parameter Name",
+  "@parameterName": {
+    "description": "parameter name"
+  },
+  "parameterValue": "Parameter Value",
+  "@parameterValue": {
+    "description": "parameter value"
+  },
+  "parameterUnit": "Parameter Unit",
+  "@parameterUnit": {
+    "description": "parameter unit"
+  },
+  "patient": "Patient",
+  "@patient": {
+    "description": "Patient"
+  },
+  "phone": "Phone",
+  "@phone": {
+    "description": "phone"
+  },
+  "pin": "Pin",
+  "@pin": {
+    "description": "Pin"
+  },
+  "pinMismatchMsg": "Pin and Confirm Pin do not match",
+  "@pinMismatchMsg": {
+    "description": "choose  date"
+  },
+  "pinResetExampleMsg": "(e.g Anniversary, Graduation)",
+  "@pinResetExampleMsg": {
+    "description": "pinResetExampleMsg"
+  },
+  "pinVerificationFailed": "Pin verification failed",
+  "@pinVerificationFailed": {
+    "description": " Pin verification failed message"
+  },
+  "pm": "PM",
+  "@pm": {
+    "description": "PM"
+  },
+  "preExistingConditions": " Pre-existing Conditions",
+  "@preExistingConditions": {
+    "description": "Pre-ExistingConditions"
+  },
+  "preferences": "Preferences",
+  "@preferences": {
+    "description": "Preferences"
+  },
+  "preparation": "Preparation",
+  "@preparation": {
+    "description": "Preparation"
+  },
+  "prescription": "Prescription",
+  "@prescription": {
+    "description": "prescription"
+  },
+  "present": "Present",
+  "@present": {
+    "description": "Present"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "profile"
+  },
+  "promoText1": "Unlimited Report Scans in Pro version !",
+  "@promoText1": {
+    "description": "promoText"
+  },
+  "preview": "Preview",
+  "@preview": {
+    "description": "Preview"
+  },
+  "promoText2": "Unlimited Prescription generation in Pro version !",
+  "@promoText2": {
+    "description": "promoText"
+  },
+  "range": "{field} length must be between {min} and {max}",
+  "@range": {
+    "description": "Required error message",
+    "placeholders": {
+      "field": {},
+      "max": {},
+      "min": {}
+    }
+  },
+  "remove": "remove",
+  "@remove": {
+    "description": "remove"
+  },
+  "reset": "Reset",
+  "@reset": {
+    "description": "Reset"
+  },
+
+  "rx": "Rx",
+  "@rx" :{
+    "description": "rx"
+  },
+
+  "review": "Review",
+  "@review": {
+    "description": "review"
+  },
+
+  "retention": "Retention",
+  "@retention": {
+    "description": "retention"
+  },
+  "saturday": "Saturday",
+  "@saturday": {
+    "description": "saturday"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "save"
+  },
+  "saveConsultationFailed": "Failed to save consultation. Try again.",
+  "@saveConsultationFailed": {
+    "description": "RFailed to save consultation"
+  },
+  "savingProfileSettings": "Saving profile and settings",
+  "@savingProfileSettings": {
+    "description": "Saving profile and settings"
+  },
+  "scan": " Scan",
+  "@scan": {
+    "description": "Scan"
+  },
+  "schedule": "Schedule",
+  "@schedule": {
+    "description": "Schedule"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "Search"
+  },
+
+  "set": "set",
+  "@set": {
+    "description": "Set"
+  },
+
+
+
+  "securitySettings": "Security Settings",
+  "@securitySettings": {
+    "description": "Security Setting"
+  },
+  "select": "Select",
+  "@select": {
+    "description": "Select"
+  },
+  
+  "security": "Security",
+  "@security": {
+    "description": "Security"
+  },
+
+  "selectFormat": "Select format",
+  "@selectFormat": {
+    "description": "Select Format"
+  },
+  "selectPrescriptionTemplate": "Select prescription template",
+  "@selectPrescriptionTemplate": {
+    "description": "Select a prescription template"
+  },
+  "selectPinResetMsg": "choose date for reset pin secret",
+  "@selectPinResetMsg": {
+    "description": "selectPinResetMsg"
+  },
+  "selectTemplate": "select template",
+  "@selectTemplate": {
+    "description": "select template"
+  },
+  "setPin": "set pin",
+  "@setPin": {
+    "description": "set pin"
+  },
+  "settings": "settings",
+  "@settings": {
+    "description": "Settings"
+  },
+  "signature": "Signature",
+  "@signature": {
+    "description": "signature"
+  },
+  "since": " Since",
+  "@since": {
+    "description": "Since"
+  },
+  "skip": "Skip",
+  "@skip": {
+    "description": "skip"
+  },
+  "specialization": "Specialization",
+  "@specialization": {
+    "description": "Specialization"
+  },
+  "specializtionCredentials": "Credentials",
+  "@specializtionCredentials": {
+    "description": "credentials"
+  },
+  "spo2": "Spo2",
+  "@spo2": {
+    "description": "Blood Oxygen"
+  },
+  "status": "status",
+  "@status": {
+    "description": "status"
+  },
+  "stop": "stop",
+  "@stop": {
+    "description": "stop"
+  },
+  "strength": "Strength",
+  "@strength": {
+    "description": "Stength"
+  },
+  "summary": "Summary",
+  "@summary": {
+    "description": "summary"
+  },
+  "sunday": "Sunday",
+  "@sunday": {
+    "description": "sunday"
+  },
+  "symptoms": "Symptoms",
+  "@symptoms": {
+    "description": "symptoms"
+  },
+  "systolic": "Systolic",
+  "@systolic": {
+    "description": "Systolic"
+  },
+  "temperature": "Temperature",
+  "@temperature": {
+    "description": "Temperature"
+  },
+  "thursday": "Thursday",
+  "@thursday": {
+    "description": "thursday"
+  },
+  "time": "time",
+  "@time": {
+    "description": "time"
+  },
+  "timesDaily": " {no} times Daily",
+  "@timesDaily": {
+    "description": "Daily Frequency",
+    "placeholders": {
+      "no": {}
+    }
+  },
+  "title": "title",
+  "@title": {
+    "description": "title"
+  },
+  "trans": "Trans",
+  "@trans": {
+    "description": "Transexual"
+  },
+  "tuesday": "Tuesday",
+  "@tuesday": {
+    "description": "Tuesday"
+  },
+  "twoWeeks": "2 Weeks",
+  "@twoWeeks": {
+    "description": "2 Weeks"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "Type"
+  },
+  "unit": "Unit",
+  "@unit": {
+    "description": "Unit"
+  },
+  "update": "Update",
+  "@update": {
+    "description": "Update"
+  },
+  "valueRange": "{field} should be between {min} and {max}",
+  "@valueRange": {
+    "description": "value Range error message",
+    "placeholders": {
+      "field": {},
+      "max": {},
+      "min": {}
+    }
+  },
+  "valueRangeWithoutField": "value between {min} and {max}",
+  "@valueRangeWithoutField": {
+    "description": "value Range error message",
+    "placeholders": {
+      "max": {},
+      "min": {}
+    }
+  },
+  "view": "View",
+  "@view": {
+    "description": "View"
+  },
+  "vitals": "vital signs",
+  "@vitals": {
+    "description": "Vital Signs"
+  },
+  "wednesday": "Wednesday",
+  "@wednesday": {
+    "description": "wednesday"
+  },
+  "week": "Week",
+  "@week": {
+    "description": "Week"
+  },
+
+
+  "weekly": "Weekly",
+  "@weekly": {
+    "description": "Weekly"
+  },
+
+  "weight": "Weight",
+  "@weight": {
+    "description": ""
+  },
+
+  "year": "Year",
+  "@year": {
+    "description": "Year"
+  },
+  "years": "Years",
+  "@years": {
+    "description": "years"
+  }
+}

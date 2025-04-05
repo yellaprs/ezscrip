@@ -1,0 +1,1 @@
+enum MedStatus { New, Continue, Discontinue}
