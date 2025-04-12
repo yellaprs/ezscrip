@@ -690,7 +690,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
     return Container(
         width: MediaQuery.of(context).size.width * 0.6,
         alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height * 0.15,
+        height: MediaQuery.of(context).size.height * 0.125,
         child: Stack(children: [
           Text(AppLocalizations.of(context)!.unit,
               style: Theme.of(context).textTheme.titleSmall),
@@ -790,7 +790,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         //padding: const EdgeInsets.only(left: 10),
         child: Stack(alignment: Alignment.topLeft, children: [
           Text(AppLocalizations.of(context)!.duration,
-              style: Theme.of(context)!.textTheme.titleSmall),
+              style: Theme.of(context).textTheme.titleSmall),
           Padding(
               padding: const EdgeInsets.only(top: 20),
               child: Focus(
@@ -923,7 +923,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         child: Stack(alignment: Alignment.topLeft, children: [
           Text(
             AppLocalizations.of(context)!.preparation,
-            style: Theme.of(context)!.textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -1031,7 +1031,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
             label: getSemanticDirectionLabel(direction),
             container: true,
             child: ChoiceChip(
-                labelPadding: EdgeInsets.all(2),
+                labelPadding: const EdgeInsets.all(2),
                 key: Key(
                     EnumToString.convertToString(direction, camelCase: true)
                         .toLowerCase()),
@@ -1342,7 +1342,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                           (dosage == null));
 
                       if (isValid?.isEmpty ?? true) {
-                        var rangeMap = this._propertiesMap[
+                        var rangeMap = _propertiesMap[
                             EnumToString.convertToString(_preparation,
                                     camelCase: false)
                                 .toLowerCase()]!;
@@ -1424,9 +1424,9 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                   buildPrescInfoHeader(),
                   Expanded(
                       child: Container(
-                          margin: EdgeInsets.only(bottom: 25),
+                          margin: const EdgeInsets.only(bottom: 25),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(8.0),
                                 topRight: Radius.circular(8.0),
                                 bottomRight: Radius.circular(8.0)),
@@ -1462,12 +1462,12 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
 
   Widget buildPrescInfoHeader() {
     return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border: const Border(
+          border: Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -1476,7 +1476,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         height: 50,
         width: MediaQuery.of(context).size.width * 0.3,
         child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -1517,9 +1517,9 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                   buildScheduleWidgetHeader(),
                   Expanded(
                       child: Container(
-                          margin: EdgeInsets.only(bottom: 25),
+                          margin: const EdgeInsets.only(bottom: 25),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const  BorderRadius.only(
                               bottomLeft: Radius.circular(8.0),
                               topRight: Radius.circular(8.0),
                               bottomRight: Radius.circular(8.0),
@@ -1561,7 +1561,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
         height: 50,
         width: MediaQuery.of(context).size.width * 0.35,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius:  const BorderRadius.only(
               topLeft: Radius.circular(8.0), topRight: Radius.circular(8.0)),
           border: Border(
             top:
@@ -1573,7 +1573,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
           ),
         ),
         child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const  BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -1765,7 +1765,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.9,
       width: MediaQuery.of(context).size.width,
       child: Column(children: [

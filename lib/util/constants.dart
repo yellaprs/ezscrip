@@ -23,6 +23,7 @@ class Constants {
   static const LOCALE = "LOCALE";
   static const DATE_FORMAT = "DATE_FORMAT";
   static const DATA_RETENTION_DURATION = "DATA_RETENTION_DURATION";
+  static const DATA_RETENTION_DURATION_TYPE = "DATA_RETENTION_DURATION_TYPE";
   static const APP_SETTINGS = "app_settings";
   static const TEST_DATA = "test_data";
   static const TEST_DATA_JSON = "TEST_DATA";

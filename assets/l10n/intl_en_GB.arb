@@ -518,6 +518,11 @@
   "@savingProfileSettings": {
     "description": "Saving profile and settings"
   },
+
+  "scrip" : "Scrip",
+  "@scrip" :{
+    "description" : "scrip"
+  },
   "scan": " Scan",
   "@scan": {
     "description": "Scan"
@@ -580,6 +585,12 @@
   "@signature": {
     "description": "signature"
   },
+
+  "share" : "Share",
+  "@share" :{
+    "description" : "Share"
+  },
+  
   "since": " Since",
   "@since": {
     "description": "Since"

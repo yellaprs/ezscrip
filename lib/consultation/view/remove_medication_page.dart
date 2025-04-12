@@ -135,7 +135,7 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
         child: Stack(alignment: Alignment.topLeft, children: [
           Text(
             AppLocalizations.of(context)!.preparation,
-            style: Theme.of(context)!.textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleSmall,
           ),
           Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -288,7 +288,7 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
   Widget buildPrescInfoHeader() {
     return Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8), topRight: Radius.circular(8)),
           border: Border(
               top: BorderSide(
@@ -307,7 +307,7 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               color: Theme.of(context).primaryColor,
               child: Stack(alignment: Alignment.centerLeft, children: [
-                Icon(MaterialCommunityIcons.pill,
+                const Icon(MaterialCommunityIcons.pill,
                     size: 25, color: Colors.black),
                 Padding(
                     padding: const EdgeInsets.only(left: 30),
@@ -333,7 +333,7 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
               Expanded(
                 child: Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(8.0),
                           bottomLeft: Radius.circular(8.0),
                           bottomRight: Radius.circular(8.0)),
@@ -345,6 +345,9 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
                             color: Theme.of(context).indicatorColor,
                             width: 1.5),
                         right: BorderSide(
+                            color: Theme.of(context).indicatorColor,
+                            width: 1.5),
+                        bottom: BorderSide(
                             color: Theme.of(context).indicatorColor,
                             width: 1.5),
                       ),
@@ -363,7 +366,8 @@ class _RemoveMedicationPageState extends State<RemoveMedicationPage> {
                               buildRouteWidget(Orientation.portrait)
                             ]))),
               )
-            ]));
+            ])
+      );
   }
 
   @override

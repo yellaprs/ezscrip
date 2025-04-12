@@ -1,4 +1,7 @@
+import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/app_bar.dart';
+import 'package:ezscrip/consultation/model/durationType.dart';
 import 'package:ezscrip/settings/model/userprefs.dart';
 import 'package:ezscrip/util/focus_nodes.dart';
 import 'package:ezscrip/util/keys.dart';
@@ -6,34 +9,45 @@ import 'package:ezscrip/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_spinbox/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:ezscrip/util/semantics.dart' as semantic;
 import 'package:get_it/get_it.dart';
-import 'package:spinner_input_plus/spinner_input_plus.dart'; // or flutter_spinbox.dart for both
-
+// or flutter_spinbox.dart for both
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
+import 'package:validatorless/validatorless.dart';
 import '../../util/mode.dart';
 
 enum AmPm { am, pm }
+
+enum FileteredDurationType { Day, Week, Month, Year}
+
+class DurationTypeValidator {
+  static String? isRequired(String errMsg, bool isEmpty) {
+    return (isEmpty) ? errMsg : null;
+  }
+}
 
 @immutable
 class DataRetentionSettingPage extends StatefulWidget {
   final Mode mode;
   final bool dataRetentionEnabled;
   final int dataRetentionPeriod;
+  final FileteredDurationType durationType;
 
   DataRetentionSettingPage(
       {required this.mode,
       required this.dataRetentionEnabled,
       this.dataRetentionPeriod = 7,
+      this.durationType = FileteredDurationType.Day,
       key = K.dataRetentionSettingsPage})
       : super(key: key);
 
   @override
   _DataRetentionSettingPageState createState() =>
       _DataRetentionSettingPageState(
-          mode, dataRetentionEnabled, dataRetentionPeriod);
+          mode, dataRetentionEnabled, dataRetentionPeriod, durationType);
 }
 
 class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
@@ -41,14 +55,15 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
   int _dataRetentionPeriod;
   final Mode _mode;
   late TimeOfDay _time;
+  late FileteredDurationType _durationType;
 
   late int _hour;
   late int _minute;
   late TextEditingController hourController,
       minuteController,
       dataRetentionController;
-  _DataRetentionSettingPageState(
-      this._mode, this._dataRetentionEnabled, this._dataRetentionPeriod);
+  _DataRetentionSettingPageState(this._mode, this._dataRetentionEnabled,
+      this._dataRetentionPeriod, this._durationType);
 
   @override
   void initState() {
@@ -70,6 +85,42 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
     super.initState();
   }
 
+  Future<bool> enableDataRetetionTask() async {
+    bool isTaskEnabled = false;
+    int duration = 24 * 60;
+
+    if (await GetIt.instance<UserPrefs>().isDataRetentionTaskSetup()) {
+      AwesomeNotifications().cancelAll();
+    }
+    if (_durationType == FileteredDurationType.Week) {
+      duration = duration * 7;
+    } else if (_durationType == FileteredDurationType.Month) {
+      duration = duration * 30;
+    } else if (_durationType == FileteredDurationType.Year) {
+      duration = duration * 365;
+    }
+
+    setupDataRetentionTask(
+        await GetIt.instance<UserPrefs>().getDataRetentionTaskName(),
+        TimeOfDay(hour: _time.hour, minute: _time.minute),
+        duration);
+
+    bool isSaved = await GetIt.instance<UserPrefs>()
+        .setDataRetentionPeriod(_dataRetentionPeriod);
+
+    isSaved = await GetIt.instance<UserPrefs>()
+        .setDataRetentionPeriodType(
+          DurationType.values.firstWhere((element) => 
+             EnumToString.convertToString(element, camelCase: true) == EnumToString.convertToString(_durationType, camelCase: true)));
+
+    isSaved = await GetIt.instance<UserPrefs>().setDataRetentionScheduleTime(
+        TimeOfDay(hour: _time.hour, minute: _time.minute).format(context));
+        
+    isTaskEnabled = await GetIt.instance<UserPrefs>().saveDataRetentionTask(isSaved);
+
+    return isTaskEnabled;
+  }
+
   List<Widget> buildActions() {
     List<Widget> actions = [];
 
@@ -81,41 +132,24 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
             data: Theme.of(context).iconTheme,
             child: const Icon(
               Foundation.check,
+              size: 25,
               semanticLabel: semantic.S.SETTINGS_DONE_BTN,
             )),
         onPressed: (_mode == Mode.Preview)
             ? null
             : () async {
                 if (_dataRetentionEnabled) {
-                  if (await GetIt.instance<UserPrefs>()
-                      .isDataRetentionTaskSetup()) {
-                    AwesomeNotifications().cancelAll();
-                  }
 
-                  setupDataRetentionTask(
-                      await GetIt.instance<UserPrefs>()
-                          .getDataRetentionTaskName(),
-                      TimeOfDay(hour: _time.hour, minute: _time.minute));
+                  await  enableDataRetetionTask();
 
-                  bool isSaved = await GetIt.instance<UserPrefs>()
-                      .setDataRetentionPeriod(_dataRetentionPeriod);
-
-                  isSaved = await GetIt.instance<UserPrefs>()
-                      .setDataRetentionScheduleTime(
-                          TimeOfDay(hour: _time.hour, minute: _time.minute)
-                              .format(context));
-
-                  bool isTaskSaved = await GetIt.instance<UserPrefs>()
-                      .saveDataRetentionTask(isSaved);
                 } else if (!_dataRetentionEnabled) {
-                  AwesomeNotifications().cancelAll();
-                  await GetIt.instance<UserPrefs>()
-                      .saveDataRetentionTask(false);
-                  await GetIt.instance<UserPrefs>().disableDataRetention();
-                }
 
+                  AwesomeNotifications().cancelAll();
+                  await GetIt.instance<UserPrefs>().saveDataRetentionTask(false);
+                  await GetIt.instance<UserPrefs>().disableDataRetention();
+
+                }
                 navService.goBack();
-                //Navigator.pop(context);
               }));
 
     return actions;
@@ -128,110 +162,265 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
   }
 
   Widget buildDataRetentionWidget() {
-    Widget dataRetentionWidget;
 
-    dataRetentionWidget = AnimatedOpacity(
-        duration: const Duration(seconds: 2),
-        opacity: (_dataRetentionEnabled) ? 1.0 : 0.2,
-        child: Stack(alignment: Alignment.center, children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Stack(alignment: Alignment.centerLeft, children: [
-              const Icon(Icons.today, size: 25),
-              Container(
-                  margin: const EdgeInsets.only(left: 30),
-                  child: AutoSizeText("Retention Duration",
-                      style: Theme.of(context).textTheme.displaySmall,
-                      semanticsLabel:
-                          semantic.S.SETTINGS_RETENTION_DURATION_TITLE))
-            ]),
-          ),
-          // Align(alignment: Alignment.bottomCenter, child: buildTimeStampWidget()),
-          Padding(
-              padding: const EdgeInsets.all(35),
-              child: Focus(
-                  focusNode: FocusNodes.setRetentionDuration,
-                  child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.all(5),
-                      //color: Theme.of(context).primaryColor,
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+
+
+    return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.12,
+        child: AnimatedOpacity(
+            duration: const Duration(seconds: 2),
+            opacity: (_dataRetentionEnabled) ? 1.0 : 0.2,
+            child: Stack(alignment: Alignment.center, children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Stack(alignment: Alignment.centerLeft, children: [
+                  const Icon(Icons.today, size: 25),
+                  Container(
+                      margin: const EdgeInsets.only(left: 30),
+                      child: AutoSizeText("Retention Duration",
+                          style: Theme.of(context).textTheme.displaySmall,
+                          semanticsLabel:
+                              semantic.S.SETTINGS_RETENTION_DURATION_TITLE))
+                ]),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Focus(
+                      child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            ConstrainedBox(
-                                constraints: BoxConstraints(
-                                    maxWidth:
-                                        MediaQuery.of(context).size.width *
-                                            0.65,
-                                    maxHeight:
-                                        MediaQuery.of(context).size.height *
-                                            0.3),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20, vertical: 20),
-                                  child: Semantics(
-                                    identifier: semantic
-                                        .S.SETTINGS_RETENTION_DURATION_FLD,
-                                    child: SpinnerInput(
-                                      minValue: 7,
-                                      maxValue: 365,
-                                      step: 5,
-                                      plusButton: SpinnerButtonStyle(
-                                        elevation: 0,
-                                        child: CircleAvatar(
-                                            backgroundColor: Theme.of(context)
-                                                .indicatorColor,
-                                            radius: 25,
-                                            child: Icon(Icons.add,
-                                                color: Colors.white, size: 20)),
-                                        color: Theme.of(context).indicatorColor,
-                                      ),
-                                      minusButton: SpinnerButtonStyle(
-                                        elevation: 0,
-                                        child: CircleAvatar(
-                                            backgroundColor: Theme.of(context)
-                                                .indicatorColor,
-                                            radius: 25,
-                                            child: Icon(Icons.remove,
-                                                color: Colors.white, size: 20)),
-                                        color: Theme.of(context).indicatorColor,
-                                      ),
-                                      middleNumberWidth: 70,
-                                      middleNumberStyle:
-                                          const TextStyle(fontSize: 21),
-                                      spinnerValue:
-                                          _dataRetentionPeriod.toDouble(),
-                                      onChange: (newValue) {
-                                        setState(() {
-                                          _dataRetentionPeriod =
-                                              newValue.round();
-                                        });
-                                      },
-                                    ),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            child: Semantics(
+                              label:
+                                  semantic.S.ADD_MEDICATION_DRUG_DURATION_FIELD,
+                              container: true,
+                              child: SpinBox(
+                                key: K.durationSpinbox,
+                                focusNode: FocusNodes.durationAutoSizeTextField,
+                                textAlign: TextAlign.center,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.all(10),
+                                  //label: Text(AppLocalizations.of(context)!.duration),
+                                  //labelStyle: Theme.of(context).textTheme.titleSmall,
+                                  border: UnderlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                )),
-                            Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: AutoSizeText("Days",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium)),
-                          ])))),
-        ]));
+                                ),
+                                incrementIcon: const Icon(
+                                    key: K.addDays, Icons.add, size: 25),
+                                decrementIcon: const Icon(
+                                    key: K.subtractDays,
+                                    Icons.minimize,
+                                    size: 25),
+                                min: 1,
+                                max: 10,
+                                value: _dataRetentionPeriod.toDouble(),
+                                onChanged: (value) {
+                                  _dataRetentionPeriod = value.ceil();
+                                  setState(() {});
+                                },
+                                validator: Validatorless.multiple([
+                                  Validatorless.required(
+                                      AppLocalizations.of(context)!.isRequired(
+                                          AppLocalizations.of(context)!
+                                              .duration)),
+                                  Validatorless.numbersBetweenInterval(
+                                      1,
+                                      100,
+                                      AppLocalizations.of(context)!
+                                          .valueRangeWithoutField(1, 100)),
+                                ]),
+                              ),
+                            )),
+                        const SizedBox(width: 10),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            //height: MediaQuery.of(context).size.height * 0.125,
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 5, vertical: 5),
+                                child: Semantics(
+                                    container: true,
+                                    identifier: semantic.S
+                                        .ADD_MEDICATION_DRUG_DURATION_TYPE_DROPDWON,
+                                    child: CustomDropdown<
+                                        FileteredDurationType>.search(
+                                      key: K.durationTypeField,
+                                      hintText: AppLocalizations.of(context)!
+                                          .duration,
+                                      initialItem: _durationType,
+                                      decoration: CustomDropdownDecoration(
+                                          closedFillColor:
+                                              Theme.of(context).primaryColor,
+                                          closedBorder:
+                                              Border.all(color: Colors.black),
+                                          errorStyle: const TextStyle(
+                                              color: Colors.red),
+                                          expandedFillColor:
+                                              Theme.of(context).primaryColor,
+                                          headerStyle: Theme.of(context)
+                                              .textTheme
+                                              .titleSmall,
+                                          closedErrorBorder:
+                                              Border.all(color: Colors.red)),
+                                      headerBuilder: (context, durationType,
+                                          displayHeader) {
+                                        return Semantics(
+                                            container: true,
+                                            identifier: semantic.S
+                                                .ADD_MEDICATION_DURATION_TYPE_OPTION,
+                                            child: AutoSizeText(
+                                                EnumToString.convertToString(
+                                                    durationType,
+                                                    camelCase: true)));
+                                      },
+                                      validator: (val) {
+                                        String? isValid =
+                                            DurationTypeValidator.isRequired(
+                                                AppLocalizations.of(context)!
+                                                    .isRequired(
+                                                        AppLocalizations.of(
+                                                                context)!
+                                                            .duration),
+                                                (val == null));
+                                        return isValid;
+                                      },
+                                      items: FileteredDurationType.values,
 
-    return dataRetentionWidget;
+                                      listItemBuilder: (context, durationType, selected, onTap) {
+                                        return Container(
+                                            alignment: Alignment.centerLeft,
+                                            padding: const EdgeInsets.all(3),
+                                            child: ListTile(
+                                                title: AutoSizeText(EnumToString
+                                                    .convertToString(
+                                                        durationType,
+                                                        camelCase: true))));
+                                      },
+                                      onChanged: (_mode == Mode.Preview)
+                                          ? null
+                                          : (val) {
+                                              setState(() {
+                                                _durationType = val!;
+                                              });
+                                            },
+                                    )))
+                              )
+                      ])))
+            ])));
   }
+
+  // Widget buildDataRetentionWidget() {
+  // Widget dataRetentionWidget;
+
+  // dataRetentionWidget = AnimatedOpacity(
+  // duration: const Duration(seconds: 2),
+  // opacity: (_dataRetentionEnabled) ? 1.0 : 0.2,
+  // child: Stack(alignment: Alignment.center, children: [
+  // Align(
+  // alignment: Alignment.topCenter,
+  // child: Stack(alignment: Alignment.centerLeft, children: [
+  // const Icon(Icons.today, size: 25),
+  // Container(
+  // margin: const EdgeInsets.only(left: 30),
+  // child: AutoSizeText("Retention Duration",
+  // style: Theme.of(context).textTheme.displaySmall,
+  // semanticsLabel:
+  // semantic.S.SETTINGS_RETENTION_DURATION_TITLE))
+  // ]),
+  // ),
+  // Align(alignment: Alignment.bottomCenter, child: buildTimeStampWidget()),
+  // Padding(
+  // padding: const EdgeInsets.all(35),
+  // child: Focus(
+  // focusNode: FocusNodes.setRetentionDuration,
+  // child: Container(
+  // alignment: Alignment.center,
+  // padding: const EdgeInsets.all(5),
+  //color: Theme.of(context).primaryColor,
+  // child: Column(
+  // mainAxisAlignment: MainAxisAlignment.center,
+  // crossAxisAlignment: CrossAxisAlignment.center,
+  // children: [
+  // ConstrainedBox(
+  // constraints: BoxConstraints(
+  // maxWidth:
+  // MediaQuery.of(context).size.width *
+  // 0.65,
+  // maxHeight:
+  // MediaQuery.of(context).size.height *
+  // 0.3),
+  // child: Padding(
+  // padding: const EdgeInsets.symmetric(
+  // horizontal: 20, vertical: 20),
+  // child: Semantics(
+  // identifier: semantic
+  // .S.SETTINGS_RETENTION_DURATION_FLD,
+  // child: SpinnerInput(
+  // minValue: 7,
+  // maxValue: 365,
+  // step: 5,
+  // plusButton: SpinnerButtonStyle(
+  // elevation: 0,
+  // child: CircleAvatar(
+  // backgroundColor: Theme.of(context)
+  // .indicatorColor,
+  // radius: 25,
+  // child: Icon(Icons.add,
+  // color: Colors.white, size: 20)),
+  // color: Theme.of(context).indicatorColor,
+  // ),
+  // minusButton: SpinnerButtonStyle(
+  // elevation: 0,
+  // child: CircleAvatar(
+  // backgroundColor: Theme.of(context)
+  // .indicatorColor,
+  // radius: 25,
+  // child: Icon(Icons.remove,
+  // color: Colors.white, size: 20)),
+  // color: Theme.of(context).indicatorColor,
+  // ),
+  // middleNumberWidth: 70,
+  // middleNumberStyle:
+  // const TextStyle(fontSize: 21),
+  // spinnerValue:
+  // _dataRetentionPeriod.toDouble(),
+  // onChange: (newValue) {
+  // setState(() {
+  // _dataRetentionPeriod =
+  // newValue.round();
+  // });
+  // },
+  // ),
+  // ),
+  // )),
+  // Padding(
+  // padding: const EdgeInsets.all(10),
+  // child: AutoSizeText("Days",
+  // style: Theme.of(context)
+  // .textTheme
+  // .titleMedium)),
+  // ])))),
+  // ]));
+
+  // return dataRetentionWidget;
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, AppLocalizations.of(context)!.settings, buildActions()),
+            context,
+            const Icon(Ionicons.settings, size: 25),
+            AppLocalizations.of(context)!.settings,
+            buildActions()),
         body: Container(
             height: MediaQuery.of(context).size.height * 0.8,
             width: MediaQuery.of(context).size.width * 0.9,
-            margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
             alignment: Alignment.center,
             child: OrientationBuilder(builder: (context, orientation) {
               return Stack(alignment: Alignment.center, children: [

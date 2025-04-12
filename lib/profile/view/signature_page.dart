@@ -165,7 +165,10 @@ class _SignaturePageState extends State<SignaturePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, AppLocalizations.of(context)!.signature, buildActions()),
+            context, 
+            const Icon(Icons.person_pin, size: 25),
+            AppLocalizations.of(context)!.signature, 
+            buildActions()),
         body: Container(
             alignment: Alignment.center,
             height: MediaQuery.of(context).size.height - 100,

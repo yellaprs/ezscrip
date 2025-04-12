@@ -89,7 +89,7 @@ class _AddSymtomPageState extends State<AddSymptomPage> {
                     alignment: Alignment.center,
                     child: buildHeader()),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                Container(
+                SizedBox(
                     width: MediaQuery.of(context).size.width * 0.85,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +117,8 @@ class _AddSymtomPageState extends State<AddSymptomPage> {
                                                       .copyWith(
                                                           fontStyle:
                                                               FontStyle.italic),
-                                              decoration: InputDecoration(
-                                                border:
-                                                    const UnderlineInputBorder(),
+                                              decoration: const InputDecoration(
+                                                border: UnderlineInputBorder(),
                                                 hintText: '',
                                               ),
                                               validator: (val) {
@@ -143,16 +142,14 @@ class _AddSymtomPageState extends State<AddSymptomPage> {
                                           Material(
                                         type: MaterialType.card,
                                         elevation: 4,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(8)),
+                                        borderRadius: const BorderRadius.all( Radius.circular(8)),
                                         child: child,
                                       ),
                                       itemBuilder: (context, suggestion) =>
                                           ListTile(
                                         title: Text(suggestion),
                                       ),
-                                      debounceDuration:
-                                          Duration(milliseconds: 400),
+                                      debounceDuration: const Duration(milliseconds: 400),
                                       hideOnEmpty: true,
                                       hideOnSelect: true,
                                       hideOnUnfocus: true,

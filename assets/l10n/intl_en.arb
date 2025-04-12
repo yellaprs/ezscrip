@@ -512,6 +512,12 @@
   "@scan": {
     "description": "Scan"
   },
+
+  "scrip": "Scrip",
+  "@scrip": {
+    "description": "scrip"
+  },
+  
   "schedule": "Schedule",
   "@schedule": {
     "description": "Schedule"
@@ -562,6 +568,12 @@
   "@settings": {
     "description": "Settings"
   },
+
+  "share": "Share",
+  "@share": {
+    "description": "Share"
+  },
+  
   "signature": "Signature",
   "@signature": {
     "description": "signature"

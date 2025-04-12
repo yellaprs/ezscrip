@@ -43,7 +43,6 @@ import 'package:ezscrip/util/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ezscrip/app_bar.dart';
 import 'package:flash/flash.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -547,9 +546,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         key: K.saveButton,
         focusNode: FocusNodes.saveConsultatioButton,
         icon: IconTheme(
-          data: Theme.of(context).copyWith().iconTheme,
-          child: const Icon(
-            Foundation.save,
+            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
+            child: const Icon(
+            Foundation.save, size: 25,
             semanticLabel: semantic.S.CONSULTATION_SAVE_BUTTON,
           ),
         ),
@@ -581,9 +580,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         key: K.checkButton,
         focusNode: FocusNodes.checkConsultatioButton,
         icon: IconTheme(
-            data: Theme.of(context).copyWith().iconTheme,
+            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
             child: const Icon(Foundation.check,
-                size: 30, semanticLabel: semantic.S.CONSULTATION_DONE_BUTTON)),
+                size: 25, semanticLabel: semantic.S.CONSULTATION_DONE_BUTTON)),
         onPressed: () async {
           if (_mode != Mode.Preview) {
             _consultation.setStatus(Status.Complete);
@@ -635,7 +634,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
           height: 60,
           width: 150,
           alignment: Alignment.topLeft,
-          padding: EdgeInsets.all(2),
+          padding: const EdgeInsets.all(2),
           child: AutoSizeText(
             content,
             maxLines: 3,
@@ -731,9 +730,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
           Semantics(
               identifier: semantic.S.CONSULTATION_SYMPTOM_LABEL,
               container: true,
-              child: Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Stack(alignment: Alignment.centerLeft, children: [
+              child: Stack(alignment: Alignment.centerLeft, children: [
                     CircleAvatar(
                         radius: 5,
                         backgroundColor: Theme.of(context).indicatorColor),
@@ -742,8 +739,10 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                             horizontal: 25, vertical: 0),
                         child: AutoSizeText(symptom,
                             style: Theme.of(context).textTheme.bodyMedium)),
-                  ]))),
-          IconButton(
+                  ])),
+          SizedBox(
+            width : MediaQuery.of(context).size.width * 0.08,
+            child :IconButton(
               icon: Icon(EvaIcons.closeCircleOutline,
                   color: Theme.of(context).indicatorColor, size: 20),
               onPressed: () {
@@ -757,12 +756,13 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                               .toString()));
                 });
               })
+          )
         ],
       );
     }).toList();
 
     return Container(
-        padding: const EdgeInsets.all(0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         constraints:
             const BoxConstraints(minHeight: UI.EXPANSION_TILE_EMPTY_SIZE),
         color: Colors.white,
@@ -791,7 +791,10 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                   child: AutoSizeText(test,
                       style: Theme.of(context).textTheme.bodySmall)),
             ])),
-        IconButton(
+
+        SizedBox(
+           width : MediaQuery.of(context).size.width * 0.08,
+           child:IconButton(
             icon: const Icon(EvaIcons.closeCircleOutline,
                 size: UI.DELETE_TILE_ACTION_BTN_SIZE),
             onPressed: () {
@@ -803,12 +806,12 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                             .getValue(C.MAX_INVESTIGATIONS)
                             .toString());
               });
-            })
+            }))
       ]);
     }).toList();
 
     return Container(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 5),
       constraints:
           const BoxConstraints(minHeight: UI.EXPANSION_TILE_EMPTY_SIZE),
       color: Colors.white,
@@ -967,11 +970,11 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                 ),
               ])),
           Padding(
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               child: Stack(alignment: Alignment.centerLeft, children: [
-                Align(
+                const Align(
                     alignment: Alignment.centerLeft,
-                    child: const Icon(Icons.timer, size: 20)),
+                    child: Icon(Icons.timer, size: 20)),
                 Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -990,7 +993,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           : const SizedBox(width: 30, height: 30),
                     )),
                 Padding(
-                  padding: EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 30),
                   child: Semantics(
                       identifier: semantic.S.PRESCRIPTION_TILE_SCHEDULE,
                       container: true,
@@ -1006,9 +1009,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         width: MediaQuery.of(context).size.width * 0.25,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(alignment: Alignment.centerLeft, children: [
-            Icon(Icons.timelapse, size: 20),
+            const Icon(Icons.timelapse, size: 20),
             Padding(
-                padding: EdgeInsets.only(left: 25),
+                padding:const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   prescription.duration.toString() +
                       " " +
@@ -1053,7 +1056,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
     Widget directionWidget;
 
     directionWidget = Stack(alignment: Alignment.centerLeft, children: [
-      Icon(Icons.comment, size: 20),
+      const Icon(Icons.comment, size: 20),
       Semantics(
           identifier: semantic.S.PRESCRIPTION_TILE_DIRECTIONS,
           container: true,
@@ -1113,7 +1116,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
 
       Card card = Card(
           color: Colors.white,
-          margin: EdgeInsets.all(2),
+          margin: const EdgeInsets.all(2),
           borderOnForeground: false,
           elevation: 0,
           child: SizedBox(
@@ -1130,7 +1133,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
             ? UI.EXPANSION_TILE_EMPTY_SIZE
             : prescriptionChips.length * UI.EXPANSION_TILE_CONTENT_ROW_HEIGHT,
         color: Colors.white,
-        padding: EdgeInsets.all(1),
+        padding: const EdgeInsets.all(1),
         child: ListView(key: K.prescriptionList, children: prescriptionChips));
   }
 
@@ -1176,7 +1179,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         _consultation.getMedicalHistory().map((medicalHistory) {
       return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.45,
+          width: MediaQuery.of(context).size.width * 0.52,
           child: Semantics(
             identifier: semantic.S.CONSULTATION_MEDICAL_HISTORY_LABEL,
             child: Stack(alignment: Alignment.centerLeft, children: [
@@ -1191,9 +1194,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
           ),
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.35,
+          width: MediaQuery.of(context).size.width * 0.3,
           child: Padding(
-              padding: const EdgeInsets.only(left: 0, right: 60),
+              padding: const EdgeInsets.only(left: 0, right: 10),
               child: Stack(alignment: Alignment.centerLeft, children: [
                 const Icon(Icons.timer, size: 15),
                 Padding(
@@ -1204,7 +1207,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
               ])),
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.1,
+          width: MediaQuery.of(context).size.width * 0.08,
           child: IconButton(
             icon: Icon(EvaIcons.closeCircleOutline,
                 size: UI.DELETE_TILE_ACTION_BTN_SIZE,
@@ -1227,21 +1230,14 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
     return Container(
         constraints:
             const BoxConstraints(minHeight: UI.EXPANSION_TILE_EMPTY_SIZE),
+         padding: const EdgeInsets.symmetric(horizontal:8,vertical : 5),
         color: Colors.white,
         child: ListView(
             key: K.medicalHistoryList,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             scrollDirection: Axis.vertical,
-            children: [
-              Container(
-                  padding: const EdgeInsets.all(8),
-                  color: Colors.white,
-                  child: Wrap(
-                      spacing: 5.0,
-                      runSpacing: 5.0,
-                      children: conditionsListWidget))
-            ]));
+            children: conditionsListWidget));
   }
 
   Widget buildBPIndicatorWidget() {
@@ -1626,8 +1622,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                               // child: SvgPicture.asset("assets/spo2.svg",
                               //     width: 25, height: 25, color: Colors.white)
                             ),
-                            borderRadius: const BorderRadius.all(
-                                const Radius.circular(21)),
+                            borderRadius: const BorderRadius.all( Radius.circular(21)),
                             width: 70.0,
                             height: 30.0,
                             enabled: true,
@@ -1795,7 +1790,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                   color: Theme.of(context).indicatorColor),
                             ),
                           ]))
-                      : SizedBox(height: 5, width: 5)
+                      : const SizedBox(height: 5, width: 5)
                 ]),
                 children: <Widget>[
                   Container(
@@ -1959,7 +1954,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         _consultation.getParameters().map((parameter) {
       return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         SizedBox(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.525,
             child: Stack(alignment: Alignment.centerLeft, children: [
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -1972,9 +1967,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                       style: Theme.of(context).textTheme.bodySmall)),
             ])),
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.4,
+          width: MediaQuery.of(context).size.width * 0.325,
           child: Padding(
-              padding: const EdgeInsets.only(right: 60),
+              padding: const EdgeInsets.only(right: 10),
               child: AutoSizeText(
                   "${parameter.getValue()} ${(parameter.getUnit() != null) ? parameter.getUnit() : ''}",
                   style: Theme.of(context).textTheme.bodySmall)),
@@ -2073,7 +2068,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                       : Theme.of(context)
                                           .textTheme
                                           .titleMedium)))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                   Semantics(
                       identifier: (_isParametersExpanded)
                           ? semantic.S.PARAMETER_EXPANDED_LABEL
@@ -2151,7 +2146,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                   color: Theme.of(context).indicatorColor),
                             ),
                           ]))
-                      : SizedBox(width: 5, height: 5)
+                      : const SizedBox(width: 5, height: 5)
                 ]),
                 children: [
                   Container(
@@ -2273,35 +2268,35 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
       } else {
         List<Indicator> indicators = [];
 
-        print("_bpEnabled" + _bpEnabled.value.toString());
-        print("_systolic" + _systolic.toString());
-        print("_diastolic" + _diastolic.toString());
+        // print("_bpEnabled" + _bpEnabled.value.toString());
+        // print("_systolic" + _systolic.toString());
+        // print("_diastolic" + _diastolic.toString());
 
         if (_bpEnabled.value && _systolic != null && _diastolic != null) {
           indicators.add(Indicator(
               IndicatorType.BloodPressure, "${_systolic}/${_diastolic}"));
         }
 
-        print("_heartrateEnabled" + _heartrateEnabled.value.toString());
-        print("_heartrateEnabled" + _pulseRate.toString());
+        // print("_heartrateEnabled" + _heartrateEnabled.value.toString());
+        // print("_heartrateEnabled" + _pulseRate.toString());
 
         if (_heartrateEnabled.value && _pulseRate != null) {
           indicators.add(Indicator(IndicatorType.HeartRate, "${_pulseRate}"));
         }
 
-        print("_heartrateEnabled" + _heartrateEnabled.value.toString());
-        print("_heartrateEnabled" + _pulseRate.toString());
+        // print("_heartrateEnabled" + _heartrateEnabled.value.toString());
+        // print("_heartrateEnabled" + _pulseRate.toString());
 
         if (_temperatureEnabled.value && _temp != null) {
           indicators.add(Indicator(IndicatorType.Temperature, _temp));
         }
-        print("indicatorS:" + indicators.length.toString());
+       // print("indicatorS:" + indicators.length.toString());
 
         if (_spo2Enabled.value && _spo2 != null) {
           indicators.add(Indicator(IndicatorType.Spo2, _spo2));
         }
 
-        print("indicatorS:" + indicators.length.toString());
+        // print("indicatorS:" + indicators.length.toString());
 
         _consultation.indicators = indicators;
         var id = _consultation.id ??= 0;
@@ -2381,7 +2376,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                       : Theme.of(context)
                                           .textTheme
                                           .titleMedium)))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                   Semantics(
                       identifier: (_isInvestigationsExpanded)
                           ? semantic.S.INVESTIGATION_EXPANDED_LABEL
@@ -2429,7 +2424,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                                     ),
                                                   ),
                                                   builder: (context) =>
-                                                      AddTestsPage(),
+                                                      const AddTestsPage(),
                                                 );
 
                                                 if (_consultation
@@ -2475,7 +2470,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                 ]),
                           ),
                         )
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                 ]),
                 children: <Widget>[
                   Container(
@@ -2483,6 +2478,8 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           border: Border.all(
                               color: Theme.of(context).primaryColor, width: 4)),
                       child: Container(
+                        
+                        
                           color: Colors.white, child: buildTestsWidget()))
                 ])));
 
@@ -2555,13 +2552,13 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                   style: (_isSymptomsLimitExceeded)
                                       ? const TextStyle(color: Colors.white)
                                       : Theme.of(context).textTheme.bodySmall)))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                   Semantics(
                       identifier: (_isSymptomsExpanded)
                           ? semantic.S.SYMPTOM_EXPANDED_LABEL
                           : semantic.S.SYMPTOM_COLLAPSED_LABEL,
                       container: true,
-                      child: SizedBox(height: 20, width: 20)),
+                      child: const  SizedBox(height: 20, width: 20)),
                   (!_isSymptomsLimitExceeded)
                       ? SizedBox(
                           width: 100,
@@ -2691,12 +2688,11 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           : const SizedBox(width: 20),
                     ]),
                 trailing: Stack(alignment: Alignment.centerLeft, children: [
-                  (_consultation.getMedicalHistory().isNotEmpty)
-                      ? CircleAvatar(
+                  (_isMedicalHistoryLimitExceeded)?  CircleAvatar(
                           radius: 10,
-                          backgroundColor: (_isMedicalHistoryLimitExceeded)
-                              ? Colors.red
-                              : Theme.of(context).indicatorColor,
+                          backgroundColor: 
+                              Colors.red,
+                            
                           child: CircleAvatar(
                               radius: 8,
                               backgroundColor: (_isMedicalHistoryLimitExceeded)
@@ -2712,7 +2708,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                       : Theme.of(context)
                                           .textTheme
                                           .titleMedium)))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                   Semantics(
                       identifier: (_isConditionsExpanded)
                           ? semantic.S.MEDICAL_HISTORY_EXPANDED_LABEL
@@ -2794,7 +2790,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                       color: Theme.of(context).indicatorColor),
                                 ),
                               ])))
-                      : SizedBox(height: 5, width: 5)
+                      : const SizedBox(height: 5, width: 5)
                 ]),
                 children: <Widget>[
                   Container(
@@ -3382,7 +3378,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
       focusNode: FocusNodes.backNavButton,
       icon: IconTheme(
           data: Theme.of(context).iconTheme,
-          child: const Icon(FontAwesome.chevron_left,
+          child: const Icon(FontAwesome.chevron_left, size: 25,
               semanticLabel: semantic.S.BACK_BTN)),
       onPressed: () async {
         navService.goBack();
@@ -3393,18 +3389,20 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
        child: AppBar(
          elevation: 0,
          leading: Container(
-                 margin:  const EdgeInsets.all(8),
+                 margin:  const EdgeInsets.all(4),
                  child: leftNavButton),
          bottom: const PreferredSize(
-             preferredSize: Size.fromHeight(8), child: SizedBox(height: 8)),
+             preferredSize: Size.fromHeight(6), child: SizedBox(height: 4)),
          backgroundColor: Theme.of(context).primaryColor,
          automaticallyImplyLeading:
              (ModalRoute.of(context)!.settings.name == "/Home") ? false : true,
-         title: const Center(
-             child: Icon(MaterialCommunityIcons.prescription, size: 30)),
+         title: Center(
+             child: Stack(alignment: Alignment.centerLeft, children : [const Icon(MaterialCommunityIcons.prescription, size: 25), 
+                            Padding(padding: const EdgeInsets.only(left:30), 
+                                  child: AutoSizeText("Edit Prescription", style: Theme.of(context).textTheme.displayMedium))])),
          actions: [ButtonBar(
-                     alignment: MainAxisAlignment.center,
-                     buttonPadding: const EdgeInsets.all(6),
+                     alignment: MainAxisAlignment.end,
+                     buttonPadding: const EdgeInsets.all(4),
                      children: actions)],
        ));
   }

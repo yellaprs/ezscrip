@@ -126,9 +126,9 @@ class _ProfilePageState extends State<ProfilePage> {
       actions.add(IconButton(
         key: K.saveButton,
         tooltip: "Save Profile",
-        icon: Icon(Foundation.check,
+        icon: const Icon(Foundation.check,
             size: UI.DIALOG_ACTION_BTN_SIZE,
-            color: Theme.of(context).indicatorColor,
+            color: Colors.white,
             semanticLabel: semantic.S.EDIT_PROFILE_DONE_BTN),
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
@@ -530,6 +530,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
             context,
+            const Icon(Icons.person, size: 25),
             ((_mode == Mode.View)
                 ? AppLocalizations.of(context)!.profile
                 : "Edit ${AppLocalizations.of(context)!.profile}"),

@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'dart:io';
-import 'package:share_it/share_it.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:ezscrip/util/semantics.dart' as semantic;
 import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
@@ -55,7 +56,7 @@ class _PrescriptionPdfViewPageState extends State<PrescriptionPdfViewPage>
     actions.add(IconButton(
         key: K.shareButon,
         focusNode: FocusNodes.sharButton,
-        icon: const Icon(Icons.share_outlined, size: 30),
+        icon: const Icon(Icons.share_outlined, size: 25, color: Colors.white),
         color: Theme.of(context).iconTheme.color,
         onPressed: () async {
           // String encryptedPdfFile =
@@ -75,8 +76,8 @@ class _PrescriptionPdfViewPageState extends State<PrescriptionPdfViewPage>
 
           if (_mode != Mode.Preview) {
             try {
-              await ShareIt.file(
-                  path: _generatedFile, type: ShareItFileType.anyFile);
+              await Share.shareXFiles([XFile(_generatedFile)],
+                  subject: AppLocalizations.of(context)!.prescription);
             } on PlatformException catch (exception) {
               throw ApplicationException(
                   "Platform Exception", "could not open file");
@@ -87,7 +88,7 @@ class _PrescriptionPdfViewPageState extends State<PrescriptionPdfViewPage>
     actions.add(IconButton(
         key: K.printButton,
         focusNode: FocusNodes.prinButton,
-        icon: const Icon(Icons.print, size: 30),
+        icon: const Icon(Icons.print, size: 25),
         color: Theme.of(context).iconTheme.color,
         onPressed: () async {
           await Printing.layoutPdf(
@@ -103,7 +104,8 @@ class _PrescriptionPdfViewPageState extends State<PrescriptionPdfViewPage>
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
             context,
-            AppLocalizations.of(context)!.prescription,
+            const Icon(FontAwesome5Solid.file_prescription, size: 25),
+            "${AppLocalizations.of(context)!.share} ${AppLocalizations.of(context)!.scrip}",
             (_status == Status.Complete) ? buildAppBarActions() : []),
         body: Container(
             height: MediaQuery.of(context).size.height - 10,

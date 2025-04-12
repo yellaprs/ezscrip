@@ -43,7 +43,7 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
         focusNode: FocusNodes.editProfileKey,
         tooltip: "Edit Profile",
         icon: Icon(Icons.edit,
-            size: 30,
+            size: 25,
             semanticLabel: semantic.S.PROFILE_EDIT_BTN,
             color: Theme.of(context).indicatorColor),
         onPressed: () async {
@@ -211,7 +211,7 @@ class _ViewProfilePageState extends State<ViewProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, AppLocalizations.of(context)!.profile, buildActions()),
+            context, const Icon(Icons.person, size: 25), AppLocalizations.of(context)!.profile, buildActions()),
         resizeToAvoidBottomInset: false,
         body: Container(
             margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),

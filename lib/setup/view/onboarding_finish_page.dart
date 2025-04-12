@@ -50,7 +50,7 @@ class _OnboardingFinishPageState extends State<OnboardingFinishPage> {
                         navService.pushReplacementNamed(Routes.Login);
                       },
                       child: AutoSizeText("Done",
-                          style: Theme.of(context).textTheme.titleMedium)))
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.white))))
             ])));
   }
 }

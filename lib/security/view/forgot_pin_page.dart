@@ -174,7 +174,7 @@ class _ForgotPinPageState extends State<ForgotPinPage> {
           key: K.nextButton,
           icon: const Icon(
             Icons.forward,
-            size: 30,
+            size: 30, color: Colors.white,
             semanticLabel: semantic.SemanticLabels.PIN_RESET_SET_BUTTON,
           ),
           onPressed: () async {
@@ -193,7 +193,7 @@ class _ForgotPinPageState extends State<ForgotPinPage> {
           key: K.checkButton,
           icon: const Icon(
             Icons.check,
-            size: 30,
+            size: 30, color: Colors.white,
             semanticLabel: semantic.SemanticLabels.PIN_RESET_SET_BUTTON,
           ),
           onPressed: () async {

@@ -1,8 +1,9 @@
 // ignore_for_file: unused_local_variable
+import 'package:ezscrip/consultation/model/direction.dart';
 import 'package:ezscrip/consultation/model/medicalHistory.dart';
 import 'package:ezscrip/consultation/model/testParameter.dart';
 import 'package:ezscrip/consultation/model/time.dart';
-import 'package:ezscrip/main.dart';
+import 'package:ezscrip/consultation/model/unit.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/util/utils_service.dart';
 import 'package:enum_to_string/enum_to_string.dart';
@@ -44,21 +45,21 @@ class PrescriptionGenerator_1 {
   ) {
     return (symptoms.isNotEmpty && symptoms.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(5),
             child: pw.Column(children: [
               pw.Row(children: [
                 pw.Container(
                   alignment: pw.Alignment.topLeft,
                   width: 150,
-                  padding: const pw.EdgeInsets.all(5),
+                  padding: const pw.EdgeInsets.all(2),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
-                          top: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
-                          left: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
-                          right: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
+                          // top: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
+                          // left: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
+                          // right: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
                           bottom: pw.BorderSide(
                               width: 1.0, color: pdf.PdfColors.black))),
                   child: pw.Stack(
@@ -83,7 +84,7 @@ class PrescriptionGenerator_1 {
                 ),
               ]),
               pw.Container(
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
                     top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
@@ -143,7 +144,7 @@ class PrescriptionGenerator_1 {
 
     return (testParameters.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(5),
             child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
@@ -154,12 +155,12 @@ class PrescriptionGenerator_1 {
                         alignment: pw.Alignment.topLeft,
                         decoration: const pw.BoxDecoration(
                             border: pw.Border(
-                                top: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
-                                left: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
-                                right: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
+                                // top: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
+                                // left: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
+                                // right: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
                                 bottom: pw.BorderSide(
                                     width: 1.0, color: pdf.PdfColors.black))),
                         child: pw.Stack(
@@ -183,7 +184,7 @@ class PrescriptionGenerator_1 {
                   ]),
                   pw.Container(
                       alignment: pw.Alignment.centerLeft,
-                      padding: const pw.EdgeInsets.all(10),
+                      padding: const pw.EdgeInsets.all(2),
                       decoration: const pw.BoxDecoration(
                           border: pw.Border(
                         top: pw.BorderSide(
@@ -241,23 +242,23 @@ class PrescriptionGenerator_1 {
     }
     return (indicators.isNotEmpty && indicators.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(2),
             child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
                   pw.Row(children: [
                     pw.Container(
                         width: 150,
-                        padding: const pw.EdgeInsets.all(5),
+                        padding: const pw.EdgeInsets.all(2),
                         alignment: pw.Alignment.topLeft,
                         decoration: const pw.BoxDecoration(
                             border: pw.Border(
-                                top: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
-                                left: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
-                                right: pw.BorderSide(
-                                    width: 1.0, color: pdf.PdfColors.black),
+                                // top: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
+                                // left: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
+                                // right: pw.BorderSide(
+                                    // width: 1.0, color: pdf.PdfColors.black),
                                 bottom: pw.BorderSide(
                                     width: 1.0, color: pdf.PdfColors.black))),
                         child: pw.Stack(
@@ -290,7 +291,7 @@ class PrescriptionGenerator_1 {
                             width: 1.0, color: pdf.PdfColors.black),
                       )),
                       child: pw.Wrap(
-                          spacing: 15.0,
+                          spacing: 5.0,
                           runSpacing: 10.0,
                           children: indicatorWidgets))
                 ]))
@@ -305,7 +306,7 @@ class PrescriptionGenerator_1 {
   ) {
     return (conditions.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(2),
             child: pw.Column(children: [
               pw.Row(children: [
                 pw.Container(
@@ -314,12 +315,12 @@ class PrescriptionGenerator_1 {
                     padding: const pw.EdgeInsets.all(5),
                     decoration: const pw.BoxDecoration(
                         border: pw.Border(
-                            top: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
-                            left: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
-                            right: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
+                            // top: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
+                            // left: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
+                            // right: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
                             bottom: pw.BorderSide(
                                 width: 1.0, color: pdf.PdfColors.black))),
                     child:
@@ -342,7 +343,7 @@ class PrescriptionGenerator_1 {
               ]),
               pw.Container(
                   alignment: pw.Alignment.centerLeft,
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
                     top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
@@ -456,24 +457,33 @@ class PrescriptionGenerator_1 {
       List<pw.Widget> row = [];
 
       if (medication.getStatus() != MedStatus.Discontinue) {
+  
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
+                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
             child: pw.Text(
-                "${medication.dosage.toString()} ${EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase()} ${medication.getName()}",
+                overflow: pw.TextOverflow.clip,
+                "${medication.dosage.toString()} ${(medication.unit != Unit.tabs && medication.unit != Unit.caps) ? EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase(): ""} ${medication.getName()} (${EnumToString.convertToString(medication.getPreparation(), camelCase: true)})",
                 style: pw.Theme.of(context).tableCell)));
+
+        // row.add(pw.Padding(
+            // padding:
+                // const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
+            // child: pw.Text(
+                // "${medication.dosage.toString()} ${EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase()}",
+                // style: pw.Theme.of(context).tableCell)));
+
+        // row.add(pw.Padding(
+            // padding:
+                // const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
+            // child: pw.Text(
+                // EnumToString.convertToString(medication.getPreparation(),
+                    // camelCase: true),
+                // style: pw.Theme.of(context).tableCell)));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
-            child: pw.Text(
-                EnumToString.convertToString(medication.getPreparation(),
-                    camelCase: true),
-                style: pw.Theme.of(context).tableCell)));
-
-        row.add(pw.Padding(
-            padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
+                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
             child: pw.Text(
                 medication.frequencyType.toString().substring(
                     medication.frequencyType.toString().indexOf("_") + 1),
@@ -483,16 +493,17 @@ class PrescriptionGenerator_1 {
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
+                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
             child: pw.Text(
                 "${medication.duration} ${EnumToString.convertToString(medication.durationType, camelCase: true)}",
                 style: pw.Theme.of(context).tableCell)));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
+                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
             child: pw.Text(
-                medication.direction != null
+                medication.direction != null &&
+                        medication.direction != Direction.NotApplicable
                     ? EnumToString.convertToString(medication.direction,
                         camelCase: true)
                     : "",
@@ -527,66 +538,58 @@ class PrescriptionGenerator_1 {
                 bottom: pw.BorderSide(width: 2.0))),
         children: [
           pw.SizedBox(
-              width: 70,
+              width: 150,
               child: pw.Padding(
                   padding: const pw.EdgeInsets.only(
-                      left: 2, top: 4, bottom: 4, right: 2),
-                  child: pw.Text('Drug Name'))),
+                      left: 2, top: 5, bottom: 5, right: 2),
+                  child: pw.Text('Drug Name', style: pw.Theme.of(context).tableHeader))),
+          
+              // )),
           pw.SizedBox(
-              width: 80,
+              width: 65,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
-                child: pw.Text('Preparation',
+                    left: 2, top: 5, bottom: 5, right: 2),
+                child: pw.Text('Frequency',
                     style: pw.Theme.of(context).tableHeader),
               )),
           pw.SizedBox(
               width: 65,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
-                child: pw.Text('Frequency',
-                    style: pw.Theme.of(context).tableHeader),
-              )),
-          pw.SizedBox(
-              width: 60,
-              child: pw.Padding(
-                padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
+                    left: 2, top: 5, bottom: 5, right: 2),
                 child: pw.Text('Time', style: pw.Theme.of(context).tableHeader),
               )),
           pw.SizedBox(
-              width: 50,
+              width: 65,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
+                    left: 2, top: 5, bottom: 5, right: 2),
                 child: pw.Text('Duration',
                     style: pw.Theme.of(context).tableHeader),
               )),
           pw.SizedBox(
-              width: 50,
+              width: 30,
               child: pw.Padding(
                   padding: const pw.EdgeInsets.only(
-                      left: 2, top: 4, bottom: 4, right: 2),
+                      left: 2, top: 5, bottom: 5, right: 2),
                   child: pw.Text('Advice',
                       style: pw.Theme.of(context).tableHeader))),
         ]));
 
     rows.addAll(medicationList);
 
-    Map<int, pw.FixedColumnWidth> columnWidths =
-        Map<int, pw.FixedColumnWidth>();
-
-    columnWidths.putIfAbsent(1, () => const pw.FixedColumnWidth(70));
-    columnWidths.putIfAbsent(2, () => const pw.FixedColumnWidth(80));
+    Map<int, pw.FixedColumnWidth> columnWidths = {};
+    
+    columnWidths.putIfAbsent(0, () => const pw.FixedColumnWidth(150));
+    columnWidths.putIfAbsent(1, () => const pw.FixedColumnWidth(65));
+    columnWidths.putIfAbsent(2, () => const pw.FixedColumnWidth(65));
     columnWidths.putIfAbsent(3, () => const pw.FixedColumnWidth(65));
-    columnWidths.putIfAbsent(4, () => const pw.FixedColumnWidth(65));
-    columnWidths.putIfAbsent(5, () => const pw.FixedColumnWidth(50));
-    columnWidths.putIfAbsent(6, () => const pw.FixedColumnWidth(50));
+    columnWidths.putIfAbsent(4, () => const pw.FixedColumnWidth(50));
 
     return pw.Container(
         alignment: pw.Alignment.topLeft,
-        padding: const pw.EdgeInsets.all(10),
+        padding: const pw.EdgeInsets.all(5),
         child: pw.Stack(alignment: pw.Alignment.topCenter, children: [
           pw.Row(children: [
             pw.SvgImage(
@@ -617,23 +620,23 @@ class PrescriptionGenerator_1 {
   }
 
   static pw.Widget buildPatientSummary(
-      pw.Context context, Consultation consultation, String patientSvg) {
+      pw.Context context, Consultation consultation, String patientSvg , String circleSvg) {
     return pw.Header(
-        padding: const pw.EdgeInsets.all(10),
+        padding: const pw.EdgeInsets.all(5),
         child: pw.Column(children: [
           pw.Row(children: [
             pw.Container(
               alignment: pw.Alignment.topLeft,
               width: 150,
-              padding: const pw.EdgeInsets.all(5),
+              padding: const pw.EdgeInsets.all(2),
               decoration: const pw.BoxDecoration(
                   border: pw.Border(
-                      top:
-                          pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
-                      left:
-                          pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
-                      right:
-                          pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
+                      // top:
+                          // pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
+                      // left:
+                          // pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
+                      // right:
+                          // pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
                       bottom: pw.BorderSide(
                           width: 1.0, color: pdf.PdfColors.black))),
               child: pw.Stack(
@@ -659,18 +662,26 @@ class PrescriptionGenerator_1 {
               padding: const pw.EdgeInsets.all(5),
               decoration: const pw.BoxDecoration(
                   border: pw.Border(
-                top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
+                        top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
               )),
-              child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
+              child: pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.start,
                   children: [
-                    pw.Text(
-                        "${consultation.getPatientName()}  Gender: ${EnumToString.convertToString(consultation.getGender(), camelCase: false)} Age: ${consultation.getPatientAge().toString()} years  Weight: ${consultation.getWeight().toString()} Kg",
-                        style: pw.Theme.of(context).header5),
-                    // pw.Text("${consultation.patientAge.toString()}  years",
-                    //     style: pw.Theme.of(context).header5),
-                  ]))
-        ]));
+                    pw.Padding(
+                         padding: const pw.EdgeInsets.only(left : 15),
+                         child: pw.Text(consultation.getPatientName())),
+                    pw.Padding(
+                         padding: const pw.EdgeInsets.only(left :15),
+                         child: pw.Text(EnumToString.convertToString(consultation.getGender(), camelCase: false))),
+                    pw.Padding(
+                         padding: const pw.EdgeInsets.only(left : 15),
+                         child: pw.Text("${consultation.getPatientAge().toString()} years")),
+                    pw.Padding(
+                          padding: const pw.EdgeInsets.only(left: 15),
+                          child: pw.Text("${consultation.getWeight().toString()} kg"))
+             ]),
+        )])
+     );
   }
 
   static pw.Widget buildHeader(
@@ -861,12 +872,12 @@ class PrescriptionGenerator_1 {
                       //     topLeft: pw.Radius.circular(8),
                       //     topRight: pw.Radius.circular(8)),
                       border: pw.Border(
-                          top: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
-                          left: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
-                          right: pw.BorderSide(
-                              width: 1.0, color: pdf.PdfColors.black),
+                          // top: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
+                          // left: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
+                          // right: pw.BorderSide(
+                              // width: 1.0, color: pdf.PdfColors.black),
                           bottom: pw.BorderSide(
                               width: 1.0, color: pdf.PdfColors.black))),
                   child: pw.Stack(
@@ -891,7 +902,7 @@ class PrescriptionGenerator_1 {
                 ),
               ]),
               pw.Container(
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
                     top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
@@ -944,19 +955,19 @@ class PrescriptionGenerator_1 {
             children: [
               pw.Row(children: [
                 pw.Container(
-                    padding: const pw.EdgeInsets.all(5),
+                    padding: const pw.EdgeInsets.all(3),
                     width: 150,
                     decoration: const pw.BoxDecoration(
                         // borderRadius: pw.BorderRadius.only(
                         //     topLeft: pw.Radius.circular(8),
                         //     topRight: pw.Radius.circular(8)),
                         border: pw.Border(
-                            top: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
-                            left: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
-                            right: pw.BorderSide(
-                                width: 1.0, color: pdf.PdfColors.black),
+                            // top: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
+                            // left: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
+                            // right: pw.BorderSide(
+                                // width: 1.0, color: pdf.PdfColors.black),
                             bottom: pw.BorderSide(
                                 width: 1.0, color: pdf.PdfColors.black))),
                     child:
@@ -968,7 +979,7 @@ class PrescriptionGenerator_1 {
                           clip: true,
                           fit: pw.BoxFit.contain),
                       pw.Padding(
-                          padding: const pw.EdgeInsets.only(left: 40),
+                          padding: const pw.EdgeInsets.only(left: 30),
                           child: pw.Text("Notes"))
                     ]))
               ]),
@@ -1054,7 +1065,7 @@ class PrescriptionGenerator_1 {
                   context, consultation.getStart(), locale));
 
               firstPageBlocks
-                  .add(buildPatientSummary(context, consultation, personSvg));
+                  .add(buildPatientSummary(context, consultation, personSvg, circleSvg));
               firstPageBlockLengths.add(currentLength);
 
               currentLength += symptomBlockLength(consultation.getSymptoms());

@@ -292,7 +292,7 @@ class _PinResetPageState extends State<PinResetPage> {
     return OrientationBuilder(builder: (context, orientation) {
       return Scaffold(
           appBar: AppBarBuilder.buildAppBar(
-              context,
+              context, const Icon(Icons.security, size: 25),
               AppLocalizations.of(context)!.changePin,
               (_isPinVerified) ? actions() : []),
           body: Container(

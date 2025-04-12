@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:ezscrip/consultation/model/direction.dart';
+import 'package:ezscrip/consultation/model/unit.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/utils_service.dart';
 import 'package:enum_to_string/enum_to_string.dart';
@@ -150,7 +152,8 @@ class PrescriptionGenerator_2 {
                 pw.Padding(
                     padding: const pw.EdgeInsets.only(left: 15),
                     child: pw.Text(
-                        "${indicator.getType().toString().substring(indicator.getType().toString().indexOf(".") + 1)} : ${indicator.getValue()} ${indicator.getUnits()}"))
+                        overflow: pw.TextOverflow.clip,
+                        "${indicator.getType().toString().substring(indicator.getType().toString().indexOf(".") + 1)}:${indicator.getValue()} ${indicator.getUnits()}"))
               ]))
           .toList();
     }
@@ -162,7 +165,7 @@ class PrescriptionGenerator_2 {
                 children: [
                   pw.Row(children: [
                     pw.Container(
-                        width: 150,
+                        width: 175,
                         padding: const pw.EdgeInsets.all(5),
                         alignment: pw.Alignment.topLeft,
                         decoration: const pw.BoxDecoration(
@@ -190,7 +193,7 @@ class PrescriptionGenerator_2 {
                   ]),
                   pw.Container(
                       padding: const pw.EdgeInsets.only(
-                          top: 10, bottom: 10, left: 15, right: 15),
+                          top: 10, bottom: 10, left: 10, right: 5),
                       decoration: const pw.BoxDecoration(
                           border: pw.Border(
                         top: pw.BorderSide(
@@ -198,7 +201,7 @@ class PrescriptionGenerator_2 {
                       )),
                       child: pw.Expanded(
                           child: pw.Wrap(
-                              spacing: 45.0,
+                              spacing: 30.0,
                               runSpacing: 10.0,
                               children: indicatorWidgets)))
                 ]))
@@ -213,7 +216,7 @@ class PrescriptionGenerator_2 {
   ) {
     return (conditions.isNotEmpty && conditions.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(5),
             child: pw.Column(children: [
               pw.Row(children: [
                 pw.Container(
@@ -244,13 +247,13 @@ class PrescriptionGenerator_2 {
               ]),
               pw.Container(
                   alignment: pw.Alignment.centerLeft,
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
                     top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
                   )),
                   child: pw.Wrap(
-                      spacing: 10.0,
+                      spacing: 5.0,
                       runSpacing: 10.0,
                       children: conditions
                           .map((condition) => pw.Padding(
@@ -328,44 +331,64 @@ class PrescriptionGenerator_2 {
       List<pw.Widget> row = [];
 
       if (medication.getStatus() != MedStatus.Discontinue) {
-        row.add(pw.Padding(
-          padding:
-              const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
-          child: pw.Text(
-              "${medication.dosage} ${EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase()} ${medication.getName()}",
-              style: pw.Theme.of(context).tableCell),
-        ));
+        // row.add(pw.Padding(
+            // padding:
+                // const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
+            // child: pw.SizedBox(
+              // width: 30,
+              // child: pw.Text(
+                  // "${medication.dosage}${EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase()}",
+                  // style: pw.Theme.of(context).tableCell),
+            // )));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
-            child: pw.Text(
-                EnumToString.convertToString(medication.getPreparation(),
-                    camelCase: true),
-                style: pw.Theme.of(context).tableCell)));
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
+            child: pw.SizedBox(
+              width: 70,
+              child: pw.Text(
+                  "${medication.dosage} ${(medication.unit != Unit.tabs && medication.unit != Unit.caps) ? EnumToString.convertToString(medication.unit, camelCase: true).toLowerCase(): ""} ${medication.getName()}  (${EnumToString.convertToString(medication.getPreparation(),
+                     camelCase: true)})",
+                  style: pw.Theme.of(context).tableCell),
+            )));
+
+        // row.add(pw.Padding(
+            // padding:
+                // const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
+            // child: pw.SizedBox(
+                // width: 65,
+                // child: pw.Text(
+                    // EnumToString.convertToString(medication.getPreparation(),
+                        // camelCase: true),
+                    // style: pw.Theme.of(context).tableCell))));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
-            child: pw.Text(
-                medication.frequencyType.toString().substring(
-                    medication.frequencyType.toString().indexOf("_") + 1),
-                style: pw.Theme.of(context).tableCell)));
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
+            child: pw.SizedBox(
+                width: 65,
+                child: pw.Text(
+                    medication.frequencyType.toString().substring(
+                        medication.frequencyType.toString().indexOf("_") + 1),
+                    style: pw.Theme.of(context).tableCell))));
 
         row.add((buildTimes(medication.times!, timeIconsMap)));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
-            child: pw.Text(
-                "${medication.duration} ${EnumToString.convertToString(medication.durationType, camelCase: true)}",
-                style: pw.Theme.of(context).tableCell)));
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
+            child: pw.SizedBox(
+                width: 50,
+                child: pw.Text(
+                    "${medication.duration} ${EnumToString.convertToString(medication.durationType, camelCase: true)}",
+                    style: pw.Theme.of(context).tableCell))));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 4, bottom: 4, right: 2),
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
             child: pw.Text(
-                medication.direction != null
+                medication.direction != null &&
+                        medication.direction != Direction.NotApplicable
                     ? EnumToString.convertToString(medication.direction,
                         camelCase: true)
                     : "",
@@ -373,13 +396,13 @@ class PrescriptionGenerator_2 {
       } else {
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
             child: pw.Text(medication.getName(),
                 style: pw.Theme.of(context).tableCell)));
 
         row.add(pw.Padding(
             padding:
-                const pw.EdgeInsets.only(left: 2, top: 5, bottom: 5, right: 2),
+                const pw.EdgeInsets.only(left: 0, top: 5, bottom: 5, right: 0),
             child: pw.Text(
                 EnumToString.convertToString(medication.getPreparation(),
                     camelCase: true),
@@ -400,40 +423,48 @@ class PrescriptionGenerator_2 {
                 top: pw.BorderSide(width: 2.0),
                 bottom: pw.BorderSide(width: 2.0))),
         children: [
+          // pw.SizedBox(
+          // width: 35,
+          // child: pw.Padding(
+          // padding: const pw.EdgeInsets.only(
+          // left: 0, top: 5, bottom: 5, right: 2),
+          // child: pw.Text('Unit',
+          // style: pw.Theme.of(context).tableHeader))),
           pw.SizedBox(
-              width: 70,
+              width: 150,
               child: pw.Padding(
                   padding: const pw.EdgeInsets.only(
-                      left: 2, top: 4, bottom: 4, right: 2),
-                  child: pw.Text('Drug Name'))),
+                      left: 0, top: 5, bottom: 5, right: 2),
+                  child: pw.Text('Drug Name',
+                      style: pw.Theme.of(context).tableHeader))),
+          // pw.SizedBox(
+          // width: 65,
+          // child: pw.Padding(
+          // padding: const pw.EdgeInsets.only(
+          // left: 0, top: 5, bottom: 5, right: 2),
+          // child: pw.Text('Preparation',
+          // style: pw.Theme.of(context).tableHeader),
+          //)),
           pw.SizedBox(
-              width: 80,
+              width: 65,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
-                child: pw.Text('Preparation',
+                    left: 0, top: 5, bottom: 5, right: 2),
+                child: pw.Text('Frequency',
                     style: pw.Theme.of(context).tableHeader),
               )),
           pw.SizedBox(
               width: 65,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
-                child: pw.Text('Frequency',
-                    style: pw.Theme.of(context).tableHeader),
-              )),
-          pw.SizedBox(
-              width: 60,
-              child: pw.Padding(
-                padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
+                    left: 0, top: 5, bottom: 5, right: 2),
                 child: pw.Text('Time', style: pw.Theme.of(context).tableHeader),
               )),
           pw.SizedBox(
               width: 50,
               child: pw.Padding(
                 padding: const pw.EdgeInsets.only(
-                    left: 2, top: 4, bottom: 4, right: 2),
+                    left: 0, top: 5, bottom: 5, right: 2),
                 child: pw.Text('Duration',
                     style: pw.Theme.of(context).tableHeader),
               )),
@@ -441,7 +472,7 @@ class PrescriptionGenerator_2 {
               width: 50,
               child: pw.Padding(
                   padding: const pw.EdgeInsets.only(
-                      left: 2, top: 4, bottom: 4, right: 2),
+                      left: 0, top: 5, bottom: 5, right: 2),
                   child: pw.Text('Advice',
                       style: pw.Theme.of(context).tableHeader))),
         ]));
@@ -449,18 +480,18 @@ class PrescriptionGenerator_2 {
     rows.addAll(medicationList);
 
     Map<int, pw.FixedColumnWidth> columnWidths = {};
-    // Map<int, pw.FixedColumnWidth>();
 
-    columnWidths.putIfAbsent(1, () => const pw.FixedColumnWidth(70));
-    columnWidths.putIfAbsent(2, () => const pw.FixedColumnWidth(80));
+    columnWidths.putIfAbsent(0, () => const pw.FixedColumnWidth(150));
+    // columnWidths.putIfAbsent(2, () => const pw.FixedColumnWidth(75));
+    columnWidths.putIfAbsent(1, () => const pw.FixedColumnWidth(65));
+    columnWidths.putIfAbsent(2, () => const pw.FixedColumnWidth(65));
     columnWidths.putIfAbsent(3, () => const pw.FixedColumnWidth(65));
-    columnWidths.putIfAbsent(4, () => const pw.FixedColumnWidth(65));
-    columnWidths.putIfAbsent(5, () => const pw.FixedColumnWidth(50));
-    columnWidths.putIfAbsent(6, () => const pw.FixedColumnWidth(50));
+    columnWidths.putIfAbsent(4, () => const pw.FixedColumnWidth(50));
+    // columnWidths.putIfAbsent(5, () => const pw.FixedColumnWidth(50));
 
     return pw.Container(
         alignment: pw.Alignment.topLeft,
-        padding: const pw.EdgeInsets.all(10),
+        padding: const pw.EdgeInsets.all(5),
         child: pw.Stack(alignment: pw.Alignment.topCenter, children: [
           pw.Row(children: [
             pw.SvgImage(
@@ -495,7 +526,7 @@ class PrescriptionGenerator_2 {
   static pw.Widget buildPatientSummary(
       pw.Context context, Consultation consultation, String patientSvg) {
     return pw.Container(
-        padding: const pw.EdgeInsets.all(10),
+        padding: const pw.EdgeInsets.all(5),
         child: pw.Column(children: [
           pw.Row(children: [
             pw.Container(
@@ -526,25 +557,22 @@ class PrescriptionGenerator_2 {
           ]),
           pw.Container(
               alignment: pw.Alignment.topLeft,
+              padding: const pw.EdgeInsets.all(5),
               child: pw.Column(
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   children: [
-                    pw.Text("${consultation.getPatientName()} ",
+                    pw.Text("${consultation.getPatientName()}",
                         style: pw.Theme.of(context).header5),
-                    pw.Text("${consultation.getPatientAge().toString()}  years",
+                    pw.Text(
+                        "${consultation.getPatientAge().toString()} years",
                         style: pw.Theme.of(context).header5),
-                    pw.Stack(alignment: pw.Alignment.centerLeft, children: [
-                      pw.Text(
-                          EnumToString.convertToString(consultation.getGender(),
-                              camelCase: false),
-                          style: pw.Theme.of(context).header5),
-                      pw.Padding(
-                          padding: pw.EdgeInsets.only(left: 60),
-                          child: pw.Text(
-                            "${consultation.getWeight().toString()} kg",
-                            style: pw.Theme.of(context).header5,
-                          ))
-                    ]),
+                    pw.Text(
+                        "${EnumToString.convertToString(consultation.getGender(), camelCase: false)}",
+                        style: pw.Theme.of(context).header5),
+                    pw.Text(
+                       "${consultation.getWeight().toString()} kg",
+                      style: pw.Theme.of(context).header5,
+                    )
                   ]))
         ]));
   }
@@ -753,7 +781,7 @@ class PrescriptionGenerator_2 {
 
     return (testParameters.isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(5),
             child: pw.Column(
                 crossAxisAlignment: pw.CrossAxisAlignment.start,
                 children: [
@@ -783,7 +811,7 @@ class PrescriptionGenerator_2 {
                   ]),
                   pw.Container(
                       alignment: pw.Alignment.centerLeft,
-                      padding: const pw.EdgeInsets.all(10),
+                      padding: const pw.EdgeInsets.all(5),
                       decoration: const pw.BoxDecoration(
                           border: pw.Border(
                         top: pw.BorderSide(
@@ -809,7 +837,7 @@ class PrescriptionGenerator_2 {
                                             padding: const pw.EdgeInsets.only(
                                                 left: 15),
                                             child: pw.Text(
-                                                "${parameter.getName()} - ${parameter.getValue()} ${parameter.getUnit()}",
+                                                "${parameter.getName()} - ${parameter.getValue()} ${(parameter.getUnit() != null) ? parameter.getUnit() : ""}",
                                                 style: const pw.TextStyle(
                                                     fontSize: 10)))
                                       ])))
@@ -822,13 +850,13 @@ class PrescriptionGenerator_2 {
       String circleSvg, pw.Context context) {
     return (consultation.getTests().isNotEmpty)
         ? pw.Container(
-            padding: const pw.EdgeInsets.all(10),
+            padding: const pw.EdgeInsets.all(5),
             child: pw.Stack(alignment: pw.Alignment.topCenter, children: [
               pw.Row(children: [
                 pw.Container(
                   alignment: pw.Alignment.topLeft,
                   width: 150,
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   child: pw.Stack(
                     alignment: pw.Alignment.centerLeft,
                     children: [
@@ -897,7 +925,7 @@ class PrescriptionGenerator_2 {
             ]))
         .toList();
     return pw.Container(
-        padding: const pw.EdgeInsets.all(10),
+        padding: const pw.EdgeInsets.all(5),
         alignment: pw.Alignment.centerLeft,
         child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -924,7 +952,7 @@ class PrescriptionGenerator_2 {
                     ]))
               ]),
               pw.Container(
-                  padding: const pw.EdgeInsets.all(10),
+                  padding: const pw.EdgeInsets.all(5),
                   decoration: const pw.BoxDecoration(
                       border: pw.Border(
                     top: pw.BorderSide(width: 1.0, color: pdf.PdfColors.black),
@@ -987,8 +1015,8 @@ class PrescriptionGenerator_2 {
 
     final String iconData = await rootBundle.loadString(icon);
 
-    pageTheme = await _getPageTheme(
-        pdf.PdfPageFormat.a4, user, byteData, 0.5, 0, 0.5, 0);
+    //pageTheme = await _getPageTheme(
+    //     pdf.PdfPageFormat.a4, user, byteData, 0.5, 0, 0.25, 0);
 
     List<pw.Widget> firstPageBlocks = [];
     List<pw.Widget> secondPageBlocks = [];
@@ -999,7 +1027,7 @@ class PrescriptionGenerator_2 {
     int currentLength = 2;
 
     pageTheme = await _getPageTheme(
-        pdf.PdfPageFormat.a4, user, byteData, 0.5, 1.0, 1.0, 0.5);
+        pdf.PdfPageFormat.a4, user, byteData, 0.5, 1.0, 0.5, 0.5);
 
     document.addPage(
         index: 0,
@@ -1023,6 +1051,7 @@ class PrescriptionGenerator_2 {
                       mainAxisAlignment: pw.MainAxisAlignment.start,
                       children: [
                         buildPatientSummary(context, consultation, personSvg),
+                        pw.SizedBox(height: 5),
                         buildMedicalHistory(consultation.getMedicalHistory(),
                             conditionsSvg, circleSvg, context)
                       ]),
@@ -1031,10 +1060,10 @@ class PrescriptionGenerator_2 {
                     child: pw.Column(
                         mainAxisAlignment: pw.MainAxisAlignment.start,
                         children: [
-                      buildSymptoms(consultation.getSymptoms(), symptomsSvg,
+                      buildIndicators(consultation.indicators, indicatorsSvg,
                           circleSvg, context),
                       pw.SizedBox(height: 5),
-                      buildIndicators(consultation.indicators, indicatorsSvg,
+                      buildSymptoms(consultation.getSymptoms(), symptomsSvg,
                           circleSvg, context),
                     ]))
               ]));

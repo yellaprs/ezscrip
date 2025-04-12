@@ -198,7 +198,7 @@ class _EditPinSettingsPageState extends State<EditPinSettingsPage> {
     actions.add(IconButton(
       key: K.checkButton,
       focusNode: FocusNodes.savePiButton,
-      icon: const Icon(Foundation.check),
+      icon: const Icon(Foundation.check, size: 25),
       onPressed: () {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
@@ -225,7 +225,7 @@ class _EditPinSettingsPageState extends State<EditPinSettingsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, "Security Settings", buildActions()),
+            context, const Icon(Icons.pin, size: 25),  "Security Settings", buildActions()),
         body: Container(
             height: MediaQuery.of(context).size.height - 50,
             width: MediaQuery.of(context).size.width - 20,

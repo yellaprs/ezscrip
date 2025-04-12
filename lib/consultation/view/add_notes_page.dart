@@ -75,11 +75,11 @@ class _AddNotesPageState extends State<AddNotesPage> {
                     alignment: Alignment.center,
                     child: buildHeader()),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-                Icon(FontAwesome.edit, size: 25),
-                SizedBox(height: 5),
+                const Icon(FontAwesome.edit, size: 25),
+                const SizedBox(height: 5),
                 Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(8.0),
                           topRight: Radius.circular(8.0)),
                       border: Border(

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ezscrip/resources/resources.dart';
 import 'package:ezscrip/settings/model/userprefs.dart';
 import 'package:ezscrip/util/ui_constants.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 import '../../util/semantics.dart' as semantic;
@@ -195,7 +197,7 @@ class _LetterheadSelectionPageState extends State<LetterheadSelectionPage> {
                   return Shimmer.fromColors(
                       baseColor: Colors.grey,
                       highlightColor: Theme.of(context).primaryColor,
-                      child: SizedBox(height: 40));
+                      child: const SizedBox(height: 40));
                   // return const Center(
                   //     child: SpinKitThreeBounce(color: Colors.red, size: 30));
                 }
@@ -207,7 +209,13 @@ class _LetterheadSelectionPageState extends State<LetterheadSelectionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, AppLocalizations.of(context)!.preferences, buildActions()),
+            context, 
+             SvgPicture.asset(Images.userPreferences,
+                 height: 25,
+                 width:  25,
+                semanticsLabel: semantic.S.HOME_APPBAR_PREFERNCES_BUTTON),
+            AppLocalizations.of(context)!.preferences,
+            buildActions()),
         body: Container(
             alignment: Alignment.center,
             height: MediaQuery.of(context).size.height * 0.8,

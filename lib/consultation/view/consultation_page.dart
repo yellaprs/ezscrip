@@ -137,7 +137,7 @@ class ConsultationPageState extends State<ConsultationPage>
 
   Widget buildEditAction(Consultation consultation) {
     return IconButton(
-      icon: Icon(Icons.edit, size: 30),
+      icon: const  Icon(Icons.edit, size: 30),
       onPressed: () async {
         AppUser user = await GetIt.instance<UserPrefs>().getUser();
         Map<String, dynamic> propertiesMap =
@@ -159,7 +159,7 @@ class ConsultationPageState extends State<ConsultationPage>
         key: K.prescriptionViewButton,
         focusNode: FocusNodes.prescriptionVieButton,
         icon: IconTheme(
-            data: Theme.of(context).copyWith().iconTheme,
+            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
             child: const Icon(FontAwesome5Solid.file_prescription)),
         onPressed: () async {
           pw.Document prescDocument;
@@ -228,7 +228,7 @@ class ConsultationPageState extends State<ConsultationPage>
           key: K.checkButton,
           focusNode: FocusNodes.checkConsultatioButton,
           icon: IconTheme(
-              data: Theme.of(context).copyWith().iconTheme,
+              data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
               child: const Icon(Foundation.check,
                   size: 30,
                   semanticLabel: semantic.S.CONSULTATION_DONE_BUTTON)),
@@ -412,19 +412,19 @@ class ConsultationPageState extends State<ConsultationPage>
       children: [
         Container(
           height: 40,
-          decoration: BoxDecoration(
+          decoration: const  BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            border: const Border(
+            border: Border(
               top: BorderSide(color: Colors.blueGrey, width: 1.5),
               left: BorderSide(color: Colors.blueGrey, width: 1.5),
               right: BorderSide(color: Colors.blueGrey, width: 1.5),
             ),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -465,12 +465,12 @@ class ConsultationPageState extends State<ConsultationPage>
         Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border:  Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -486,19 +486,19 @@ class ConsultationPageState extends State<ConsultationPage>
     return Stack(alignment: Alignment.topCenter, children: [
       Container(
           height: 40,
-          decoration: BoxDecoration(
+          decoration:  const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            border: const Border(
+            border:  Border(
               top: BorderSide(color: Colors.blueGrey, width: 1.5),
               left: BorderSide(color: Colors.blueGrey, width: 1.5),
               right: BorderSide(color: Colors.blueGrey, width: 1.5),
             ),
           ),
           child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -507,7 +507,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 color: Theme.of(context).primaryColor,
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   Padding(
-                      padding: EdgeInsets.only(left: 10),
+                      padding:const EdgeInsets.only(left: 10),
                       child: SvgPicture.asset(Images.tests,
                           width: 25, height: 25)),
                   Padding(
@@ -520,12 +520,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration:const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border:  Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -540,19 +540,19 @@ class ConsultationPageState extends State<ConsultationPage>
         child: Stack(children: [
       Container(
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const  BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border: const Border(
+          border: Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
           ),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
@@ -575,12 +575,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -670,19 +670,19 @@ class ConsultationPageState extends State<ConsultationPage>
     return Stack(children: [
       Container(
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border: const Border(
+          border: Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
           ),
         ),
         child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -703,12 +703,12 @@ class ConsultationPageState extends State<ConsultationPage>
           padding: const EdgeInsets.only(top: 40),
           child: Container(
               width: MediaQuery.of(context).size.width - 10,
-              decoration: BoxDecoration(
+              decoration:const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border:  Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -816,19 +816,19 @@ class ConsultationPageState extends State<ConsultationPage>
         child: Stack(children: [
       Container(
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border: const Border(
+          border:  Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
           ),
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
@@ -837,7 +837,7 @@ class ConsultationPageState extends State<ConsultationPage>
               color: Theme.of(context).primaryColor,
               child: Stack(alignment: Alignment.centerLeft, children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: SvgPicture.asset(Images.medicalTest,
                       height: 30, width: 30),
                 ),
@@ -852,12 +852,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border:  Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -871,19 +871,19 @@ class ConsultationPageState extends State<ConsultationPage>
     return Stack(alignment: Alignment.topCenter, children: [
       Container(
         height: 40,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border: const Border(
+          border: Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
           ),
         ),
         child: ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
@@ -903,12 +903,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -1040,7 +1040,7 @@ class ConsultationPageState extends State<ConsultationPage>
         width: MediaQuery.of(context).size.width * 0.6,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Padding(
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               child: Stack(alignment: Alignment.centerLeft, children: [
                 getUnitIcon(prescription.getPreparation()),
                 Semantics(
@@ -1053,11 +1053,11 @@ class ConsultationPageState extends State<ConsultationPage>
                 ),
               ])),
           Padding(
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               child: Stack(alignment: Alignment.centerLeft, children: [
-                Align(
+                const Align(
                     alignment: Alignment.centerLeft,
-                    child: const Icon(Icons.timer, size: 20)),
+                    child: Icon(Icons.timer, size: 20)),
                 Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
@@ -1076,7 +1076,7 @@ class ConsultationPageState extends State<ConsultationPage>
                           : const SizedBox(width: 30, height: 30),
                     )),
                 Padding(
-                  padding: EdgeInsets.only(left: 30),
+                  padding: const EdgeInsets.only(left: 30),
                   child: Semantics(
                       identifier: semantic.S.PRESCRIPTION_TILE_SCHEDULE,
                       container: true,
@@ -1099,7 +1099,7 @@ class ConsultationPageState extends State<ConsultationPage>
           child: Stack(alignment: Alignment.centerLeft, children: [
             getUnitIcon(prescription.getPreparation()),
             Padding(
-                padding: EdgeInsets.only(left: 30, right: 3),
+                padding: const EdgeInsets.only(left: 30, right: 3),
                 child: AutoSizeText(
                     "${prescription.getName()} ${EnumToString.convertToString(prescription.getPreparation(), camelCase: true)}",
                     style: Theme.of(context).textTheme.titleMedium))
@@ -1111,7 +1111,7 @@ class ConsultationPageState extends State<ConsultationPage>
     Widget directionWidget;
 
     directionWidget = Stack(alignment: Alignment.centerLeft, children: [
-      Icon(Icons.comment, size: 20),
+      const Icon(Icons.comment, size: 20),
       Semantics(
           identifier: semantic.S.PRESCRIPTION_TILE_DIRECTIONS,
           container: true,
@@ -1137,9 +1137,9 @@ class ConsultationPageState extends State<ConsultationPage>
         width: MediaQuery.of(context).size.width * 0.25,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Stack(alignment: Alignment.centerLeft, children: [
-            Icon(Icons.timelapse, size: 20),
+            const Icon(Icons.timelapse, size: 20),
             Padding(
-                padding: EdgeInsets.only(left: 25),
+                padding: const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   prescription.duration.toString() +
                       " " +
@@ -1176,7 +1176,7 @@ class ConsultationPageState extends State<ConsultationPage>
 
       Card card = Card(
         color: Colors.white,
-        margin: EdgeInsets.all(2),
+        margin: const EdgeInsets.all(2),
         elevation: 0,
         borderOnForeground: false,
         child: Row(
@@ -1191,18 +1191,18 @@ class ConsultationPageState extends State<ConsultationPage>
       Container(
           decoration: BoxDecoration(
             color: Theme.of(context).indicatorColor,
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            border: Border(
+            border: const Border(
                 top: BorderSide(width: 1.5),
                 left: BorderSide(width: 1.5),
                 right: BorderSide(width: 1.5),
                 bottom: BorderSide(width: 1.5)),
           ),
           child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
@@ -1225,12 +1225,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border: Border(
                   bottom: BorderSide(width: 1.5),
                   left: BorderSide(width: 1.5),
                   right: BorderSide(width: 1.5),
@@ -1396,19 +1396,19 @@ class ConsultationPageState extends State<ConsultationPage>
     return Stack(children: [
       Container(
           height: 40,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            border: const Border(
+            border: Border(
               top: BorderSide(color: Colors.blueGrey, width: 1.5),
               left: BorderSide(color: Colors.blueGrey, width: 1.5),
               right: BorderSide(color: Colors.blueGrey, width: 1.5),
             ),
           ),
           child: ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 topRight: Radius.circular(8),
               ),
@@ -1418,7 +1418,7 @@ class ConsultationPageState extends State<ConsultationPage>
                   child: Stack(alignment: Alignment.centerLeft, children: [
                     const Padding(
                         padding: EdgeInsets.only(left: 10),
-                        child: const Icon(Foundation.clipboard_notes,
+                        child: Icon(Foundation.clipboard_notes,
                             size: 30, color: Colors.black)),
                     Padding(
                         padding: const EdgeInsets.only(left: 50),
@@ -1430,29 +1430,29 @@ class ConsultationPageState extends State<ConsultationPage>
           child: Container(
               key: K.notesViewList,
               width: MediaQuery.of(context).size.width - 10,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border: const Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
                 ),
               ),
-              constraints: BoxConstraints(
+              constraints: const BoxConstraints(
                   minHeight: UIConstants.EXPANSION_TILE_EMPTY_SIZE),
               //padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
               child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                       horizontal: UI.EXPANSION_TILE_HORIZONTAL_PADDING,
                       vertical: UI.EXPANSION_TILE_VERTICAL_PADDING),
                   child: Column(
                       children: _consultation
                           .getNotes()
                           .map((note) => Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: UI.EXPANSION_TILE_VERTICAL_PADDING),
                               child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -1482,8 +1482,8 @@ class ConsultationPageState extends State<ConsultationPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context,
-            (_isEditable) ? AppLocalizations.of(context)!.review : AppLocalizations.of(context)!.rx ,
+            context, const Icon(MaterialCommunityIcons.prescription, size: 25),
+            "${(_isEditable) ? AppLocalizations.of(context)!.review : AppLocalizations.of(context)!.view} ${AppLocalizations.of(context)!.prescription}",
             buildActions(),
             buildEditAction(_consultation)),
         body: Container(
@@ -1518,6 +1518,8 @@ class ConsultationPageState extends State<ConsultationPage>
                           const SizedBox(height: 10),
                           buildPrescriptionWidget(Orientation.portrait),
                           const SizedBox(height: 10),
-                        ])))));
+                        ])
+              ))
+      ));
   }
 }

@@ -4,7 +4,7 @@ erysipelas
 Klinefelter's syndrome
 Crohn's disease
 ulcerative colitis
-systemic lupus erythematosus
+systemic lupus erythematous
 yaws
 acne
 sleep disorder
@@ -20,7 +20,6 @@ pressure ulcer
 infertility
 alpha thalassemia
 beta-mannosidosis
-AIDS phobia
 activated protein C resistance
 esophagitis
 esophageal atresia
@@ -35,10 +34,8 @@ fetishism
 amblyopia
 cystic fibrosis
 anogenital venereal wart
-chromosome 1q21.1 deletion syndrome
 Hodgkin lymphoma
 endocarditis
-pedophilia
 scarlet fever
 typhoid fever
 Marchiafava-Bignami disease
@@ -48,7 +45,6 @@ lead poisoning
 Marfan syndrome
 constipation
 cerebral palsy
-kleptomania
 Infectious mononucleosis
 herpes gestationis
 Addison's disease
@@ -58,7 +54,6 @@ hepatitis E
 blindness
 astrocytoma
 adult Refsum disease
-adjustment disorder
 abducens nerve palsy
 premature ejaculation
 Colorado tick fever
@@ -66,8 +61,6 @@ borderline personality disorder
 lymphoma
 presbyopia
 abetalipoproteinemia
-dependent personality disorder
-syndrome
 Alzheimer's disease
 fucosidosis
 astigmatism
@@ -100,7 +93,6 @@ parasitic protozoa infectious disease
 duodenal ulcer
 adenoid cystic carcinoma
 adenocarcinoma
-antisocial personality disorder
 medullary sponge kidney
 salmonellosis
 tick-borne encephalitis
@@ -109,7 +101,7 @@ mastocytosis
 glanders
 hepatitis D
 attention deficit hyperactivity disorder
-arcus senilis
+arcus seniles
 appendicitis
 dandruff
 testicular cancer
@@ -117,7 +109,6 @@ giardiasis
 common cold
 progeria
 kwashiorkor
-intellectual disability
 acute lymphocytic leukemia
 anthrax
 dysentery
@@ -151,7 +142,6 @@ cancer
 cholera
 diabetes insipidus
 pulmonary embolism
-stuttering
 premenstrual syndrome
 agnosia
 tolosa-hunt syndrome
@@ -242,21 +232,19 @@ narcolepsy
 acromegaly
 hypothyroidism
 miliary tuberculosis
-eating disorder
 Langerhans-cell histiocytosis
 smallpox
 aphthous stomatitis
 peritonitis
 otitis media
 pulmonary emphysema
-mood disorder
 color blindness
 poisoning by drugs
 placental abruption
 intestinal volvulus
 Meckel's diverticulum
 ischemia
-lupus erythematosus
+lupus erythematous
 migraine
 sarcoma
 precocious puberty
@@ -322,7 +310,6 @@ cysticercosis
 Digoxin toxicity
 chlamydia infection
 aspergillosis
-SADDAN
 thrombosis
 central pontine myelinolysis
 Huntington's disease
@@ -568,7 +555,6 @@ somatization disorder
 tonic–clonic seizure
 fetal nicotine spectrum disorder
 twin-to-twin transfusion syndrome
-port-wine stain
 tarsal tunnel syndrome
 conjunctival concretion
 fibrillary glomerulonephritis
@@ -632,7 +618,6 @@ hemophilia C
 factor XIII deficiency
 Paraneoplastic pemphigus
 familial hypocalciuric hypercalcemia
-stomach disease
 phobia
 pyelonephritis
 prostatic hypertrophy
@@ -834,7 +819,6 @@ Tay-Sachs disease AB variant
 gangliosidosis GM1
 GM2 gangliosidosis
 GMS syndrome
-GRACILE syndrome
 galactokinase deficiency
 galactose-1-phosphate uridylyltransferase deficiency
 gallbladder disease
@@ -915,7 +899,6 @@ autosomal recessive limb-girdle muscular dystrophy type 2S
 homozygous familial hypercholesterolemia
 congenital pseudoarthrosis of the tibia
 Meyer dysplasia
-cow milk allergy
 benign neonatal seizures
 nasopharyngeal angiofibroma
 lobular neoplasia
@@ -928,7 +911,6 @@ infantile-onset ascending hereditary spastic paralysis
 hereditary spastic paraplegia 7
 Léri–Weill dyschondrosteosis
 dental pulp disease
-PHACE association
 substance dependence
 Pthirus pubis infestation
 anosognosia
@@ -1348,7 +1330,6 @@ vascular myelopathy
 anti-neutrophil cytoplasmic antibody-associated vasculitis
 Kleine-Levin syndrome
 camptodactyly
-louping ill
 bronchiolitis obliterans
 Fabry disease
 auditory agnosia

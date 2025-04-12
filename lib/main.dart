@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:crypto/crypto.dart';
 import 'package:ezscrip/consultation/consultation_routes.dart';
+import 'package:ezscrip/consultation/model/durationType.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/add_medicalhistory_page.dart';
 import 'package:ezscrip/consultation/view/add_medication_page.dart';
@@ -93,14 +94,33 @@ SembastCodec _getEncryptSembastCodec({required String password}) =>
 
 @pragma('vm:entry-point')
 Future<void> periodicDataRetentionTask() async {
+
   int deletedConsultationCount = 0;
 
   Logger.info("Executing Data Retention Task");
 
   final StoreRef consultationStore = intMapStoreFactory.store('consultations');
+
   Workmanager().executeTask((task, inputData) async {
+
+    DurationType durationType =
+        await GetIt.instance<UserPrefs>().getDataRetentinDurationType();
+
     int? dataRetentionPeriod =
         int.parse((await SecureStorageService.get(C.DATA_RETENTION_DURATION))!);
+
+    if (durationType == DurationType.Week) {
+
+       dataRetentionPeriod =  dataRetentionPeriod * 7;
+
+    } else if (durationType == DurationType.Month) {
+
+       dataRetentionPeriod = dataRetentionPeriod * 30;
+
+    } else if (durationType == DurationType.Year) {
+
+       dataRetentionPeriod = dataRetentionPeriod * 365;
+    }
 
     Logger.info("Data Retention period:$dataRetentionPeriod");
 
@@ -164,7 +184,7 @@ Future<void> periodicDataRetentionTask() async {
   });
 }
 
-Future<String> setupDataRetentionTask(String taskName, TimeOfDay time) async {
+Future<String> setupDataRetentionTask(String taskName, TimeOfDay time, int interval) async {
   int initialDelay;
 
   if (DateTime.now().hour > time.hour) {
@@ -185,7 +205,7 @@ Future<String> setupDataRetentionTask(String taskName, TimeOfDay time) async {
         requiresStorageNotLow: false,
         networkType: NetworkType.not_required),
     initialDelay: Duration(minutes: initialDelay),
-    frequency: const Duration(minutes: 15),
+    frequency: Duration(minutes: interval),
   );
 
   Logger.info(
@@ -248,10 +268,6 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  //final getIt = GetIt.instance;
-
-  // final Map<String, dynamic> deviceInfo = await getDeviceInfo();
 
   await GlobalConfiguration().loadFromAsset(C.APP_SETTINGS);
 
@@ -419,7 +435,7 @@ class _ezscripAppState extends State<ezscripApp> {
                 builder: (context) => InitSplashPage(user: args.user));
           case Routes.OnBoardingFinish:
             return MaterialPageRoute(
-                builder: (context) => OnboardingFinishPage());
+                builder: (context) => const OnboardingFinishPage());
 
           case Routes.Home:
             HomePageArguments args = settings.arguments as HomePageArguments;
@@ -427,10 +443,11 @@ class _ezscripAppState extends State<ezscripApp> {
                 builder: (context) => HomePage(showDemo: args.showDemo));
 
           case Routes.Login:
-            return MaterialPageRoute(builder: (context) => LoginPage());
+            return MaterialPageRoute(builder: (context) => const LoginPage());
 
           case Routes.Setup:
-            return MaterialPageRoute(builder: (context) => IntroductionPage());
+            return MaterialPageRoute(
+                builder: (context) => const IntroductionPage());
 
           case Routes.ViewProfile:
             ViewProfilePageArguments args =
@@ -508,26 +525,20 @@ class _ezscripAppState extends State<ezscripApp> {
 
           case Routes.RemoveMedication:
             return MaterialPageRoute(
-                builder: (context) => RemoveMedicationPage());
+                builder: (context) => const RemoveMedicationPage());
 
           case Routes.AddSymptom:
             // AdddSymtomPageArguments args =
             //     settings.arguments as AdddSymtomPageArguments;
-            return MaterialPageRoute(builder: (context) => AddSymptomPage());
+            return MaterialPageRoute(
+                builder: (context) => const AddSymptomPage());
 
           case Routes.AddMedicalHistory:
             AddMedicalHistoryArguments args =
                 settings.arguments as AddMedicalHistoryArguments;
 
             return MaterialPageRoute(
-                builder: (context) => AddMedicalHistoryPage());
-
-          // case Routes.AddTests:
-          //   AddTestsPageArguments args =
-          //       settings.arguments as AddTestsPageArguments;
-          //   return MaterialPageRoute(
-          //       builder: (context) =>
-          //           AddSymptomPage(symptomList: args.testList));
+                builder: (context) => const AddMedicalHistoryPage());
 
           case Routes.EditParameter:
             AddParameterPageArguments args =
@@ -537,10 +548,12 @@ class _ezscripAppState extends State<ezscripApp> {
                     AddParameterPage(parameterList: args.parameterList));
 
           case Routes.AddNotes:
-            return MaterialPageRoute(builder: (context) => AddNotesPage());
+            return MaterialPageRoute(
+                builder: (context) => const AddNotesPage());
 
           case Routes.ResetPassword:
-            return MaterialPageRoute(builder: (context) => ForgotPinPage());
+            return MaterialPageRoute(
+                builder: (context) => const ForgotPinPage());
 
           default:
             return null;

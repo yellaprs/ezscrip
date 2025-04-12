@@ -13,7 +13,7 @@ class AppBarBuilder {
         focusNode: FocusNodes.backNavButton,
         icon: IconTheme(
             data: Theme.of(context).iconTheme,
-            child: const Icon(FontAwesome.chevron_left,
+            child: const Icon(FontAwesome.chevron_left, size: 25,
                 semanticLabel: semantic.S.BACK_BTN)),
         onPressed: () async {
           navService.goBack();
@@ -21,7 +21,7 @@ class AppBarBuilder {
   }
 
   static PreferredSizeWidget buildAppBar(
-      BuildContext context, String title, List<Widget> actions,
+      BuildContext context, Widget titleIcon,  String title, List<Widget> actions,
       [Widget leftNavAction = const SizedBox(width: 20, height: 20)]) {
     List<Widget> paddingWidgets = [];
     if (actions.isEmpty) {
@@ -29,7 +29,7 @@ class AppBarBuilder {
       paddingWidgets.add(SizedBox(height: 25, width: 35, child: Container()));
     }
     return PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           elevation: 0,
           leading: (ModalRoute.of(context)!.canPop)
@@ -40,23 +40,24 @@ class AppBarBuilder {
                       : const EdgeInsets.all(6),
                   child: buildLeadingNavWidget(context))
               : leftNavAction,
-          bottom: PreferredSize(
+          bottom: const PreferredSize(
               preferredSize: Size.fromHeight(8), child: SizedBox(height: 8)),
           backgroundColor: Theme.of(context).primaryColor,
           automaticallyImplyLeading:
               (ModalRoute.of(context)!.settings.name == "/Home") ? false : true,
           title: Center(
-              child: AutoSizeText(
-            title,
-            style: Theme.of(context).textTheme.displayMedium,
-            semanticsLabel: title,
-          )),
+              child: Stack(children : [
+              titleIcon,
+              Padding( padding: const EdgeInsets.only(left: 30), child : AutoSizeText(
+                     title,
+                     style: Theme.of(context).textTheme.displayMedium,
+                    semanticsLabel: title))])),
           actions: (actions.isEmpty)
               ? paddingWidgets
               : [
                   ButtonBar(
                       alignment: MainAxisAlignment.center,
-                      buttonPadding: const EdgeInsets.all(6),
+                      buttonPadding: const EdgeInsets.all(4),
                       children: actions)
                 ],
         ));

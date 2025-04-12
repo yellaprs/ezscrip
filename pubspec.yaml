@@ -65,9 +65,6 @@ dependencies:
 
   toast: ^0.3.0
 
-  flutter_secure_storage: ^9.1.1
-
-
   intl_utils: ^2.0.0
 
   pin_code_fields: ^8.0.1
@@ -98,11 +95,7 @@ dependencies:
 
   watch_it: ^1.4.0
   
-  rxdart: ^0.28.0
-
   flutter_typeahead: ^5.1.0
-
-  extended_tabs: ^4.1.0
 
   sliding_up_panel: ^2.0.0
 
@@ -117,6 +110,8 @@ dependencies:
   country_calling_code_picker: ^2.0.0
   
   rate_my_app: ^2.2.0
+
+  flutter_secure_storage: 9.2.4
 
   no_context_navigation: ^3.0.0
 
@@ -134,7 +129,6 @@ dependencies:
 
   scrollview_observer: ^1.20.0
 
-  flutter_keyboard_size: ^1.0.0
 
   flutter_localized_locales: any
 
@@ -168,8 +162,6 @@ dependencies:
     
   timeline_tile: 2.0.0
 
-  inspector: ^2.1.0
-
   timelines: ^0.1.0
 
   sentry_flutter: ^8.2.0
@@ -180,13 +172,9 @@ dependencies:
 
   device_info_plus: ^10.1.0
   
-  flutter_time_picker_spinner: ^2.0.0
-
-  share_it: ^0.7.0
+  share_plus: ^9.0.0
 
   super_tooltip: ^2.0.8
-
-  features_tour: ^0.4.12
 
   accessibility_tools: ^2.0.0
 
@@ -208,7 +196,6 @@ dependencies:
 
   patrol_cli: ^2.7.0
 
-  flutter_platform_widgets: ^7.0.0
   
 dev_dependencies:
  

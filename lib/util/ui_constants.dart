@@ -19,6 +19,6 @@ class UIConstants {
   static const double EXPANSION_TILE_ACTION_BTN_PADDING = 4.0;
   static const double EXPANSION_TILE_HEADERBAR_HIEGHT = 40.0;
   static const double CONSULTATION_FAB_BUTTON_SIZE = 30.0;
-  static const double PAGE_ACTION_BTN_SIZE = 35.0;
+  static const double PAGE_ACTION_BTN_SIZE = 30.0;
   static const double PAGE_ACTION_BTN_PADDING = 10.0;
 }

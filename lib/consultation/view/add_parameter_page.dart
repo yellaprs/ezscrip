@@ -105,7 +105,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                       width: MediaQuery.of(context).size.width * 0.95,
                       child: buildHeader()),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
@@ -116,7 +116,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                           // crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Row(children: [
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.75,
                                 height: 60,
                                 child: Semantics(
@@ -138,9 +138,8 @@ class _AddParameterPageState extends State<AddParameterPage> {
                                                       .copyWith(
                                                           fontStyle:
                                                               FontStyle.italic),
-                                              decoration: InputDecoration(
-                                                border:
-                                                    const UnderlineInputBorder(),
+                                              decoration: const InputDecoration(
+                                                border: UnderlineInputBorder(),
                                                 hintText: '',
                                               ),
                                               validator: (val) {
@@ -164,7 +163,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                                           Material(
                                         type: MaterialType.card,
                                         elevation: 4,
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(8)),
                                         child: child,
                                       ),
@@ -173,7 +172,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                                         title: Text(suggestion),
                                       ),
                                       debounceDuration:
-                                          Duration(milliseconds: 400),
+                                          const Duration(milliseconds: 400),
                                       hideOnSelect: true,
                                       hideOnEmpty: true,
                                       hideOnUnfocus: true,
@@ -212,7 +211,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                                               width: 25,
                                               height: 25),
                                           hintText: "Value",
-                                          border: UnderlineInputBorder()),
+                                          border: const UnderlineInputBorder()),
                                       inputFormatters: [
                                         FilteringTextInputFormatter.digitsOnly
                                       ],

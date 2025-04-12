@@ -39,7 +39,10 @@ class _RetentionAuditPageState extends State<RetentionAuditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, "Data Retention Log", buildActions()),
+            context, 
+            const Icon(Icons.ac_unit, size:25),
+            "Data Retention Log", 
+            buildActions()),
         body: Container(
             height: MediaQuery.of(context).size.height - 30,
             width: MediaQuery.of(context).size.width - 20,

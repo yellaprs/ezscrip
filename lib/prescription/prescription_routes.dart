@@ -9,3 +9,4 @@ class PrescriptionPdfViewPageArguments {
   PrescriptionPdfViewPageArguments(
       {required this.generatedFile, required this.mode, required this.status});
 }
+ 

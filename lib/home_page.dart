@@ -156,11 +156,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: IconTheme(
             data: Theme.of(context).iconTheme,
             child: SvgPicture.asset(Images.userPreferences,
-                height: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
-                width: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
-                semanticsLabel: semantic.S.HOME_APPBAR_PREFERNCES_BUTTON)),
+                    height: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
+                    width: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
+                    semanticsLabel: semantic.S.HOME_APPBAR_PREFERNCES_BUTTON)),
       ),
-      onPressed: () async {
+      onPressed: () async { 
         String? letterTemplate;
         String? format;
 

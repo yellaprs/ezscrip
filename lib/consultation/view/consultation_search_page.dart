@@ -626,9 +626,9 @@ class ConsultationSearchPageState extends State<ConsultationSearchPage> {
       Padding(
           padding: const EdgeInsets.only(top: 35),
           child: Container(
-              margin: EdgeInsets.only(bottom: 10),
+              margin: const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
                 border: Border(
                     top: BorderSide(
                         color: Theme.of(context).indicatorColor, width: 0.5),
@@ -657,7 +657,8 @@ class ConsultationSearchPageState extends State<ConsultationSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, AppLocalizations.of(context)!.search, []),
+            context, const Icon(MaterialCommunityIcons.note_search_outline, size: 25), 
+            AppLocalizations.of(context)!.search, []),
         body: Container(
             margin: const EdgeInsets.only(top: 30),
             height: MediaQuery.of(context).size.height,
@@ -718,7 +719,7 @@ class ConsultationSearchPageState extends State<ConsultationSearchPage> {
                         height: MediaQuery.of(context).size.height * 0.065,
                         margin: const EdgeInsets.only(top: 10),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
                           border: Border(
                               top: BorderSide(
                                   color: Theme.of(context).indicatorColor,
@@ -796,7 +797,7 @@ class ConsultationSearchPageState extends State<ConsultationSearchPage> {
                                               });
                                             })),
                             ])),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     (_dateFilter)
                         ? buildDateFilterWidgets(Orientation.portrait)
                         : Container(),

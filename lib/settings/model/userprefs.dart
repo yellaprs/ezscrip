@@ -1,3 +1,5 @@
+import 'package:enum_to_string/enum_to_string.dart';
+import 'package:ezscrip/consultation/model/durationType.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/infrastructure/services/securestorage_service.dart';
 import 'package:flutter/material.dart';
@@ -111,10 +113,20 @@ class UserPrefs extends ChangeNotifier {
         C.DATA_RETENTION_DURATION, dataRetentionPeriod.toString());
   }
 
-  Future<bool> isDataRetentionEnabled() async {
-    String? dataRetentionStr =
-        await SecureStorageService.get(C.DATA_RETENTION_DURATION);
+  Future<bool> setDataRetentionPeriodType(DurationType  durationType){
 
+    return SecureStorageService.store(C.DATA_RETENTION_DURATION_TYPE, EnumToString.convertToString(durationType, camelCase: false));
+  }
+
+   Future<DurationType> getDataRetentinDurationType() async {
+    
+    String? durationType = await SecureStorageService.get(C.DATA_RETENTION_DURATION_TYPE);
+    return DurationType.values.firstWhere((element) => (EnumToString.convertToString(element, camelCase: false) ==  durationType!));
+  }
+
+  Future<bool> isDataRetentionEnabled() async {
+    
+    String? dataRetentionStr = await SecureStorageService.get(C.DATA_RETENTION_DURATION);
     return (dataRetentionStr != null);
   }
 
