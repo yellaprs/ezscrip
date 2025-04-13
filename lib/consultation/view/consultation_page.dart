@@ -1274,7 +1274,7 @@ class ConsultationPageState extends State<ConsultationPage>
   Widget buildHeaderWidget() {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Stack(alignment: Alignment.centerLeft, children: [
-        const Icon(Icons.calendar_today, size: 25),
+        const Icon(Icons.calendar_today, size:  UI.DIALOG_ACTION_BTN_SIZE),
         Padding(
             padding: const EdgeInsets.only(left: 30),
             child: AutoSizeText(
@@ -1283,7 +1283,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 style: Theme.of(context).textTheme.titleLarge)),
         const Padding(
             padding: EdgeInsets.only(left: 140),
-            child: Icon(Icons.timer, size: 25)),
+            child: Icon(Icons.timer, size: UI.DIALOG_ACTION_BTN_SIZE)),
         Padding(
             padding: const EdgeInsets.only(left: 170),
             child: AutoSizeText(

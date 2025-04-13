@@ -4,7 +4,7 @@ class UIConstants {
   const UIConstants();
 
   static const String DEFAULT_FONT = " Courier";
-  static const double DIALOG_ACTION_BTN_SIZE = 30.0;
+  static const double DIALOG_ACTION_BTN_SIZE = 25.0;
   static const double HOME_PAGE_NAVBAR_BTN_SIZE = 35.0;
   static const double HOME_PAGE_NAVBAR_BTN_PADDING = 4.0;
   static const double EXPANSION_TILE_ACTION_BTN_SIZE = 25.0;
@@ -21,4 +21,5 @@ class UIConstants {
   static const double CONSULTATION_FAB_BUTTON_SIZE = 30.0;
   static const double PAGE_ACTION_BTN_SIZE = 30.0;
   static const double PAGE_ACTION_BTN_PADDING = 10.0;
+
 }

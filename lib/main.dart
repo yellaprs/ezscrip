@@ -22,7 +22,8 @@ import 'package:ezscrip/prescription/prescription_routes.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/security/view/forgot_pin_page.dart';
 import 'package:ezscrip/setup/view/onboarding_finish_page.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; 
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ezscrip/profile/profile_routes.dart';
 import 'package:ezscrip/settings/view/letterhead_selection_page.dart';
@@ -65,7 +66,6 @@ import 'package:newrelic_mobile/newrelic_navigation_observer.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<Map<String, dynamic>> getDeviceInfo() async {
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -372,23 +372,14 @@ void main() async {
 
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  //FlutterError.onError = NewrelicMobile.onError;
-  //NewrelicMobile.instance.startAgent(config);
+ 
   FlutterNativeSplash.remove();
 
-  // await SentryFlutter.init(
-  //   (options) {
-  //     options.dsn = 'https://776744f8dccd31b22b54b358a0fea99e@o4507332568219648.ingest.de.sentry.io/4507332570513488';
-  //   },
-  //   // Init your App.
-  //   appRunner: () => runApp(ezscripApp(isPrefsSet)),
-  // );
+   FirebaseApp app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(ezscripApp(isPrefsSet));
-  //)
-  // }, (Object error, StackTrace stackTrace) {
-  //   NewrelicMobile.instance.recordError(error, stackTrace);
-  // });
 }
 
 Widget getLandingPage(bool isPrefSet) {

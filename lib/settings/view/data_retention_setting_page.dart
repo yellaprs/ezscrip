@@ -21,7 +21,7 @@ import '../../util/mode.dart';
 
 enum AmPm { am, pm }
 
-enum FileteredDurationType { Day, Week, Month, Year}
+enum FileteredDurationType { Day, Week, Month, Year }
 
 class DurationTypeValidator {
   static String? isRequired(String errMsg, bool isEmpty) {
@@ -56,6 +56,7 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
   final Mode _mode;
   late TimeOfDay _time;
   late FileteredDurationType _durationType;
+  late GlobalKey<FormState> _formKey;
 
   late int _hour;
   late int _minute;
@@ -72,7 +73,7 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
 
     hourController = TextEditingController();
     hourController.text = _hour.toString();
-
+    _formKey = GlobalKey<FormState>();
     minuteController = TextEditingController();
     minuteController.text = _minute.toString();
 
@@ -108,15 +109,16 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
     bool isSaved = await GetIt.instance<UserPrefs>()
         .setDataRetentionPeriod(_dataRetentionPeriod);
 
-    isSaved = await GetIt.instance<UserPrefs>()
-        .setDataRetentionPeriodType(
-          DurationType.values.firstWhere((element) => 
-             EnumToString.convertToString(element, camelCase: true) == EnumToString.convertToString(_durationType, camelCase: true)));
+    isSaved = await GetIt.instance<UserPrefs>().setDataRetentionPeriodType(
+        DurationType.values.firstWhere((element) =>
+            EnumToString.convertToString(element, camelCase: true) ==
+            EnumToString.convertToString(_durationType, camelCase: true)));
 
     isSaved = await GetIt.instance<UserPrefs>().setDataRetentionScheduleTime(
         TimeOfDay(hour: _time.hour, minute: _time.minute).format(context));
-        
-    isTaskEnabled = await GetIt.instance<UserPrefs>().saveDataRetentionTask(isSaved);
+
+    isTaskEnabled =
+        await GetIt.instance<UserPrefs>().saveDataRetentionTask(isSaved);
 
     return isTaskEnabled;
   }
@@ -140,12 +142,17 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
             : () async {
                 if (_dataRetentionEnabled) {
 
-                  await  enableDataRetetionTask();
+                  if (_formKey.currentState!.validate()) {
 
+                     _formKey.currentState!.save();
+                     await enableDataRetetionTask();
+
+                  }
                 } else if (!_dataRetentionEnabled) {
 
                   AwesomeNotifications().cancelAll();
-                  await GetIt.instance<UserPrefs>().saveDataRetentionTask(false);
+                  await GetIt.instance<UserPrefs>()
+                      .saveDataRetentionTask(false);
                   await GetIt.instance<UserPrefs>().disableDataRetention();
 
                 }
@@ -162,155 +169,154 @@ class _DataRetentionSettingPageState extends State<DataRetentionSettingPage> {
   }
 
   Widget buildDataRetentionWidget() {
-
-
-
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.12,
-        child: AnimatedOpacity(
-            duration: const Duration(seconds: 2),
-            opacity: (_dataRetentionEnabled) ? 1.0 : 0.2,
-            child: Stack(alignment: Alignment.center, children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Stack(alignment: Alignment.centerLeft, children: [
-                  const Icon(Icons.today, size: 25),
-                  Container(
-                      margin: const EdgeInsets.only(left: 30),
-                      child: AutoSizeText("Retention Duration",
-                          style: Theme.of(context).textTheme.displaySmall,
-                          semanticsLabel:
-                              semantic.S.SETTINGS_RETENTION_DURATION_TITLE))
-                ]),
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Focus(
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            child: Semantics(
-                              label:
-                                  semantic.S.ADD_MEDICATION_DRUG_DURATION_FIELD,
-                              container: true,
-                              child: SpinBox(
-                                key: K.durationSpinbox,
-                                focusNode: FocusNodes.durationAutoSizeTextField,
-                                textAlign: TextAlign.center,
-                                decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(10),
-                                  //label: Text(AppLocalizations.of(context)!.duration),
-                                  //labelStyle: Theme.of(context).textTheme.titleSmall,
-                                  border: UnderlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                                incrementIcon: const Icon(
-                                    key: K.addDays, Icons.add, size: 25),
-                                decrementIcon: const Icon(
-                                    key: K.subtractDays,
-                                    Icons.minimize,
-                                    size: 25),
-                                min: 1,
-                                max: 10,
-                                value: _dataRetentionPeriod.toDouble(),
-                                onChanged: (value) {
-                                  _dataRetentionPeriod = value.ceil();
-                                  setState(() {});
-                                },
-                                validator: Validatorless.multiple([
-                                  Validatorless.required(
-                                      AppLocalizations.of(context)!.isRequired(
-                                          AppLocalizations.of(context)!
-                                              .duration)),
-                                  Validatorless.numbersBetweenInterval(
-                                      1,
-                                      100,
-                                      AppLocalizations.of(context)!
-                                          .valueRangeWithoutField(1, 100)),
-                                ]),
-                              ),
-                            )),
-                        const SizedBox(width: 10),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            //height: MediaQuery.of(context).size.height * 0.125,
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 5, vertical: 5),
+        child: Form(
+            key: _formKey,
+            child: AnimatedOpacity(
+                duration: const Duration(seconds: 2),
+                opacity: (_dataRetentionEnabled) ? 1.0 : 0.2,
+                child: Stack(alignment: Alignment.center, children: [
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Stack(alignment: Alignment.centerLeft, children: [
+                      const Icon(Icons.today, size: 25),
+                      Container(
+                          margin: const EdgeInsets.only(left: 30),
+                          child: AutoSizeText("Retention Duration",
+                              style: Theme.of(context).textTheme.displaySmall,
+                              semanticsLabel:
+                                  semantic.S.SETTINGS_RETENTION_DURATION_TITLE))
+                    ]),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Focus(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.25,
                                 child: Semantics(
-                                    container: true,
-                                    identifier: semantic.S
-                                        .ADD_MEDICATION_DRUG_DURATION_TYPE_DROPDWON,
-                                    child: CustomDropdown<
-                                        FileteredDurationType>.search(
-                                      key: K.durationTypeField,
-                                      hintText: AppLocalizations.of(context)!
-                                          .duration,
-                                      initialItem: _durationType,
-                                      decoration: CustomDropdownDecoration(
-                                          closedFillColor:
-                                              Theme.of(context).primaryColor,
-                                          closedBorder:
-                                              Border.all(color: Colors.black),
-                                          errorStyle: const TextStyle(
-                                              color: Colors.red),
-                                          expandedFillColor:
-                                              Theme.of(context).primaryColor,
-                                          headerStyle: Theme.of(context)
-                                              .textTheme
-                                              .titleSmall,
-                                          closedErrorBorder:
-                                              Border.all(color: Colors.red)),
-                                      headerBuilder: (context, durationType,
-                                          displayHeader) {
-                                        return Semantics(
-                                            container: true,
-                                            identifier: semantic.S
-                                                .ADD_MEDICATION_DURATION_TYPE_OPTION,
-                                            child: AutoSizeText(
-                                                EnumToString.convertToString(
-                                                    durationType,
-                                                    camelCase: true)));
-                                      },
-                                      validator: (val) {
-                                        String? isValid =
-                                            DurationTypeValidator.isRequired(
-                                                AppLocalizations.of(context)!
-                                                    .isRequired(
-                                                        AppLocalizations.of(
-                                                                context)!
-                                                            .duration),
-                                                (val == null));
-                                        return isValid;
-                                      },
-                                      items: FileteredDurationType.values,
-
-                                      listItemBuilder: (context, durationType, selected, onTap) {
-                                        return Container(
-                                            alignment: Alignment.centerLeft,
-                                            padding: const EdgeInsets.all(3),
-                                            child: ListTile(
-                                                title: AutoSizeText(EnumToString
+                                  label: semantic
+                                      .S.ADD_MEDICATION_DRUG_DURATION_FIELD,
+                                  container: true,
+                                  child: TextFormField(
+                                    key: K.durationSpinbox,
+                                    focusNode:
+                                        FocusNodes.durationAutoSizeTextField,
+                                    textAlign: TextAlign.center,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.all(10),
+                                      label: Text(AppLocalizations.of(context)!.duration),
+                                      labelStyle: Theme.of(context).textTheme.titleSmall,
+                                      border: UnderlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                    ),
+                                    keyboardType:  TextInputType.number,
+                                    onChanged: (value) {
+                                      _dataRetentionPeriod = int.parse(value);
+                                      setState(() {});
+                                    },
+                                    validator: Validatorless.multiple([
+                                      Validatorless.required(
+                                          AppLocalizations.of(context)!
+                                              .isRequired(
+                                                  AppLocalizations.of(context)!
+                                                      .duration)),
+                                      Validatorless.numbersBetweenInterval(
+                                          1,
+                                          100,
+                                          AppLocalizations.of(context)!
+                                              .valueRangeWithoutField(1, 100)),
+                                    ]),
+                                  ),
+                                )),
+                            const SizedBox(width: 10),
+                            SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                //height: MediaQuery.of(context).size.height * 0.125,
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5, vertical: 5),
+                                    child: Semantics(
+                                        container: true,
+                                        identifier: semantic.S
+                                            .ADD_MEDICATION_DRUG_DURATION_TYPE_DROPDWON,
+                                        child: CustomDropdown<
+                                            FileteredDurationType>.search(
+                                          key: K.durationTypeField,
+                                          hintText:
+                                              AppLocalizations.of(context)!
+                                                  .duration,
+                                          initialItem: _durationType,
+                                          decoration: CustomDropdownDecoration(
+                                              closedFillColor: Theme.of(context)
+                                                  .primaryColor,
+                                              closedBorder: Border.all(
+                                                  color: Colors.black),
+                                              errorStyle: const TextStyle(
+                                                  color: Colors.red),
+                                              expandedFillColor:
+                                                  Theme.of(context)
+                                                      .primaryColor,
+                                              headerStyle: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall,
+                                              closedErrorBorder: Border.all(
+                                                  color: Colors.red)),
+                                          headerBuilder: (context, durationType,
+                                              displayHeader) {
+                                            return Semantics(
+                                                container: true,
+                                                identifier: semantic.S
+                                                    .ADD_MEDICATION_DURATION_TYPE_OPTION,
+                                                child: AutoSizeText(EnumToString
                                                     .convertToString(
                                                         durationType,
-                                                        camelCase: true))));
-                                      },
-                                      onChanged: (_mode == Mode.Preview)
-                                          ? null
-                                          : (val) {
-                                              setState(() {
-                                                _durationType = val!;
-                                              });
-                                            },
-                                    )))
-                              )
-                      ])))
-            ])));
+                                                        camelCase: true)));
+                                          },
+                                          validator: (val) {
+                                            String? isValid =
+                                                DurationTypeValidator.isRequired(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .isRequired(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .duration),
+                                                    (val == null));
+                                            return isValid;
+                                          },
+                                          items: FileteredDurationType.values,
+                                          listItemBuilder: (context,
+                                              durationType, selected, onTap) {
+                                            return Container(
+                                                alignment: Alignment.centerLeft,
+                                                padding:
+                                                    const EdgeInsets.all(3),
+                                                child: ListTile(
+                                                    title: AutoSizeText(
+                                                        EnumToString
+                                                            .convertToString(
+                                                                durationType,
+                                                                camelCase:
+                                                                    true))));
+                                          },
+                                          onChanged: (_mode == Mode.Preview)
+                                              ? null
+                                              : (val) {
+                                                  setState(() {
+                                                    _durationType = val!;
+                                                  });
+                                                },
+                                        ))))
+                          ])))
+                ]))));
   }
 
   // Widget buildDataRetentionWidget() {

@@ -1667,7 +1667,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
             key: K.closeButton,
             icon: IconTheme(
                 data: Theme.of(context).iconTheme,
-                child: const Icon(Foundation.x)),
+                child: const Icon(Foundation.x, size:  UI.DIALOG_ACTION_BTN_SIZE)),
             onPressed: () {
               Navigator.of(context).pop();
             }),
