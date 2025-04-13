@@ -196,8 +196,6 @@ dependencies:
 
   patrol_cli: ^2.7.0
 
-  firebase_core: ^3.1.0
-
   
 dev_dependencies:
  

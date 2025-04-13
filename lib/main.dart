@@ -22,7 +22,6 @@ import 'package:ezscrip/prescription/prescription_routes.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/security/view/forgot_pin_page.dart';
 import 'package:ezscrip/setup/view/onboarding_finish_page.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; 
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ezscrip/profile/profile_routes.dart';
@@ -374,10 +373,6 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
  
   FlutterNativeSplash.remove();
-
-   FirebaseApp app = await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
 
   runApp(ezscripApp(isPrefsSet));
 }
