@@ -2,6 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/durationType.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/infrastructure/services/securestorage_service.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:flutter/material.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
@@ -22,9 +23,18 @@ class UserPrefs extends ChangeNotifier {
     String? credential = prefs.getString(C.CREDENTIAL);
     Locale? locale = await getLocale();
     String? contactNo = prefs.getString(C.CONTACT_NO);
+    String? userType = prefs.getString(C.USER_TYPE);
 
-    user = AppUser.getIntance(firstName!, lastName!, credential!,
-        specialization!, clinic!, locale, contactNo!);
+    user = AppUser.getIntance(
+        firstName!,
+        lastName!,
+        credential!,
+        specialization!,
+        clinic!,
+        locale,
+        contactNo!,
+        UserType.values.firstWhere(
+            (user) => EnumToString.convertToString(user) == userType!));
 
     return user;
   }
@@ -36,6 +46,7 @@ class UserPrefs extends ChangeNotifier {
   }
 
   Future<bool> saveUser(AppUser user) async {
+
     bool isSaved = false;
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -58,6 +69,11 @@ class UserPrefs extends ChangeNotifier {
 
     isSaved = (isSaved) ? (await setLocale(user.getLocale())) : false;
 
+    isSaved = (isSaved)
+        ? await prefs.setString(
+            C.USER_TYPE, EnumToString.convertToString(user.getUserType()))
+        : false;
+
     notifyListeners();
 
     return isSaved;
@@ -70,7 +86,7 @@ class UserPrefs extends ChangeNotifier {
 
   Future<String?> getTemplate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString(C.TEMPLATE);
+    return prefs.getString(C.TEMPLATE);
   }
 
   Future<bool> setFormat(String format) async {
@@ -80,7 +96,7 @@ class UserPrefs extends ChangeNotifier {
 
   Future<String?> getFormat() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? format = await prefs.getString(C.FORMAT);
+    String? format = prefs.getString(C.FORMAT);
 
     return (format != null) ? format : null;
   }
@@ -113,20 +129,25 @@ class UserPrefs extends ChangeNotifier {
         C.DATA_RETENTION_DURATION, dataRetentionPeriod.toString());
   }
 
-  Future<bool> setDataRetentionPeriodType(DurationType  durationType){
-
-    return SecureStorageService.store(C.DATA_RETENTION_DURATION_TYPE, EnumToString.convertToString(durationType, camelCase: false));
+  Future<bool> setDataRetentionPeriodType(DurationType durationType) {
+    return SecureStorageService.store(C.DATA_RETENTION_DURATION_TYPE,
+        EnumToString.convertToString(durationType, camelCase: false));
   }
 
-   Future<DurationType> getDataRetentinDurationType() async {
-    
-    String? durationType = await SecureStorageService.get(C.DATA_RETENTION_DURATION_TYPE);
-    return DurationType.values.firstWhere((element) => (EnumToString.convertToString(element, camelCase: false) ==  durationType!));
+  Future<DurationType> getDataRetentinDurationType() async {
+    String? durationType =
+        await SecureStorageService.get(C.DATA_RETENTION_DURATION_TYPE);
+
+    return DurationType.values.firstWhere(
+      (element) => (EnumToString.convertToString(element, camelCase: false) ==
+          durationType!),
+    );
   }
 
   Future<bool> isDataRetentionEnabled() async {
-    
-    String? dataRetentionStr = await SecureStorageService.get(C.DATA_RETENTION_DURATION);
+    String? dataRetentionStr =
+        await SecureStorageService.get(C.DATA_RETENTION_DURATION);
+
     return (dataRetentionStr != null);
   }
 
@@ -186,8 +207,45 @@ class UserPrefs extends ChangeNotifier {
   Future<DateTime> getInstallDate() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    return await DateTime.fromMillisecondsSinceEpoch(
-        prefs.getInt(C.INSTALL_DATE)!);
+    return DateTime.fromMillisecondsSinceEpoch(prefs.getInt(C.INSTALL_DATE)!);
+  }
+
+  Future<bool> setBetaMode(bool isBeta) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.setBool(C.IS_BETA, isBeta);
+  }
+
+  Future<bool> getBetaMode() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(C.IS_BETA)!;
+  }
+
+  Future<bool> resetCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.setInt(C.COUNTER, 0);
+  }
+
+  Future<bool> incrementCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int counter = prefs.getInt(C.COUNTER)!;
+    counter++;
+    return await prefs.setInt(C.COUNTER, counter);
+  }
+
+  Future<int> getCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(C.COUNTER)!;
+  }
+
+  Future<bool> setCounterResetDate(DateTime date) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return await prefs.setInt(C.RESET_DATE, date.millisecondsSinceEpoch);
+  }
+
+  Future<DateTime> getResetDate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return DateTime.fromMillisecondsSinceEpoch(
+        prefs.getInt(C.RESET_DATE)!);
   }
 
   Future<Locale> getLocale() async {
@@ -197,6 +255,19 @@ class UserPrefs extends ChangeNotifier {
         : null;
     return Locale.fromSubtags(
         languageCode: localeStr!.first, countryCode: localeStr.elementAt(1));
+  }
+  
+  Future<UserType> getUserType() async{
+
+     SharedPreferences prefs = await SharedPreferences.getInstance();
+     return UserType.values.firstWhere((userType) => EnumToString.convertToString(userType) == prefs.getString(C.USER_TYPE));
+  }
+
+   Future<bool> setUserType(UserType userType) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return  prefs.setString(C.USER_TYPE,  EnumToString.convertToString(userType) );
+  
   }
 
   Future<bool> setLocale(Locale locale) async {

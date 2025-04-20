@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/consultation/model/consultation_model.dart';
 import 'package:ezscrip/profile/profile_routes.dart';
@@ -16,6 +18,7 @@ import 'package:ezscrip/util/mode.dart';
 import 'package:ezscrip/util/speciality.dart';
 import 'package:ezscrip/util/ui_constants.dart';
 import 'package:ezscrip/util/utils_service.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get_it/get_it.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -156,11 +159,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: IconTheme(
             data: Theme.of(context).iconTheme,
             child: SvgPicture.asset(Images.userPreferences,
-                    height: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
-                    width: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
-                    semanticsLabel: semantic.S.HOME_APPBAR_PREFERNCES_BUTTON)),
+                height: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
+                width: UI.HOME_PAGE_NAVBAR_BTN_SIZE,
+                semanticsLabel: semantic.S.HOME_APPBAR_PREFERNCES_BUTTON)),
       ),
-      onPressed: () async { 
+      onPressed: () async {
         String? letterTemplate;
         String? format;
 
@@ -333,7 +336,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   Widget _buildTimeLineWidget(
       DateTime start, DateTime end, DateTime focussedDate) {
-        
     return ListViewObserver(
         controller: observerController,
         child: ListView.separated(
@@ -380,10 +382,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                         Theme.of(context).textTheme.titleMedium)
                                 : Container(),
                           ])),
-                          const Padding(
-                            padding: EdgeInsets.only(left: 60),
-                            child: Divider(thickness: 1.5)),
-                            buildTimeLineDayWidget(date)
+                      const Padding(
+                          padding: EdgeInsets.only(left: 60),
+                          child: Divider(thickness: 1.5)),
+                      buildTimeLineDayWidget(date)
                     ]))
                 : Container();
           },
@@ -415,7 +417,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         showCloseButton: true,
         closeButtonType: CloseButtonType.inside,
         onHide: () async {
-          var testDataJson = GlobalConfiguration().getValue(C.DEMO_DATA);
+          var testDataJson  =  await rootBundle.loadStructuredData(
+              GlobalConfiguration().getValue(C.DEMO_DATA), (value) async {
+            await json.decode(value);
+          });
+        
           Consultation consultation = Consultation.fromMap(testDataJson);
           AppUser user = await GetIt.instance<UserPrefs>().getUser();
           Map<String, dynamic> propertiesMap =

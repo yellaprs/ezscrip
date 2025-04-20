@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_page.dart';
@@ -5,6 +6,7 @@ import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
@@ -19,28 +21,16 @@ import '../setup.dart';
 import 'common/consultation_common.dart';
 
 void main() {
-  late Consultation consultation;
-  late AppUser profile;
 
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-    var testDataJson = GlobalConfiguration().getValue(C.TEST_DATA_JSON);
-    consultation = Consultation.fromMap(testDataJson);
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_PROFILE);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['cedential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
 
   patrolTest(
     'Add Consultation with prescription 1 test',
     ($) async {
+
+      Consultation consultation = await loadTestDateConsultation(
+          "assets/test/${C.TEST_DATA_CONSULTATION_5}.json");
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
       await login($, "1111");
       await $(HomePage).waitUntilVisible();

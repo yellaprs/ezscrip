@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_page.dart';
@@ -5,9 +8,11 @@ import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -19,27 +24,14 @@ import '../setup.dart';
 import 'common/consultation_common.dart';
 
 void main() {
-  late Consultation consultation;
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-    var testDataJson = GlobalConfiguration().getValue(C.TEST_DATA_JSON);
-    consultation = Consultation.fromMap(testDataJson);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
-
   patrolTest(
     'Add Consultation Page (3 symptons, 2 conditions, 3 tests, 3 prescriptions)',
     ($) async {
+      Consultation consultation = await loadTestDateConsultation(
+          "assets/test/${C.TEST_DATA_CONSULTATION_1}.json");
+
+      AppUser profile = await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
+
       await createApp($, profile);
       await login($, "1111");
       await $(HomePage).waitUntilVisible();

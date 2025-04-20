@@ -5,7 +5,6 @@ import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
 import '../login.dart';
 import '../logoff.dart';
@@ -13,24 +12,13 @@ import '../setup.dart';
 import 'common/consultation_common.dart';
 
 void main() {
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
 
   patrolTest(
     'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)',
     ($) async {
+
+       AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
       await login($, "1111");
 
@@ -91,9 +79,16 @@ void main() {
         if ($(K.notesTile).$(K.tileStatusCollapsed).exists) break;
       }
 
-      if (symptoms.length > 0) {
+      if (symptoms.isNotEmpty) {
+         for (int i = 0; i <= 2; i++) {
+          if ($(K.symptomsTile).$(K.tileStatusExpanded).exists) break;
+          await $(K.symptomsTile).$('Symptoms').tap();
+        }
         for (int i = 0; i < symptoms.length; i++) {
           await addSymptom($, symptoms.elementAt(i));
+         
+          expect($(K.symptomsList), findsOneWidget);
+          expect($(K.symptomsList).$(symptoms.elementAt(i)), findsOneWidget);
         }
       }
       expect($(K.symptomsTile).$(Row).$("maximum is 10"), findsOneWidget);

@@ -215,6 +215,7 @@ class _AddParameterPageState extends State<AddParameterPage> {
                                       inputFormatters: [
                                         FilteringTextInputFormatter.digitsOnly
                                       ],
+                                      keyboardType: const TextInputType.numberWithOptions(signed: false, decimal:false),
                                       controller: _parameterValueController,
                                       autovalidateMode:
                                           AutovalidateMode.disabled,

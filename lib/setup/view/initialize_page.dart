@@ -1,10 +1,12 @@
 import 'dart:io';
 import 'package:ezscrip/infrastructure/services/securestorage_service.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/resources/resources.dart';
 import 'package:ezscrip/route_constants.dart';
 import 'package:ezscrip/settings/model/userprefs.dart';
 import 'package:ezscrip/setup/model/localemodel.dart';
 import 'package:ezscrip/setup/setup_routes.dart';
+import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/util/speciality.dart';
@@ -21,6 +23,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
 import 'package:get_it/get_it.dart';
+import 'package:global_configuration/global_configuration.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 //import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:ezscrip/widgets/pin_text_field.dart';
@@ -47,18 +50,19 @@ class SpecialityListFiter with CustomDropdownListFilter {
 }
 
 class IntroductionPage extends StatefulWidget {
-  const IntroductionPage(
-      {Key? key = K.introductionPage, Object? specailityList})
+  final UserType userType;
+
+  const IntroductionPage({ required this.userType,
+      Key? key = K.introductionPage, Object? specailityList})
       : super(key: key);
 
   @override
-  IntroductionPageState createState() => IntroductionPageState();
+  IntroductionPageState createState() => IntroductionPageState(this.userType);
 }
 
 class IntroductionPageState extends State<IntroductionPage> {
   final formKey = GlobalKey<FormState>();
-  //final settingsFormKey = GlobalKey<FormState>();
-
+  UserType _userType;
   late int _currentStep;
   String? _firstName;
   String? _lastName;
@@ -89,7 +93,7 @@ class IntroductionPageState extends State<IntroductionPage> {
       _credentialFocusNode,
       _contactNoFocusNode;
 
-  IntroductionPageState();
+  IntroductionPageState(this._userType);
 
   @override
   void initState() {
@@ -184,57 +188,56 @@ class IntroductionPageState extends State<IntroductionPage> {
                     Container(
                         padding: const EdgeInsets.all(10),
                         child: AutoSizeText(
-                            AppLocalizations.of(context)!.ezscripSummary1,
-                            style: Theme.of(context).textTheme.bodyLarge,
-                        )
-                    ),
+                          AppLocalizations.of(context)!.ezscripSummary1,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        )),
                     // Container(
-                        // padding: const EdgeInsets.all(10),
-                        // child: Stack(alignment: Alignment.topLeft, children: [
-                          // Semantics(
-                              // identifier: Semantic
-                                  // .S.INITIALIZE_INTRODUCTION_CONSULTATION_TITLE,
-                              // container: true,
-                              // child: AutoSizeText(
-                                // AppLocalizations.of(context)!.consultation,
-                                // style: Theme.of(context).textTheme.titleLarge,
-                              // )),
-                          // Padding(
-                              // padding: const EdgeInsets.only(top: 20),
-                              // child: Semantics(
-                                  // identifier: Semantic.S
-                                      // .INITIALIZE_INTRODUCTION_CONSULTATION_BODY,
-                                  // container: true,
-                                  // child: AutoSizeText(
-                                    // AppLocalizations.of(context)!
-                                        // .ezscrip_Summary2,
-                                    // style:
-                                        // Theme.of(context).textTheme.bodyMedium,
-                                  // ))) //"Create consulting appointments and track and maintain doctor's consulting schedule",
-                        // ])),
+                    // padding: const EdgeInsets.all(10),
+                    // child: Stack(alignment: Alignment.topLeft, children: [
+                    // Semantics(
+                    // identifier: Semantic
+                    // .S.INITIALIZE_INTRODUCTION_CONSULTATION_TITLE,
+                    // container: true,
+                    // child: AutoSizeText(
+                    // AppLocalizations.of(context)!.consultation,
+                    // style: Theme.of(context).textTheme.titleLarge,
+                    // )),
+                    // Padding(
+                    // padding: const EdgeInsets.only(top: 20),
+                    // child: Semantics(
+                    // identifier: Semantic.S
+                    // .INITIALIZE_INTRODUCTION_CONSULTATION_BODY,
+                    // container: true,
+                    // child: AutoSizeText(
+                    // AppLocalizations.of(context)!
+                    // .ezscrip_Summary2,
+                    // style:
+                    // Theme.of(context).textTheme.bodyMedium,
+                    // ))) //"Create consulting appointments and track and maintain doctor's consulting schedule",
+                    // ])),
                     // Container(
-                        // padding: const EdgeInsets.all(10),
-                        // child: Stack(alignment: Alignment.topLeft, children: [
-                          // Semantics(
-                              // identifier: Semantic
-                                  // .S.INITIALIZE_INTRODUCTION_PRESCRIPTION_TITLE,
-                              // child: AutoSizeText(
-                                // AppLocalizations.of(context)!.prescription,
-                                // style: Theme.of(context).textTheme.titleLarge,
-                              // )),
-                          // Padding(
-                              // padding:
-                                  // const EdgeInsets.only(top: 20, bottom: 5),
-                              // child: Semantics(
-                                  // identifier: Semantic.S
-                                      // .INITIALIZE_INTRODUCTION_PRESCRIPTION_BODY,
-                                  // child: AutoSizeText(
-                                    // AppLocalizations.of(context)!
-                                        // .ezscrip_Summary3,
-                                    // style:
-                                        // Theme.of(context).textTheme.bodyMedium,
-                                  // )))
-                        // ])),
+                    // padding: const EdgeInsets.all(10),
+                    // child: Stack(alignment: Alignment.topLeft, children: [
+                    // Semantics(
+                    // identifier: Semantic
+                    // .S.INITIALIZE_INTRODUCTION_PRESCRIPTION_TITLE,
+                    // child: AutoSizeText(
+                    // AppLocalizations.of(context)!.prescription,
+                    // style: Theme.of(context).textTheme.titleLarge,
+                    // )),
+                    // Padding(
+                    // padding:
+                    // const EdgeInsets.only(top: 20, bottom: 5),
+                    // child: Semantics(
+                    // identifier: Semantic.S
+                    // .INITIALIZE_INTRODUCTION_PRESCRIPTION_BODY,
+                    // child: AutoSizeText(
+                    // AppLocalizations.of(context)!
+                    // .ezscrip_Summary3,
+                    // style:
+                    // Theme.of(context).textTheme.bodyMedium,
+                    // )))
+                    // ])),
                   ]))),
     );
   }
@@ -832,16 +835,16 @@ class IntroductionPageState extends State<IntroductionPage> {
               formKey.currentState!.save();
 
               AppUser user = AppUser(
-                _firstName!,
-                _lastName!,
-                _credential!,
-                _specialization!.getTitle(),
-                _clinic!,
-                locale,
-                _contactNo!,
-              );
+                  _firstName!,
+                  _lastName!,
+                  _credential!,
+                  _specialization!.getTitle(),
+                  _clinic!,
+                  locale,
+                  _contactNo!,
+                  _userType);
 
-              bool isSuccess = await submit();
+              bool isSuccess = await submit(_userType);
 
               if (isSuccess) {
                 navService.pushReplacementNamed(Routes.InitSplash,
@@ -880,8 +883,9 @@ class IntroductionPageState extends State<IntroductionPage> {
     }
   }
 
-  Future<bool> submit() async {
+  Future<bool> submit(UserType userType) async {
     bool isSuccess = false;
+  
 
     isSuccess = await SecureStorageService.store(
         "storagePin", _fileEncryptionPin.toString());
@@ -889,6 +893,14 @@ class IntroductionPageState extends State<IntroductionPage> {
     isSuccess = await GetIt.instance<UserPrefs>().setPin(_fileEncryptionPin);
     isSuccess = await GetIt.instance<UserPrefs>().setReminderDate(resetDate);
 
+    if (userType != UserType.Beta) {
+      isSuccess =
+          await GetIt.instance<UserPrefs>().setInstallDate(DateTime.now());
+      isSuccess =
+          await GetIt.instance<UserPrefs>().setCounterResetDate(DateTime.now());
+
+      isSuccess = await GetIt.instance<UserPrefs>().resetCounter();
+    }
     return isSuccess;
   }
 

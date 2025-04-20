@@ -57,6 +57,7 @@ class _ProfilePageState extends State<ProfilePage> {
   List<Speciality> _specialityList;
   Mode _mode;
   late Speciality _speciality;
+  late String _firstname, _lastname, _credentials, _clinic;
 
   late List<SpecialityListFiter> _specialityFilterList;
   late SpecialityListFiter _selectedSpeciality;
@@ -97,11 +98,16 @@ class _ProfilePageState extends State<ProfilePage> {
     _selectedSpeciality = _specialityFilterList.firstWhere(
         (element) => element.speciality.getTitle() == _speciality.getTitle());
 
-    _firstnameController.text = _user.getFirstName();
-    _lastnameController.text = _user.getLastName();
-    _speciallizationController.text = _user.getCredentials();
+    _firstname = _user.getFirstName();
+    _lastname = _user.getLastName();
+    _credentials = _user.getCredentials();
+    _clinic = _user.getClinic();
 
-    _clinicController.text = _user.getClinic();
+    _firstnameController.text = _firstname;
+    _lastnameController.text = _lastname;
+    _speciallizationController.text = _credentials;
+
+    _clinicController.text = _clinic;
     _countryCode = _user.getContactNo().substring(
         _user.getContactNo().indexOf("(") + 1,
         _user.getContactNo().indexOf(")"));
@@ -132,15 +138,18 @@ class _ProfilePageState extends State<ProfilePage> {
             semanticLabel: semantic.S.EDIT_PROFILE_DONE_BTN),
         onPressed: () async {
           if (_formKey.currentState!.validate()) {
-            _formKey.currentState!.save();
 
+            _formKey.currentState!.save();
+            _user.setFirstName(_firstname);
+            _user.setLastName(_lastname);
+            _user.setClinic(_clinic);
+            _user.setCredentials(_credentials);
+            _user.setContactNo("(" + _countryCode + ")" + _contactNo);
             _user.setSpecialization(_specialityList
                 .firstWhere(
                     (element) => element.getTitle() == _speciality.getTitle())
                 .getTitle());
-
             await GetIt.instance<UserPrefs>().saveUser(_user);
-
             navService.goBack(result: _user);
             // Navigator.pop(context, _user);
           }
@@ -179,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
               focusNode: _firstNameFocusNode,
               controller: _firstnameController,
               onSaved: (val) {
-                _user.setFirstName(val!);
+                _firstname = val!;
               },
               validator: Validatorless.multiple([
                 Validatorless.max(
@@ -227,7 +236,7 @@ class _ProfilePageState extends State<ProfilePage> {
               focusNode: _lastNameFocusNode,
               controller: _lastnameController,
               onSaved: (val) {
-                _user.setLastName(val!);
+                _lastname = val!;
               },
               validator: Validatorless.multiple([
                 Validatorless.max(
@@ -339,13 +348,14 @@ class _ProfilePageState extends State<ProfilePage> {
               focusNode: _credentialFocusNode,
               readOnly: (_mode == Mode.Preview) ? true : false,
               onSaved: (val) {
-                _user.setSpecialization(val!);
+                _credentials = val!;
               },
               validator: Validatorless.multiple([
                 Validatorless.max(
                     30,
                     AppLocalizations.of(context)!.maxLength(
-                        AppLocalizations.of(context)!.specialization, 30)),
+                        AppLocalizations.of(context)!.specializtionCredentials,
+                        30)),
                 Validatorless.required(AppLocalizations.of(context)!.isRequired(
                     AppLocalizations.of(context)!.specializtionCredentials))
               ]),
@@ -385,7 +395,7 @@ class _ProfilePageState extends State<ProfilePage> {
               controller: _clinicController,
               readOnly: (_mode == Mode.View) ? true : false,
               onSaved: (val) {
-                _user.setClinic(val!);
+                _clinic = val!;
               },
               validator: Validatorless.multiple([
                 Validatorless.max(
@@ -440,7 +450,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         SizedBox(
                             width: MediaQuery.of(context).size.width * 0.35,
                             child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 0),
                                 child: CountryDropdown(
                                   printCountryName: true,
@@ -465,7 +475,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     child: TextFormField(
                                       key: K.contactNoField,
                                       readOnly:
-                                          (_mode == Mode.View) ? false : true,
+                                          (_mode == Mode.View) ? true : false,
                                       controller: _contactNoController,
                                       decoration: InputDecoration(
                                         hintText: AppLocalizations.of(context)!
@@ -511,9 +521,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                         return null;
                                       },
                                       onSaved: (phone) {
-                                        setState(() {
-                                          _contactNo = phone!;
-                                        });
+                                        _contactNo = phone!;
                                       },
                                     ))))
                       ]);
@@ -545,7 +553,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: ListView(children: [
                 Row(children: [
                   buildFirstNameWidget(),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   buildLastNameWidget()
                 ]),
                 buildCredentialsWidget(),

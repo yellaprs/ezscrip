@@ -1,8 +1,10 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
@@ -17,33 +19,17 @@ import '../setup.dart';
 import 'common/consultation_common.dart';
 
 void main() {
-  late Consultation consultation;
-  late Consultation consultation1;
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION_SEARCH);
-    var testDataJson = GlobalConfiguration().getValue(C.TEST_DATA_JSON);
-    consultation = Consultation.fromMap(testDataJson);
-    await GlobalConfiguration()
-        .loadFromAsset(C.TEST_DATA_CONSULTATION_SEARCH_1);
-    var testDataJson1 = GlobalConfiguration().getValue(C.TEST_DATA_JSON);
-    consultation1 = Consultation.fromMap(testDataJson1);
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_PROFILE);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
 
   patrolTest(
     'consultation search by patient name test',
     ($) async {
+
+     Consultation consultation = await loadTestDateConsultation(
+          "assets/test/${C.TEST_DATA_CONSULTATION_SEARCH}.json");
+       Consultation consultation1 = await loadTestDateConsultation(
+          "assets/test/${C.TEST_DATA_CONSULTATION_SEARCH_1}.json");
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
       await login($, "1111");
       await $(HomePage).waitUntilVisible();

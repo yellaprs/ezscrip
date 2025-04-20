@@ -13,5 +13,8 @@
   "MAX_PARAMETERS" : 10,
   "IS_SIGNATURE_ENABLED" : false,
   "PRESCRIPTION_BLOCK_LENGTH" : 8,
-  "PRESCRIPTION_BLOCK_WEIGHT" : 1
+  "PRESCRIPTION_BLOCK_WEIGHT" : 1,
+  "BETA" : true,
+  "BASIC_PLAN_QUOTA" : 10,
+  "DEMO_DATA" : "assets/demo/test_data_demo.json"
 }

@@ -1,6 +1,8 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/login_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/settings/view/letterhead_selection_page.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
@@ -13,7 +15,7 @@ import '../setup.dart';
 void main() {
   const nativeConfig = NativeAutomatorConfig(
     packageName: 'com.example.ezscrip',
-    androidAppName: 'Docsribe',
+    androidAppName: 'ezscrip',
     bundleId: "com.example.ezscrip",
   );
 
@@ -28,8 +30,11 @@ void main() {
         profileDataJson['credential'],
         profileDataJson['specialization'],
         profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
+        const Locale('EN_US'),
+        profileDataJson['contact_no'],
+         UserType.values.firstWhere((userType) =>
+            EnumToString.convertToString(userType) ==
+            profileDataJson['user_type']));
   });
 
   patrolTest(

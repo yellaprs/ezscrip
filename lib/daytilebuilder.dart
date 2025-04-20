@@ -3,6 +3,7 @@ import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/consultation/model/consultation_model.dart';
 import 'package:ezscrip/consultation/model/status.dart';
 import 'package:ezscrip/prescription/prescription_routes.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/route_constants.dart';
 import 'package:ezscrip/settings/model/userprefs.dart';
 import 'package:ezscrip/setup/model/localemodel.dart';
@@ -16,6 +17,7 @@ import 'package:ezscrip/prescription/services/prescription_generator_1.dart';
 import 'package:ezscrip/prescription/services/prescription_generator_2.dart';
 import 'package:ezscrip/util/semantics.dart' as semantic;
 import 'package:ezscrip/util/utils_service.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -252,6 +254,28 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                     ))));
   }
 
+
+  void _showMessage(IconData icon, String message, Color color) {
+    showFlash(
+      context: context,
+      duration: const Duration(seconds: 3),
+      builder: (_, controller) {
+        return Flash(
+          controller: controller,
+          position: FlashPosition.bottom,
+          child: FlashBar(
+            controller: controller,
+            icon: Icon(
+              icon,
+              size: 36.0,
+              color: color,
+            ),
+            content: Text(message),
+          ),
+        );
+      });
+}
+
   List<CustomSlidableAction> buildEventActions(
       Consultation consultation, BuildContext context) {
     List<CustomSlidableAction> actions = [];
@@ -294,11 +318,23 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                 ),
               ])),
       onPressed: (context) async {
+
         pw.Document prescPdf;
         String? letterHead;
         Uint8List byteData;
         String? signatureSvg;
         String? format;
+
+        if ((await GetIt.instance<UserPrefs>().getUserType()) ==  UserType.Basic) {
+           int count = await GetIt.instance<UserPrefs>().getCounter();
+            if (count >= GlobalConfiguration().get(C.BASIC_PLAN_QUOTA)) {
+             _showMessage(
+                Icons.warning,
+                "Exceeded quota for Basic plan. Upgrade to premium version.",
+                Colors.red);
+            return;
+          }
+        }
 
         Map<String, String> timeIconsMap =
             await GetIt.instance<UtilsService>().getTimeIconMap();

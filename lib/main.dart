@@ -18,11 +18,12 @@ import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/home_page_routes.dart';
 import 'package:ezscrip/init_splash_page.dart';
 import 'package:ezscrip/login_page.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/prescription/prescription_routes.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/security/view/forgot_pin_page.dart';
 import 'package:ezscrip/setup/view/onboarding_finish_page.dart';
-import 'firebase_options.dart'; 
+import 'package:ezscrip/upgrade_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:ezscrip/profile/profile_routes.dart';
 import 'package:ezscrip/settings/view/letterhead_selection_page.dart';
@@ -63,7 +64,6 @@ import 'package:talker_flutter/talker_flutter.dart';
 //import 'package:newrelic_mobile/newrelic_mobile.dart';
 import 'package:newrelic_mobile/newrelic_navigation_observer.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:rate_my_app/rate_my_app.dart';
 import 'package:no_context_navigation/no_context_navigation.dart';
 
 Future<Map<String, dynamic>> getDeviceInfo() async {
@@ -93,7 +93,6 @@ SembastCodec _getEncryptSembastCodec({required String password}) =>
 
 @pragma('vm:entry-point')
 Future<void> periodicDataRetentionTask() async {
-
   int deletedConsultationCount = 0;
 
   Logger.info("Executing Data Retention Task");
@@ -101,7 +100,6 @@ Future<void> periodicDataRetentionTask() async {
   final StoreRef consultationStore = intMapStoreFactory.store('consultations');
 
   Workmanager().executeTask((task, inputData) async {
-
     DurationType durationType =
         await GetIt.instance<UserPrefs>().getDataRetentinDurationType();
 
@@ -109,16 +107,11 @@ Future<void> periodicDataRetentionTask() async {
         int.parse((await SecureStorageService.get(C.DATA_RETENTION_DURATION))!);
 
     if (durationType == DurationType.Week) {
-
-       dataRetentionPeriod =  dataRetentionPeriod * 7;
-
+      dataRetentionPeriod = dataRetentionPeriod * 7;
     } else if (durationType == DurationType.Month) {
-
-       dataRetentionPeriod = dataRetentionPeriod * 30;
-
+      dataRetentionPeriod = dataRetentionPeriod * 30;
     } else if (durationType == DurationType.Year) {
-
-       dataRetentionPeriod = dataRetentionPeriod * 365;
+      dataRetentionPeriod = dataRetentionPeriod * 365;
     }
 
     Logger.info("Data Retention period:$dataRetentionPeriod");
@@ -183,7 +176,8 @@ Future<void> periodicDataRetentionTask() async {
   });
 }
 
-Future<String> setupDataRetentionTask(String taskName, TimeOfDay time, int interval) async {
+Future<String> setupDataRetentionTask(
+    String taskName, TimeOfDay time, int interval) async {
   int initialDelay;
 
   if (DateTime.now().hour > time.hour) {
@@ -258,7 +252,6 @@ Config initilaizeNewRelicConfig() {
 }
 
 void main() async {
-  // runZonedGuarded(() async {
 
   List<String> medWords = [];
   List<String> diseaseWords = [];
@@ -270,12 +263,18 @@ void main() async {
 
   await GlobalConfiguration().loadFromAsset(C.APP_SETTINGS);
 
-  await GlobalConfiguration().loadFromAsset(C.TEST_DATA);
-
   final UserPrefs userPrefs = UserPrefs();
   await userPrefs.setTemplate(GlobalConfiguration().get(C.DEFAULT_TEMPLATE));
 
-  final isPrefsSet = await userPrefs.isPreferencesSet();
+  final bool isPrefsSet = await userPrefs.isPreferencesSet();
+
+  final DateTime installDate =
+      (isPrefsSet) ? await userPrefs.getInstallDate() : DateTime.now();
+
+  final UserType userType = (isPrefsSet)? await userPrefs.getUserType(): UserType.Basic;
+
+  final int prescCount = (isPrefsSet) ? await userPrefs.getCounter() : 0;
+
   final localeModel = LocaleModel(const Locale("en", "US"));
 
   final talker = TalkerFlutter.init();
@@ -360,51 +359,54 @@ void main() async {
     isInDebugMode: true,
   );
 
-  final RateMyApp rateMyApp = RateMyApp(
-    //preferencesPrefix: 'rateMyApp_',
-    minDays: 0, // Show rate popup on first day of install.
-    minLaunches:
-        2, // Show rate popup after 5 launches of app after minDays is passed.
-  );
-
-  rateMyApp.init();
-
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
- 
+
   FlutterNativeSplash.remove();
 
-  runApp(ezscripApp(isPrefsSet));
-}
-
-Widget getLandingPage(bool isPrefSet) {
-  Widget landingPage;
-  if (isPrefSet) {
-    landingPage = LoginPage();
-  } else {
-    landingPage = IntroductionPage();
-  }
-  return landingPage;
+  runApp(ezscripApp(isPrefsSet, userType, prescCount));
 }
 
 @immutable
 class ezscripApp extends StatefulWidget {
   late bool isPrefsSet;
-  ezscripApp(this.isPrefsSet, {Key? key}) : super(key: key);
+  late UserType userType;
+  late int prescCount;
+
+  ezscripApp(this.isPrefsSet, this.userType, this.prescCount, {Key? key})
+      : super(key: key);
 
   static final navigatorKey = GlobalKey<NavigatorState>();
 
-  _ezscripAppState createState() => _ezscripAppState(this.isPrefsSet);
+  _ezscripAppState createState() =>
+      _ezscripAppState(this.isPrefsSet, this.userType, this.prescCount);
 }
 
 class _ezscripAppState extends State<ezscripApp> {
   late bool isPrefsSet;
+  late UserType userType;
+  late int prescCount;
 
-  _ezscripAppState(this.isPrefsSet);
+  _ezscripAppState(this.isPrefsSet, this.userType, this.prescCount);
 
   @override
   void initState() {
     super.initState();
+  }
+
+  Widget getLandingPage(bool isPrefSet, int prescCount,
+      [UserType userType = UserType.Basic]) {
+    Widget landingPage;
+    if (isPrefSet) {
+      if ( userType == UserType.Basic && prescCount >= 10) {
+        landingPage = UpgradePage(prescCount);
+      } else {
+        landingPage = const LoginPage();
+      }
+    } else {
+      landingPage = IntroductionPage(userType: userType);
+    }
+    return landingPage;
   }
 
   @override
@@ -432,8 +434,9 @@ class _ezscripAppState extends State<ezscripApp> {
             return MaterialPageRoute(builder: (context) => const LoginPage());
 
           case Routes.Setup:
+            IntroductionPageArguments args = settings.arguments as IntroductionPageArguments;
             return MaterialPageRoute(
-                builder: (context) => const IntroductionPage());
+                builder: (context) =>  IntroductionPage(userType:  args.userType));
 
           case Routes.ViewProfile:
             ViewProfilePageArguments args =
@@ -619,20 +622,9 @@ class _ezscripAppState extends State<ezscripApp> {
       ],
       navigatorObservers: [NewRelicNavigationObserver()],
       builder: (BuildContext context, Widget? widget) {
-        // Catcher.addDefaultErrorWidget(
-        //     showStacktrace: true,
-        //     title: "Custom error title",
-        //     description: "Custom error description",
-        //     maxWidthForSmallMode: 150);
-
-        // return AccessibilityTools(
-        //   logLevel: LogLevel.warning,
-        //   checkSemanticLabels: true,
-        //   checkFontOverflows: true,
-        //   child: widget!,
         return widget!;
       },
-      home: getLandingPage(isPrefsSet),
+      home: getLandingPage(isPrefsSet,  prescCount , userType),
     );
   }
 }

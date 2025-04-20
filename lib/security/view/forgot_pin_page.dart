@@ -250,7 +250,7 @@ class _ForgotPinPageState extends State<ForgotPinPage> {
                       SizedBox(
                           height: MediaQuery.of(context).size.height * 0.35,
                           child: Semantics(
-                              identifier: semantic.S.LOGIN_ezscrip_LOGO,
+                              identifier: semantic.S.LOGIN_EZSCRIP_LOGO,
                               child: Image.asset(Images.healthcareIcon,
                                   height: 200, width: 150))),
                       SizedBox(

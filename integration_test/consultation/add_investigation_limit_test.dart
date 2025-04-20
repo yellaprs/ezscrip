@@ -1,3 +1,4 @@
+
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
@@ -5,7 +6,6 @@ import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
 import '../login.dart';
 import '../logoff.dart';
@@ -13,25 +13,13 @@ import '../setup.dart';
 import 'common/consultation_common.dart';
 
 void main() {
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
 
   patrolTest(
     'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)',
     ($) async {
+
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
       await login($, "1111");
 
@@ -93,13 +81,19 @@ void main() {
 
       await $.scrollUntilVisible(finder: $(K.testsTile));
 
-      if (investigationsList.length > 0) {
+      if (investigationsList.isNotEmpty) {
+
+         for (int i = 0; i <= 2; i++) {
+            if ($(K.testsTile).$(K.tileStatusExpanded).exists) break;
+            await $(K.testsTile).$('Investigations').tap();
+        }
         for (int i = 0; i < investigationsList.length; i++) {
+         
           await addInvestigation($, investigationsList.elementAt(i));
           await $.scrollUntilVisible(
               finder: $(K.testsList).$(Row).$(investigationsList.elementAt(i)),
               view: $(K.testsList),
-              dragDuration: Duration(seconds: 1),
+              dragDuration: const Duration(seconds: 1),
               scrollDirection: AxisDirection.down);
         }
       }

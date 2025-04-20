@@ -81,7 +81,7 @@ class _AddTestsPageState extends State<AddTestsPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(5),
-                              child: Container(
+                              child: SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.7,
                                   height: 60,
@@ -108,11 +108,12 @@ class _AddTestsPageState extends State<AddTestsPage> {
                                               borderRadius:
                                                   BorderRadius.circular(9)),
                                         ),
-                                      ))),
-                            ),
-                          ]))
+                          ))),
+                      ),
+                  ]))
                 ],
               )
-            ])));
+            ])
+      ));
   }
 }

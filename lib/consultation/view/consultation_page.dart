@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/home_page.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/focus_nodes.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:ezscrip/consultation/model/direction.dart';
@@ -137,7 +139,7 @@ class ConsultationPageState extends State<ConsultationPage>
 
   Widget buildEditAction(Consultation consultation) {
     return IconButton(
-      icon: const  Icon(Icons.edit, size: 30),
+      icon: const Icon(Icons.edit, size: 30),
       onPressed: () async {
         AppUser user = await GetIt.instance<UserPrefs>().getUser();
         Map<String, dynamic> propertiesMap =
@@ -152,6 +154,27 @@ class ConsultationPageState extends State<ConsultationPage>
     );
   }
 
+  void _showMessage(IconData icon, String message, Color color) {
+    showFlash(
+        context: context,
+        duration: const Duration(seconds: 3),
+        builder: (_, controller) {
+          return Flash(
+            controller: controller,
+            position: FlashPosition.bottom,
+            child: FlashBar(
+              controller: controller,
+              icon: Icon(
+                icon,
+                size: 36.0,
+                color: color,
+              ),
+              content: Text(message),
+            ),
+          );
+        });
+  }
+
   List<Widget> buildActions() {
     List<Widget> actions = [];
 
@@ -159,59 +182,77 @@ class ConsultationPageState extends State<ConsultationPage>
         key: K.prescriptionViewButton,
         focusNode: FocusNodes.prescriptionVieButton,
         icon: IconTheme(
-            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
+            data: Theme.of(context)
+                .iconTheme
+                .copyWith(size: UI.PAGE_ACTION_BTN_SIZE),
             child: const Icon(FontAwesome5Solid.file_prescription)),
         onPressed: () async {
+
           pw.Document prescDocument;
           String? template;
           String? format;
           Uint8List byteData;
           String? signatureSvg;
 
-          template = await GetIt.instance<UserPrefs>().getTemplate();
-          byteData = (await rootBundle.load(template!)).buffer.asUint8List();
-          format = await GetIt.instance<UserPrefs>().getFormat();
+           if ((await GetIt.instance<UserPrefs>().getUserType()) ==  UserType.Basic) {
 
-          bool isPrescriptionSet =
-              await GetIt.instance<UserPrefs>().isSignatureEnabled();
+               int count = await GetIt.instance<UserPrefs>().getCounter();
 
-          if (isPrescriptionSet) {
-            signatureSvg = await GetIt.instance<UserPrefs>().getSignature();
-          }
-          if (format!.indexOf("1") > 0) {
-            prescDocument = await PrescriptionGenerator_1.buildPrescription(
-                _consultation,
-                _user,
-                GetIt.instance<LocaleModel>().getLocale,
-                byteData,
-                isPrescriptionSet,
-                await GetIt.instance<UtilsService>().getTimeIconMap(),
-                GlobalConfiguration().getValue(C.PRESCRIPTION_BLOCK_LENGTH),
-                GlobalConfiguration().getValue(C.PRESCRIPTION_BLOCK_WEIGHT),
-                signatureSvg);
-          } else {
-            prescDocument = await PrescriptionGenerator_2.buildPrescription(
-                _consultation,
-                _user,
-                GetIt.instance<LocaleModel>().getLocale,
-                byteData,
-                isPrescriptionSet,
-                await GetIt.instance<UtilsService>().getTimeIconMap(),
-                signatureSvg);
-          }
+               if (count >= GlobalConfiguration().get(C.BASIC_PLAN_QUOTA)) {
+                  _showMessage(
+                      Icons.warning,
+                      "Exceeded quota for Basic plan. Upgrade to premium version.",
+                     Colors.red);
+                  return;
+               }
+            }
+            await GetIt.instance<UserPrefs>().incrementCounter();
+            template = await GetIt.instance<UserPrefs>().getTemplate();
+            byteData = (await rootBundle.load(template!)).buffer.asUint8List();
+            format = await GetIt.instance<UserPrefs>().getFormat();
 
-          Uint8List pdfData = await prescDocument.save();
-          File savedFile = await File(
-                  "${(await getApplicationCacheDirectory()).path}/prescription.pdf")
-              .create();
-          File prescFile = await savedFile.writeAsBytes(pdfData);
+            bool isPrescriptionSet =
+                await GetIt.instance<UserPrefs>().isSignatureEnabled();
 
-          navService.pushNamed(Routes.ViewPrescription,
-              args: PrescriptionPdfViewPageArguments(
-                  generatedFile: prescFile.path,
-                  mode: Mode.View,
-                  status: _consultation.getStatus()));
-        });
+            if (isPrescriptionSet) {
+              signatureSvg = await GetIt.instance<UserPrefs>().getSignature();
+            }
+            if (format!.indexOf("1") > 0) {
+              prescDocument = await PrescriptionGenerator_1.buildPrescription(
+                  _consultation,
+                  _user,
+                  GetIt.instance<LocaleModel>().getLocale,
+                  byteData,
+                  isPrescriptionSet,
+                  await GetIt.instance<UtilsService>().getTimeIconMap(),
+                  GlobalConfiguration().getValue(C.PRESCRIPTION_BLOCK_LENGTH),
+                  GlobalConfiguration().getValue(C.PRESCRIPTION_BLOCK_WEIGHT),
+                  signatureSvg);
+            } else {
+              prescDocument = await PrescriptionGenerator_2.buildPrescription(
+                  _consultation,
+                  _user,
+                  GetIt.instance<LocaleModel>().getLocale,
+                  byteData,
+                  isPrescriptionSet,
+                  await GetIt.instance<UtilsService>().getTimeIconMap(),
+                  signatureSvg);
+            }
+
+            Uint8List pdfData = await prescDocument.save();
+            File savedFile = await File(
+                    "${(await getApplicationCacheDirectory()).path}/prescription.pdf")
+                .create();
+            File prescFile = await savedFile.writeAsBytes(pdfData);
+
+            navService.pushNamed(Routes.ViewPrescription,
+                args: PrescriptionPdfViewPageArguments(
+                    generatedFile: prescFile.path,
+                    mode: Mode.View,
+                    status: _consultation.getStatus()));
+        }
+        
+    );
 
     actions.add((_mode == Mode.Preview)
         ? buildTooltipWidget(
@@ -228,7 +269,9 @@ class ConsultationPageState extends State<ConsultationPage>
           key: K.checkButton,
           focusNode: FocusNodes.checkConsultatioButton,
           icon: IconTheme(
-              data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
+              data: Theme.of(context)
+                  .iconTheme
+                  .copyWith(size: UI.PAGE_ACTION_BTN_SIZE),
               child: const Icon(Foundation.check,
                   size: 30,
                   semanticLabel: semantic.S.CONSULTATION_DONE_BUTTON)),
@@ -412,7 +455,7 @@ class ConsultationPageState extends State<ConsultationPage>
       children: [
         Container(
           height: 40,
-          decoration: const  BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
@@ -470,7 +513,7 @@ class ConsultationPageState extends State<ConsultationPage>
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border:  Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -486,12 +529,12 @@ class ConsultationPageState extends State<ConsultationPage>
     return Stack(alignment: Alignment.topCenter, children: [
       Container(
           height: 40,
-          decoration:  const BoxDecoration(
+          decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(8),
               topRight: Radius.circular(8),
             ),
-            border:  Border(
+            border: Border(
               top: BorderSide(color: Colors.blueGrey, width: 1.5),
               left: BorderSide(color: Colors.blueGrey, width: 1.5),
               right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -507,7 +550,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 color: Theme.of(context).primaryColor,
                 child: Stack(alignment: Alignment.centerLeft, children: [
                   Padding(
-                      padding:const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: 10),
                       child: SvgPicture.asset(Images.tests,
                           width: 25, height: 25)),
                   Padding(
@@ -520,12 +563,12 @@ class ConsultationPageState extends State<ConsultationPage>
       Padding(
           padding: const EdgeInsets.only(top: 40),
           child: Container(
-              decoration:const BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border:  Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -540,7 +583,7 @@ class ConsultationPageState extends State<ConsultationPage>
         child: Stack(children: [
       Container(
         height: 40,
-        decoration: const  BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
@@ -703,12 +746,12 @@ class ConsultationPageState extends State<ConsultationPage>
           padding: const EdgeInsets.only(top: 40),
           child: Container(
               width: MediaQuery.of(context).size.width - 10,
-              decoration:const BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border:  Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -821,7 +864,7 @@ class ConsultationPageState extends State<ConsultationPage>
             topLeft: Radius.circular(8),
             topRight: Radius.circular(8),
           ),
-          border:  Border(
+          border: Border(
             top: BorderSide(color: Colors.blueGrey, width: 1.5),
             left: BorderSide(color: Colors.blueGrey, width: 1.5),
             right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -857,7 +900,7 @@ class ConsultationPageState extends State<ConsultationPage>
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                border:  Border(
+                border: Border(
                   bottom: BorderSide(color: Colors.blueGrey, width: 1.5),
                   left: BorderSide(color: Colors.blueGrey, width: 1.5),
                   right: BorderSide(color: Colors.blueGrey, width: 1.5),
@@ -964,7 +1007,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.35,
                   child: Stack(children: [
-                    AutoSizeText("${AppLocalizations.of(context)!.weight}",
+                    AutoSizeText(AppLocalizations.of(context)!.weight,
                         style: Theme.of(context).textTheme.titleMedium),
                     Padding(
                         padding: const EdgeInsets.only(left: 60),
@@ -1061,7 +1104,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding: EdgeInsets.only(left: 50),
+                      padding: const EdgeInsets.only(left: 50),
                       child: (prescription.times != null)
                           ? LimitedBox(
                               maxWidth: 100,
@@ -1213,8 +1256,7 @@ class ConsultationPageState extends State<ConsultationPage>
                   child: Stack(alignment: Alignment.centerLeft, children: [
                     const Padding(
                       padding: EdgeInsets.only(left: 10),
-                      child:
-                          Icon(MaterialCommunityIcons.pill, size: 30),
+                      child: Icon(MaterialCommunityIcons.pill, size: 30),
                     ),
                     Padding(
                         padding: const EdgeInsets.only(left: 50),
@@ -1237,7 +1279,7 @@ class ConsultationPageState extends State<ConsultationPage>
                 ),
               ),
               child: Container(
-                  margin: EdgeInsets.all(1),
+                  margin: const EdgeInsets.all(1),
                   height: (prescriptionChips.isEmpty)
                       ? UI.EXPANSION_TILE_EMPTY_SIZE
                       : prescriptionChips.length * 60,
@@ -1274,7 +1316,7 @@ class ConsultationPageState extends State<ConsultationPage>
   Widget buildHeaderWidget() {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
       Stack(alignment: Alignment.centerLeft, children: [
-        const Icon(Icons.calendar_today, size:  UI.DIALOG_ACTION_BTN_SIZE),
+        const Icon(Icons.calendar_today, size: UI.DIALOG_ACTION_BTN_SIZE),
         Padding(
             padding: const EdgeInsets.only(left: 30),
             child: AutoSizeText(
@@ -1482,7 +1524,8 @@ class ConsultationPageState extends State<ConsultationPage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBarBuilder.buildAppBar(
-            context, const Icon(MaterialCommunityIcons.prescription, size: 25),
+            context,
+            const Icon(MaterialCommunityIcons.prescription, size: 25),
             "${(_isEditable) ? AppLocalizations.of(context)!.review : AppLocalizations.of(context)!.view} ${AppLocalizations.of(context)!.prescription}",
             buildActions(),
             buildEditAction(_consultation)),
@@ -1518,8 +1561,6 @@ class ConsultationPageState extends State<ConsultationPage>
                           const SizedBox(height: 10),
                           buildPrescriptionWidget(Orientation.portrait),
                           const SizedBox(height: 10),
-                        ])
-              ))
-      ));
+                        ])))));
   }
 }

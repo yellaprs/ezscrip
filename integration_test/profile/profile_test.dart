@@ -3,7 +3,7 @@ import 'package:ezscrip/login_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:global_configuration/global_configuration.dart';
+import '../consultation/common/consultation_common.dart';
 import '../setup.dart';
 import 'package:ezscrip/profile/view/profile_page.dart';
 import 'package:ezscrip/profile/view/view_profile_page.dart';
@@ -12,45 +12,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
 void main() {
-  late AppUser profile, newProfile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_PROFILE);
-    var testDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        testDataJson['firstname'],
-        testDataJson['lastname'],
-        testDataJson['cedential'],
-        testDataJson['specialization'],
-        testDataJson['clinic'],
-        Locale('EN_US'),
-        testDataJson['contact_no']);
-
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_PROFILE_1);
-    var newTestDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-
-    profile = AppUser(
-        testDataJson['firstname'],
-        testDataJson['lastname'],
-        testDataJson['cedential'],
-        testDataJson['specialization'],
-        testDataJson['clinic'],
-        Locale('EN_US'),
-        testDataJson['contact_no']);
-
-    newProfile = AppUser(
-        newTestDataJson['firstname'],
-        newTestDataJson['lastname'],
-        newTestDataJson['cedential'],
-        newTestDataJson['specialization'],
-        newTestDataJson['clinic'],
-        Locale('EN_US'),
-        newTestDataJson['contact_no']);
-  });
-
   patrolTest(
     'modify profile test',
     ($) async {
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
+      AppUser newProfile = await loadTestDataProfile(
+          "assets/test/${C.TEST_DATA_PROFILE_1}.json");
+
       await createApp($, profile);
       await $(LoginPage).waitUntilVisible();
       expect($(K.pinTextField), findsOneWidget);
@@ -67,31 +36,38 @@ void main() {
       await $(K.editProfileButtonKey).tap();
       await $(ProfilePage).waitUntilVisible();
       expect($(K.firstNameTextField), findsOneWidget);
-      await $(K.firstNameTextField).tap();
-      await $(K.firstNameTextField).enterText(profile.getFirstName());
+      //await $(K.firstNameTextField).tap();
+
+      await $(K.firstNameTextField).enterText(newProfile.getFirstName());
       expect($(K.lastNameTextField), findsOneWidget);
-      await $(K.lastNameTextField).tap();
-      await $(K.lastNameTextField).enterText(profile.getLastName());
+      // await $(K.lastNameTextField).tap();
+      await $(K.lastNameTextField).enterText(newProfile.getLastName());
       expect($(K.credentialTextField), findsOneWidget);
-      await $(K.credentialTextField).tap();
-      await $(K.credentialTextField).enterText(profile.getCredentials());
+      // await $(K.credentialTextField).tap();
+      await $(K.credentialTextField).enterText(newProfile.getCredentials());
       expect($(K.specializationDropDown), findsOneWidget);
       await $(K.specializationDropDown).tap();
-      expect($('Dermatology'), findsOneWidget);
-      await $(K.specializationDropDown).$(profile.getSpecialization()).tap();
+      //expect($('Dermatology'), findsOneWidget);
+      await $(K.specializationDropDown).$(newProfile.getSpecialization()).tap();
       expect($(K.clinicTextField), findsOneWidget);
-      await $(K.clinicTextField).tap();
-      await $(K.clinicTextField).enterText(profile.getClinic());
+      //await $(K.clinicTextField).tap();
+      await $(K.clinicTextField).enterText(newProfile.getClinic());
       expect($(K.contactNoField), findsOneWidget);
-      await $(K.contactNoField).tap();
-      await $(K.contactNoField).enterText(profile.getContactNo());
+      //await $(K.contactNoField).tap();
+      await $(K.contactNoField).enterText(newProfile.getContactNo());
       expect($(K.saveButton), findsOneWidget);
       await $(K.saveButton).tap();
       await $(ViewProfilePage).waitUntilVisible();
-      expect($(profile.getFirstName()), findsOneWidget);
-      expect($(profile.getCredentials()), findsOneWidget);
-      expect($(profile.getClinic()), findsOneWidget);
-      expect($(profile.getContactNo()), findsOneWidget);
+
+      String name = "${newProfile.getFirstName()} ${newProfile.getLastName()}";
+      expect($(name), findsOneWidget);
+      expect($(newProfile.getCredentials()), findsOneWidget);
+      expect($(newProfile.getSpecialization()), findsOneWidget);
+      expect($(newProfile.getClinic()), findsOneWidget);
+      
+      expect($(newProfile.getContactNo()), findsOneWidget);
+
+      expect($(K.backNavButton), findsOneWidget);
       await $(K.backNavButton).tap();
       await $(HomePage).waitUntilVisible();
     },

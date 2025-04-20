@@ -75,8 +75,8 @@ class SemanticLabels {
   static const String HOME_VIEW_PRESCRIPTION_BUTTON = "btn_view_prescription";
 
   // login page
-  static const String LOGIN_ezscrip_LOGO = "logo_ezscrip";
-  static const String LOGIN_DOCSRIBE_TITLE = "lbl_ezscrip";
+  static const String LOGIN_EZSCRIP_LOGO = "logo_ezscrip";
+  static const String LOGIN_EZSCRIP_TITLE = "lbl_ezscrip";
   static const String LOGIN_PIN_FLD = "fld_access_pin";
   static const String LOGIN_FORGOT_PIN_BTN = "btn_forgot_pin";
   static const String LOGIN_BTN = "btn_login";

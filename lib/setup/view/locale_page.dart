@@ -1,3 +1,4 @@
+import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/route_constants.dart';
 import 'package:ezscrip/settings/model/userprefs.dart';
 import 'package:ezscrip/setup/model/localemodel.dart';
@@ -163,7 +164,7 @@ class LocalePageState extends State<LocalePage> {
                                     .loadFromAsset(C.APP_SETTINGS);
 
                                 navService.pushNamed(Routes.Demo,
-                                    args: IntroductionPageArguments());
+                                    args: IntroductionPageArguments(userType: UserType.Basic));
 
                                 // Navigator.push(
                                 //     context,

@@ -15,7 +15,6 @@ import '../../util/semantics.dart' as semantic;
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -25,7 +24,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var pinController;
+  late TextEditingController  pinController;
   final formKey = GlobalKey<FormState>();
   late bool _isVerified;
   late StreamController<ErrorAnimationType> errorController;
@@ -192,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
             //     MaterialPageRoute(builder: (context) => const ForgotPinPage()));
           },
         ));
-  }
+  }        
 
   @override
   Widget build(BuildContext context) {
@@ -222,18 +221,18 @@ class _LoginPageState extends State<LoginPage> {
                                           children: [
                                               Semantics(
                                                 identifier:
-                                                    semantic.S.LOGIN_ezscrip_LOGO,
+                                                    semantic.S.LOGIN_EZSCRIP_LOGO,
                                                 child: Image.asset(
                                                     Images.healthcareIcon,
                                                     height: 200,
                                                     width: 150)),
                                               Container(
                                                 alignment: Alignment.center,
-                                                padding: EdgeInsets.only(top: 30),
+                                                padding: const EdgeInsets.only(top: 30),
                                                 height: 60,
                                                 child: Semantics(
                                                     identifier: semantic
-                                                        .S.LOGIN_DOCSRIBE_TITLE,
+                                                        .S.LOGIN_EZSCRIP_TITLE,
                                                     child: AutoSizeText(
                                                         AppLocalizations.of(context)!
                                                             .ezscrip,

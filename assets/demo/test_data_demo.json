@@ -1,13 +1,12 @@
 {
-    "TEST_DATA": {
-        "patient_name": "Suni Gavaskar",
-        "gender": "Male",
+    "DEMO_DATA": {
+        "patient_name": "John Doe","gender": "Male",
         "patient_age": 56,
         "weight": 82.5,
         "start": 1742798846372,
         "end": 1742798906372,
         "indicators": [
-          
+            
         ],
         "symptoms": [
             "fever",
@@ -46,16 +45,10 @@
                 "direction": "not applicable",
                 "times": [
                     "daybreak",
-                    "afternoon",
-                    "night"
+                    "morning",
+                    "afternoon"          
                 ],
                 "isHalf": false
-            },
-            {
-                "status": "Discontinue",
-                "name": "Paracetmol",
-                "dosage": 1,
-                "preparation": "Tablet"
             }
         ],
         "status": "InProgress"

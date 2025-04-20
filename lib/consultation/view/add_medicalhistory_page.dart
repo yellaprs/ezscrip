@@ -116,7 +116,7 @@ class _AddMedicalHistoryPageState extends State<AddMedicalHistoryPage> {
                   child: buildHeader()),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.75,
                   height: 60,
                   child: Semantics(
@@ -133,8 +133,8 @@ class _AddMedicalHistoryPageState extends State<AddMedicalHistoryPage> {
                           style: DefaultTextStyle.of(context)
                               .style
                               .copyWith(fontStyle: FontStyle.italic),
-                          decoration: InputDecoration(
-                            border: const UnderlineInputBorder(),
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
                             hintText: '',
                           ),
                           validator: (val) {
@@ -154,13 +154,13 @@ class _AddMedicalHistoryPageState extends State<AddMedicalHistoryPage> {
                         decorationBuilder: (context, child) => Material(
                           type: MaterialType.card,
                           elevation: 4,
-                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          borderRadius: const BorderRadius.all(Radius.circular(8)),
                           child: child,
                         ),
                         itemBuilder: (context, suggestion) => ListTile(
                           title: Text(suggestion),
                         ),
-                        debounceDuration: Duration(milliseconds: 400),
+                        debounceDuration: const Duration(milliseconds: 400),
                         hideOnEmpty: true,
                         hideOnSelect: true,
                         hideOnUnfocus: true,
@@ -180,7 +180,7 @@ class _AddMedicalHistoryPageState extends State<AddMedicalHistoryPage> {
                       )),
                 ),
               ]),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
                     width: MediaQuery.of(context).size.width * 0.35,
@@ -191,12 +191,14 @@ class _AddMedicalHistoryPageState extends State<AddMedicalHistoryPage> {
                       child: TextFormField(
                         key: K.durationField,
                         decoration: InputDecoration(
-                            icon: Icon(Icons.timelapse, size: 30),
+                            icon: const Icon(Icons.timelapse, size: 30),
                             labelText: AppLocalizations.of(context)!.duration,
-                            border: UnderlineInputBorder()),
+                            border: const UnderlineInputBorder()),
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly
                         ],
+                        keyboardType: const TextInputType.numberWithOptions(
+                            signed: false, decimal: false),
                         controller: _conditionDurationController,
                         autovalidateMode: AutovalidateMode.disabled,
                         validator: Validatorless.required(

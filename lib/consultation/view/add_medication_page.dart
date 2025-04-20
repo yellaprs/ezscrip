@@ -815,10 +815,8 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
-                            incrementIcon:
-                                Icon(key: K.addDays, Icons.add, size: 25),
-                            decrementIcon: Icon(
-                                key: K.subtractDays, Icons.minimize, size: 25),
+                            incrementIcon: const Icon(key: K.addDays, Icons.add, size: 25),
+                            decrementIcon: const Icon(key: K.subtractDays, Icons.minimize, size: 25),
                             min: 1,
                             max: 10,
                             value: _duration.toDouble(),
@@ -1424,7 +1422,7 @@ class _AddMedicationPageState extends State<AddMedicationPage> {
                   buildPrescInfoHeader(),
                   Expanded(
                       child: Container(
-                          margin: const EdgeInsets.only(bottom: 25),
+                          margin: const EdgeInsets.only(bottom: 5),
                           decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(
                                 bottomLeft: Radius.circular(8.0),

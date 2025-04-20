@@ -546,9 +546,12 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         key: K.saveButton,
         focusNode: FocusNodes.saveConsultatioButton,
         icon: IconTheme(
-            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
-            child: const Icon(
-            Foundation.save, size: 25,
+          data: Theme.of(context)
+              .iconTheme
+              .copyWith(size: UI.PAGE_ACTION_BTN_SIZE),
+          child: const Icon(
+            Foundation.save,
+            size: 25,
             semanticLabel: semantic.S.CONSULTATION_SAVE_BUTTON,
           ),
         ),
@@ -580,7 +583,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         key: K.checkButton,
         focusNode: FocusNodes.checkConsultatioButton,
         icon: IconTheme(
-            data: Theme.of(context).iconTheme.copyWith(size :UI.PAGE_ACTION_BTN_SIZE),
+            data: Theme.of(context)
+                .iconTheme
+                .copyWith(size: UI.PAGE_ACTION_BTN_SIZE),
             child: const Icon(Foundation.check,
                 size: 25, semanticLabel: semantic.S.CONSULTATION_DONE_BUTTON)),
         onPressed: () async {
@@ -731,32 +736,31 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
               identifier: semantic.S.CONSULTATION_SYMPTOM_LABEL,
               container: true,
               child: Stack(alignment: Alignment.centerLeft, children: [
-                    CircleAvatar(
-                        radius: 5,
-                        backgroundColor: Theme.of(context).indicatorColor),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 25, vertical: 0),
-                        child: AutoSizeText(symptom,
-                            style: Theme.of(context).textTheme.bodyMedium)),
-                  ])),
+                CircleAvatar(
+                    radius: 5,
+                    backgroundColor: Theme.of(context).indicatorColor),
+                Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 25, vertical: 0),
+                    child: AutoSizeText(symptom,
+                        style: Theme.of(context).textTheme.bodyMedium)),
+              ])),
           SizedBox(
-            width : MediaQuery.of(context).size.width * 0.08,
-            child :IconButton(
-              icon: Icon(EvaIcons.closeCircleOutline,
-                  color: Theme.of(context).indicatorColor, size: 20),
-              onPressed: () {
-                setState(() {
-                  _consultation.removeSymptom(symptom);
+              width: MediaQuery.of(context).size.width * 0.08,
+              child: IconButton(
+                  icon: Icon(EvaIcons.closeCircleOutline,
+                      color: Theme.of(context).indicatorColor, size: 20),
+                  onPressed: () {
+                    setState(() {
+                      _consultation.removeSymptom(symptom);
 
-                  _isSymptomsLimitExceeded =
-                      (_consultation.getSymptoms().length >
-                          int.parse(GlobalConfiguration()
-                              .getValue(C.MAX_SYMPTOMS)
-                              .toString()));
-                });
-              })
-          )
+                      _isSymptomsLimitExceeded =
+                          (_consultation.getSymptoms().length >
+                              int.parse(GlobalConfiguration()
+                                  .getValue(C.MAX_SYMPTOMS)
+                                  .toString()));
+                    });
+                  }))
         ],
       );
     }).toList();
@@ -791,22 +795,21 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                   child: AutoSizeText(test,
                       style: Theme.of(context).textTheme.bodySmall)),
             ])),
-
         SizedBox(
-           width : MediaQuery.of(context).size.width * 0.08,
-           child:IconButton(
-            icon: const Icon(EvaIcons.closeCircleOutline,
-                size: UI.DELETE_TILE_ACTION_BTN_SIZE),
-            onPressed: () {
-              setState(() {
-                _consultation.removeInvestigation(test);
-                _isInvestigationsLimitExceeded =
-                    _consultation.getTests().length >
-                        int.parse(GlobalConfiguration()
-                            .getValue(C.MAX_INVESTIGATIONS)
-                            .toString());
-              });
-            }))
+            width: MediaQuery.of(context).size.width * 0.08,
+            child: IconButton(
+                icon: const Icon(EvaIcons.closeCircleOutline,
+                    size: UI.DELETE_TILE_ACTION_BTN_SIZE),
+                onPressed: () {
+                  setState(() {
+                    _consultation.removeInvestigation(test);
+                    _isInvestigationsLimitExceeded =
+                        _consultation.getTests().length >
+                            int.parse(GlobalConfiguration()
+                                .getValue(C.MAX_INVESTIGATIONS)
+                                .toString());
+                  });
+                }))
       ]);
     }).toList();
 
@@ -1011,7 +1014,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
           Stack(alignment: Alignment.centerLeft, children: [
             const Icon(Icons.timelapse, size: 20),
             Padding(
-                padding:const EdgeInsets.only(left: 25),
+                padding: const EdgeInsets.only(left: 25),
                 child: AutoSizeText(
                   prescription.duration.toString() +
                       " " +
@@ -1230,7 +1233,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
     return Container(
         constraints:
             const BoxConstraints(minHeight: UI.EXPANSION_TILE_EMPTY_SIZE),
-         padding: const EdgeInsets.symmetric(horizontal:8,vertical : 5),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
         color: Colors.white,
         child: ListView(
             key: K.medicalHistoryList,
@@ -1622,7 +1625,8 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                               // child: SvgPicture.asset("assets/spo2.svg",
                               //     width: 25, height: 25, color: Colors.white)
                             ),
-                            borderRadius: const BorderRadius.all( Radius.circular(21)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(21)),
                             width: 70.0,
                             height: 30.0,
                             enabled: true,
@@ -2290,7 +2294,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         if (_temperatureEnabled.value && _temp != null) {
           indicators.add(Indicator(IndicatorType.Temperature, _temp));
         }
-       // print("indicatorS:" + indicators.length.toString());
+        // print("indicatorS:" + indicators.length.toString());
 
         if (_spo2Enabled.value && _spo2 != null) {
           indicators.add(Indicator(IndicatorType.Spo2, _spo2));
@@ -2478,8 +2482,6 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           border: Border.all(
                               color: Theme.of(context).primaryColor, width: 4)),
                       child: Container(
-                        
-                        
                           color: Colors.white, child: buildTestsWidget()))
                 ])));
 
@@ -2558,7 +2560,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           ? semantic.S.SYMPTOM_EXPANDED_LABEL
                           : semantic.S.SYMPTOM_COLLAPSED_LABEL,
                       container: true,
-                      child: const  SizedBox(height: 20, width: 20)),
+                      child: const SizedBox(height: 20, width: 20)),
                   (!_isSymptomsLimitExceeded)
                       ? SizedBox(
                           width: 100,
@@ -2688,11 +2690,10 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                           : const SizedBox(width: 20),
                     ]),
                 trailing: Stack(alignment: Alignment.centerLeft, children: [
-                  (_isMedicalHistoryLimitExceeded)?  CircleAvatar(
+                  (_isMedicalHistoryLimitExceeded)
+                      ? CircleAvatar(
                           radius: 10,
-                          backgroundColor: 
-                              Colors.red,
-                            
+                          backgroundColor: Colors.red,
                           child: CircleAvatar(
                               radius: 8,
                               backgroundColor: (_isMedicalHistoryLimitExceeded)
@@ -2873,7 +2874,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                       : Theme.of(context)
                                           .textTheme
                                           .titleMedium)))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                   Semantics(
                       identifier: (_isPrescriptionExpanded)
                           ? semantic.S.PRESCRIPTION_EXPANDED_LABEL
@@ -2896,7 +2897,8 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                   alignment: MainAxisAlignment.end,
                                   buttonPadding: const EdgeInsets.all(
                                       UI.EXPANSION_TILE_ACTION_BTN_PADDING + 2),
-                                  buttonMinWidth: 20,
+                                  buttonMinWidth:
+                                      UI.EXPANSION_TILE_ACTION_BTN_SIZE,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     SizedBox(
@@ -2909,7 +2911,9 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                               UI.DELETE_TILE_ACTION_BTN_SIZE,
                                           icon: IconTheme(
                                             data: Theme.of(context).iconTheme,
-                                            child: const Icon(Icons.remove),
+                                            child: const Icon(Icons.remove,
+                                                size: UI
+                                                    .EXPANSION_TILE_ACTION_BTN_SIZE),
                                           ),
                                           onPressed: () async {
                                             MedSchedule? medSchedule =
@@ -2964,6 +2968,8 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                           icon: IconTheme(
                                             data: Theme.of(context).iconTheme,
                                             child: const Icon(Icons.add,
+                                                size: UI
+                                                    .EXPANSION_TILE_ACTION_BTN_SIZE,
                                                 semanticLabel: semantic.S
                                                     .PRESCRIPTION_ADD_DIALOG_BUTTON),
                                           ),
@@ -3014,7 +3020,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                                           }),
                                     ),
                                   ])))
-                      : SizedBox(height: 5, width: 5),
+                      : const SizedBox(height: 5, width: 5),
                 ]),
                 children: <Widget>[
                   Container(
@@ -3066,7 +3072,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                       borderSide: BorderSide(color: Colors.lightBlue[100]!),
                       borderRadius: BorderRadius.circular(9)),
                 ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                keyboardType: const TextInputType.numberWithOptions(signed: false, decimal: true),
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,1}')),
                 ],
@@ -3132,7 +3138,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
                       borderSide: BorderSide(color: Colors.lightBlue[100]!),
                       borderRadius: BorderRadius.circular(9)),
                 ),
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(signed: false, decimal:false),
                 controller: _ageController,
                 onChanged: (val) {
                   if (val.isNotEmpty) {
@@ -3371,40 +3377,44 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         .format((_consultation.getStart()));
   }
 
-  PreferredSizeWidget buildAppBar(BuildContext context, List<Widget> actions){
+  PreferredSizeWidget buildAppBar(BuildContext context, List<Widget> actions) {
+    Widget leftNavButton = IconButton(
+        key: K.backNavButton,
+        focusNode: FocusNodes.backNavButton,
+        icon: IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: const Icon(FontAwesome.chevron_left,
+                size: 25, semanticLabel: semantic.S.BACK_BTN)),
+        onPressed: () async {
+          navService.goBack();
+        });
 
-   Widget leftNavButton = IconButton(
-      key: K.backNavButton,
-      focusNode: FocusNodes.backNavButton,
-      icon: IconTheme(
-          data: Theme.of(context).iconTheme,
-          child: const Icon(FontAwesome.chevron_left, size: 25,
-              semanticLabel: semantic.S.BACK_BTN)),
-      onPressed: () async {
-        navService.goBack();
-      });
-
-   return PreferredSize(
-       preferredSize: const Size.fromHeight(60),
-       child: AppBar(
-         elevation: 0,
-         leading: Container(
-                 margin:  const EdgeInsets.all(4),
-                 child: leftNavButton),
-         bottom: const PreferredSize(
-             preferredSize: Size.fromHeight(6), child: SizedBox(height: 4)),
-         backgroundColor: Theme.of(context).primaryColor,
-         automaticallyImplyLeading:
-             (ModalRoute.of(context)!.settings.name == "/Home") ? false : true,
-         title: Center(
-             child: Stack(alignment: Alignment.centerLeft, children : [const Icon(MaterialCommunityIcons.prescription, size: 25), 
-                            Padding(padding: const EdgeInsets.only(left:30), 
-                                  child: AutoSizeText("Edit Prescription", style: Theme.of(context).textTheme.displayMedium))])),
-         actions: [ButtonBar(
-                     alignment: MainAxisAlignment.end,
-                     buttonPadding: const EdgeInsets.all(4),
-                     children: actions)],
-       ));
+    return PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: AppBar(
+          elevation: 0,
+          leading:
+              Container(margin: const EdgeInsets.all(4), child: leftNavButton),
+          bottom: const PreferredSize(
+              preferredSize: Size.fromHeight(6), child: SizedBox(height: 4)),
+          backgroundColor: Theme.of(context).primaryColor,
+          automaticallyImplyLeading:
+              (ModalRoute.of(context)!.settings.name == "/Home") ? false : true,
+          title: Center(
+              child: Stack(alignment: Alignment.centerLeft, children: [
+            const Icon(MaterialCommunityIcons.prescription, size: 25),
+            Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: AutoSizeText("Edit Prescription",
+                    style: Theme.of(context).textTheme.displayMedium))
+          ])),
+          actions: [
+            ButtonBar(
+                alignment: MainAxisAlignment.end,
+                buttonPadding: const EdgeInsets.all(4),
+                children: actions)
+          ],
+        ));
   }
 
   @override

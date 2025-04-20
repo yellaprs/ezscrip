@@ -10,6 +10,7 @@ class Constants {
   static const SPECIALIZATION = "SPECIALIZATION";
   static const CLINIC = "CLINIC";
   static const CONTACT_NO = "CONTACT_NO";
+  static const USER_TYPE = "USER_TYPE";
   static const REMINDER_DATE = "REMINDER_DATE";
   static const PIN_OPTION = "PIN_OPTION";
   static const TEMPLATE = "TEMPLATE";
@@ -35,11 +36,12 @@ class Constants {
   static const TEST_DATA_CONSULTATION_5 = "test_data_consultation_5";
   static const TEST_DATA_CONSULTATION_SEARCH = "test_data_consultation_search";
   static const TEST_DATA_PROFILE = "test_data_profile";
-  static const TEST_DATA_PROFILE_1 = "test_Data_profile_1";
+  static const TEST_DATA_PROFILE_1 = "test_data_profile_1";
   static const TEST_DATA_CONSULTATION_SEARCH_1 =
       "test_data_consultation_search_1";
   static const DEMO_DATA = "DEMO_DATA";
   static const DEFAULT_TEMPLATE = "DEFAULT_TEMPLATE";
+  static const IS_BETA = "BETA";
   static const DB_NAME = "DB_NAME";
   static const AUDIT_FILE_NAME = "AUDIT_FILE_NAME";
   static const TASK_NAME = "TASK_NAME";
@@ -50,6 +52,8 @@ class Constants {
   static const MAX_MEDICAL_HISTORY = "MAX_MEDICAL_HISTORY";
   static const MAX_INVESTIGATIONS = "MAX_INVESTIGATIONS";
   static const INSTALL_DATE = "INSTALL_DATE";
+  static const RESET_DATE = "RESET_DATE";
+  static const COUNTER = "COUNTER";
   static const PRESCRIPTION_BLOCK_LENGTH = "PRESCRIPTION_BLOCK_LENGTH";
   static const PRESCRIPTION_BLOCK_WEIGHT = "PRESCRIPTION_BLOCK_WEIGHT";
   static const MAX_NOTES = "MAX_NOTES";
@@ -62,4 +66,5 @@ class Constants {
   static const PRESCRIPTION_FORMAT_2 = "2";
   static const TEST_PARMETERS_FILE = "testparameters.txt";
   static const PRESCRIPTION_FORMAT_DEMO_FILE = "demo.pdf";
+  static const BASIC_PLAN_QUOTA = "BASIC_PLAN_QUOTA";
 }

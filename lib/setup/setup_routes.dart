@@ -1,7 +1,9 @@
 import 'package:ezscrip/profile/model/appUser.dart';
+import 'package:ezscrip/profile/model/userType.dart';
 
 class IntroductionPageArguments {
-  IntroductionPageArguments();
+  final UserType userType;
+  IntroductionPageArguments({required this.userType});
 }
 
 class InitSplashPageArguments {

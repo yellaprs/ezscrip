@@ -243,15 +243,18 @@ flutter:
   assets:
     - assets/l10n/intl_en.arb
     - assets/cfg/app_settings.json
-    - assets/cfg/test_data.json
-    - assets/cfg/test_data_consultation.json
-    - assets/cfg/test_data_consultation_1.json
-    - assets/cfg/test_data_consultation_2.json
-    - assets/cfg/test_data_consultation_3.json
-    - assets/cfg/test_data_consultation_4.json
-    - assets/cfg/test_data_consultation_5.json
-    - assets/cfg/test_data_consultation_search.json
-    - assets/cfg/test_data_consultation_search_1.json
+    - assets/demo/test_data_demo.json
+    - assets/test/test_data_profile.json
+    - assets/test/test_data_profile_1.json
+    - assets/test/test_data_consultation.json
+    - assets/test/test_data_consultation.json
+    - assets/test/test_data_consultation_1.json
+    - assets/test/test_data_consultation_2.json
+    - assets/test/test_data_consultation_3.json
+    - assets/test/test_data_consultation_4.json
+    - assets/test/test_data_consultation_5.json
+    - assets/test/test_data_consultation_search.json
+    - assets/test/test_data_consultation_search_1.json
     - assets/cfg/languages_names.json
     - assets/cfg/medical_properties.json
     - assets/cfg/specialities.json

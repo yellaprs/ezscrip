@@ -6,38 +6,24 @@ import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
-import 'package:ezscrip/main.dart' as app;
-
+import '../consultation/common/consultation_common.dart';
 import '../setup.dart';
 
 void main() {
   const nativeConfig = NativeAutomatorConfig(
     packageName: 'com.example.ezscrip',
-    androidAppName: 'Docsribe',
+    androidAppName: 'ezscrip',
     bundleId: "com.example.ezscrip",
   );
 
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
   patrolTest(
     'forgot pin test ',
     config: const PatrolTesterConfig(),
     nativeAutomatorConfig: nativeConfig,
     ($) async {
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
       await $(LoginPage).waitUntilVisible();
       expect($(K.pinTextField), findsOneWidget);
@@ -69,6 +55,11 @@ void main() {
       expect($(K.loginButton), findsOneWidget);
       await $(K.loginButton).tap();
       await $(HomePage).waitUntilVisible();
+
+      expect($(K.logoutButton), findsOneWidget);
+      await $(K.logoutButton).tap();
+
+      expect($(LoginPage), findsOneWidget);
     },
   );
 }

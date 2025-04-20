@@ -14,7 +14,7 @@ final _nativeAutomatorConfig = NativeAutomatorConfig(
 
 const nativeConfig = NativeAutomatorConfig(
   packageName: 'com.example.ezscrip',
-  androidAppName: 'Docsribe',
+  androidAppName: 'ezscrip',
   bundleId: "com.example.ezscrip",
 );
 
@@ -40,7 +40,7 @@ createApp(PatrolIntegrationTester $, AppUser profile) async {
 
   expect($(K.credentialTextField), findsOneWidget);
 
-  await $(K.credentialTextField).enterText(profile.getSpecialization());
+  await $(K.credentialTextField).enterText(profile.getCredentials());
 
   expect($(K.specializationDropDown), findsOneWidget);
   await $(K.specializationDropDown).tap();

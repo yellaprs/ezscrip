@@ -6,32 +6,20 @@ import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
+import '../consultation/common/consultation_common.dart';
 import '../setup.dart';
 
 void main() {
-  late AppUser profile;
-
-  setUp(() async {
-    await GlobalConfiguration().loadFromAsset(C.TEST_DATA_CONSULTATION);
-    var profileDataJson = GlobalConfiguration().getValue(C.TEST_DATA);
-    profile = AppUser(
-        profileDataJson['firstname'],
-        profileDataJson['lastname'],
-        profileDataJson['credential'],
-        profileDataJson['specialization'],
-        profileDataJson['clinic'],
-        Locale('EN_US'),
-        profileDataJson['contact_no']);
-  });
+ 
   patrolTest(
     'Data Retention settings test',
     ($) async {
+
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
       await createApp($, profile);
-
       await $(LoginPage).waitUntilVisible();
-
       expect($(K.pinTextField), findsOneWidget);
       await $(K.pinTextField).$(TextField).first.enterText('1');
       await $(K.pinTextField).$(TextField).at(1).enterText('1');
