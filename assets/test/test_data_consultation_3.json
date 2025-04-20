@@ -1,0 +1,50 @@
+{
+    "TEST_DATA": {
+        "patient_name": "Mary Jane",
+        "gender": "Female",
+        "patient_age": 35,
+        "weight": 44.5,
+        "start": 1742798846372,
+        "end": 1742798906372,
+        "indicators": [],
+        "symptoms": [
+           "neuropathy",
+           "dysuria"
+        ],
+        "test_parameters": [
+            {
+                "name": "Vitamin B 12",
+                "value": "134",
+                "unit": "units"
+            }
+        ],
+        "medical_history": [
+            {
+                "name": "Peripheral Neuropathy",
+                "duration": 4,
+                "durationType": "Year"
+            }
+        ],
+        "tests": [
+            "Vitamin Profile",  "Complete Blood Profile"
+        ],
+        "notes": [
+            "Review after  months"
+        ],
+        "prescription": [
+            {
+                "status": "New",
+                "name": "Vitamin B12",
+                "dosage": 10,
+                "unit": "ml",
+                "preparation": "InjectionIm",
+                "frequency_type": "Weekly_OnceWeekly",
+                "duration_type": "Day",
+                "duration": 8,
+                "direction": "not applicable",
+                "isHalf": false
+            }
+        ],
+        "status": "InProgress"
+    }
+}
