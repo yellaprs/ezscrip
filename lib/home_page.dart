@@ -402,7 +402,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           height: 70,
           width: 150,
           alignment: Alignment.topLeft,
-          padding: EdgeInsets.all(2),
+          padding: const EdgeInsets.all(2),
           child: AutoSizeText(
             " Consultation notes and prescription generation.",
             maxLines: 3,
@@ -417,12 +417,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         showCloseButton: true,
         closeButtonType: CloseButtonType.inside,
         onHide: () async {
-          var testDataJson  =  await rootBundle.loadStructuredData(
-              GlobalConfiguration().getValue(C.DEMO_DATA), (value) async {
-            await json.decode(value);
+          String demoDataFile = GlobalConfiguration().getValue(C.DEMO_DATA);
+
+          print("demoData : " + demoDataFile);
+
+          Map<String, dynamic> testDataJson =
+              await rootBundle.loadStructuredData(demoDataFile, (value) async {
+            return await json.decode(value)!;
           });
-        
-          Consultation consultation = Consultation.fromMap(testDataJson);
+
+          Consultation consultation =
+              Consultation.fromMap(testDataJson[C.DEMO_DATA]);
+
           AppUser user = await GetIt.instance<UserPrefs>().getUser();
           Map<String, dynamic> propertiesMap =
               await GetIt.instance<UtilsService>().loadProperties();

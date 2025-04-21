@@ -16,5 +16,5 @@
   "PRESCRIPTION_BLOCK_WEIGHT" : 1,
   "BETA" : true,
   "BASIC_PLAN_QUOTA" : 10,
-  "DEMO_DATA" : "assets/demo/test_data_demo.json"
+  "DEMO_DATA" : "assets/cfg/demo/test_data_demo.json"
 }

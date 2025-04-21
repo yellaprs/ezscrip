@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/consultation/model/consultation_model.dart';
@@ -655,9 +656,10 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
         closeButtonType: CloseButtonType.inside,
         onHide: () async {
           if (nextFocusNode == FocusNodes.prescriptionVieButton) {
-            var testDataJson = GlobalConfiguration().getValue(C.DEMO_DATA);
-            Consultation consultation = Consultation.fromMap(testDataJson);
 
+            String testDataFile = GlobalConfiguration().getValue(C.DEMO_DATA);
+            Map<String, dynamic> testDataJson = await rootBundle.loadStructuredData(testDataFile, (data) async { return  await json.decode(data);});
+            Consultation consultation = Consultation.fromMap(testDataJson[C.DEMO_DATA]);
             AppUser user = await GetIt.instance<UserPrefs>().getUser();
             navService.pushNamed(Routes.ViewConsultation,
                 args: ConsultationPageArguments(

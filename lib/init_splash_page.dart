@@ -133,7 +133,7 @@ class _InitSplashPageState extends State<InitSplashPage> {
     await Future.delayed(
         const Duration(seconds: 1),
         () => copyFile(
-            "assets/demo/" + C.PRESCRIPTION_FORMAT_DEMO_FILE, outFile));
+            "assets/cfg/demo/" + C.PRESCRIPTION_FORMAT_DEMO_FILE, outFile));
 
     _setupController.sink.add(0.75);
 

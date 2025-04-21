@@ -243,7 +243,8 @@ flutter:
   assets:
     - assets/l10n/intl_en.arb
     - assets/cfg/app_settings.json
-    - assets/demo/test_data_demo.json
+    - assets/cfg/demo/test_data_demo.json
+    - assets/cfg/demo/demo.pdf
     - assets/test/test_data_profile.json
     - assets/test/test_data_profile_1.json
     - assets/test/test_data_consultation.json
@@ -292,7 +293,6 @@ flutter:
     - assets/images/formats/2.png
     - assets/images/templates/letterhead_blank.jpg
     - assets/images/log_file.svg
-    - assets/demo/demo.pdf
     - assets/images/chevron_left.svg
     - assets/images/chevron_left_bold.svg
     - assets/images/tests.svg
