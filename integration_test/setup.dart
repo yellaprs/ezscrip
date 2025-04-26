@@ -52,7 +52,7 @@ createApp(PatrolIntegrationTester $, AppUser profile) async {
   await $(K.clinicTextField).enterText(profile.getClinic());
 
   expect($(K.contactNoField), findsOneWidget);
-  await $(K.contactNoField).enterText(profile.getContactNo());
+  await $(K.contactNoField).enterText(profile.getContactNo().substring(profile.getContactNo().indexOf(")") + 1));
 
   await $(K.nextStep).tap();
 
@@ -70,7 +70,7 @@ createApp(PatrolIntegrationTester $, AppUser profile) async {
 
   await $(K.checkButton).tap();
 
-  await $(K.startTourButton).waitUntilVisible(timeout: Duration(seconds: 10));
+  await $(K.startTourButton).waitUntilVisible(timeout: const Duration(seconds: 10));
 
   expect($(K.startTourButton), findsOneWidget);
 

@@ -20,7 +20,7 @@ import '../setup.dart';
 void main() {
 
   patrolTest(
-    'home page test',
+    'home page test', tags: ["home"],
     ($) async {
       
       AppUser profile = await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");

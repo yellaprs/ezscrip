@@ -23,7 +23,7 @@ import 'common/consultation_common.dart';
 void main() {
 
   patrolTest(
-    'Add Consultation with prescription 1 test',
+    'Add Consultation with prescription 1 test', tags: ["consultation", "prescription"],
     ($) async {
 
       Consultation consultation = await loadTestDateConsultation(

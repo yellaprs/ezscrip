@@ -1,14 +1,11 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/testParameter.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
 import '../login.dart';
 import '../logoff.dart';
@@ -19,6 +16,7 @@ void main() {
 
   patrolTest(
     'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)',
+    tags: ["consultation"] ,
     ($) async {
 
       AppUser profile =

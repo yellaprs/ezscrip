@@ -1673,6 +1673,7 @@ class _ConsultationEditPageState extends State<ConsultationEditPage>
     Widget notesWidget = Focus(
         focusNode: FocusNodes.notesTile,
         child: Card(
+          
             elevation: 0,
             shape: RoundedRectangleBorder(
               side: BorderSide(

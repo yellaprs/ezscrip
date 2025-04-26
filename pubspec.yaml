@@ -196,13 +196,16 @@ dependencies:
 
   patrol_cli: ^2.7.0
 
+
+  firebase_core: any
+
   
 dev_dependencies:
  
   build_runner: ^2.3.3
   
   patrol: ^3.5.1
-
+ 
   integration_test:
     sdk: flutter
   

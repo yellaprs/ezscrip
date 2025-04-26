@@ -18,7 +18,7 @@ void main() {
   );
 
   patrolTest(
-    'forgot pin test ',
+    'forgot pin test ', tags: ["security"],
     config: const PatrolTesterConfig(),
     nativeAutomatorConfig: nativeConfig,
     ($) async {

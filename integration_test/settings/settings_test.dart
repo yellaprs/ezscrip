@@ -1,5 +1,4 @@
 import 'package:ezscrip/home_page.dart';
-import 'package:ezscrip/login_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/settings/view/data_retention_setting_page.dart';
 import 'package:ezscrip/util/constants.dart';
@@ -8,57 +7,57 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 import '../consultation/common/consultation_common.dart';
+import '../login.dart';
+import '../logoff.dart';
 import '../setup.dart';
 
 void main() {
- 
   patrolTest(
     'Data Retention settings test',
+    tags: ["settings"],
     ($) async {
-
       AppUser profile =
           await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
+
       await createApp($, profile);
-      await $(LoginPage).waitUntilVisible();
-      expect($(K.pinTextField), findsOneWidget);
-      await $(K.pinTextField).$(TextField).first.enterText('1');
-      await $(K.pinTextField).$(TextField).at(1).enterText('1');
-      await $(K.pinTextField).$(TextField).at(2).enterText('1');
-      await $(K.pinTextField).$(TextField).at(3).enterText('1');
-      await $(K.loginButton).tap();
+      await login($, "1111");
 
       await $(HomePage).waitUntilVisible();
-      expect($(K.securityNavigatioButton), findsOneWidget);
-      await $(K.securityNavigatioButton).tap();
-      expect(DataRetentionSettingPage, findsOneWidget);
-      expect(K.dataRetentionSwitch, findsOneWidget);
+      expect($(K.settingsButton), findsOneWidget);
+
+      await $(K.settingsButton).tap();
+
+      await $(DataRetentionSettingPage).waitUntilVisible();
+   
+      expect($(K.dataRetentionSwitch), findsOneWidget);
+
+      //  await $.tester
+      // .drag(find.byType(Switch), const Offset(5.0, 0));
 
       await $(K.dataRetentionSwitch).tap();
 
-      expect(K.dataRetentionTouchSpin, findsOneWidget);
+      expect($(K.durationSpinbox), findsOneWidget);
 
-      expect($(K.addDays), findsOneWidget);
-      expect($(K.subtractDays), findsOneWidget);
+      expect($(K.durationTypeField), findsOneWidget);
 
-      await $(K.addDays).tap();
+      await $(K.durationSpinbox).enterText("10");
 
-      expect("5", findsOneWidget);
+      await $(K.durationTypeField).tap();
 
-      await $(K.addDays).tap();
+      await $(K.durationTypeField).$(TextField).enterText("week");
 
-      expect("10", findsOneWidget);
-
-      await $(K.subtractDays).tap();
-      await $(K.subtractDays).tap();
-
-      expect("0", findsOneWidget);
+      await $(K.durationTypeField).$(ListTile).tap();
 
       expect($(K.saveButton), findsOneWidget);
 
       await $(K.saveButton).tap();
+
       await $.pumpAndSettle();
 
       expect($(HomePage), findsOneWidget);
+
+      await logoff($);
+      await $.native.pressHome();
     },
   );
 }

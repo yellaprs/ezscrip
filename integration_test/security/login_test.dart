@@ -1,13 +1,10 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/login_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
 import '../consultation/common/consultation_common.dart';
 import '../setup.dart';
@@ -15,7 +12,7 @@ import '../setup.dart';
 void main() {
 
   patrolTest(
-    'Login page sucessful login and invalid pin test',
+    'Login page sucessful login and invalid pin test', tags: ["security"],
     ($) async {
 
       AppUser profile =

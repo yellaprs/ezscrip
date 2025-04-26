@@ -15,7 +15,7 @@ import 'common/consultation_common.dart';
 void main() {
 
   patrolTest(
-    'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)',
+    'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)', tags:["consultation"],
     ($) async {
 
       AppUser profile =

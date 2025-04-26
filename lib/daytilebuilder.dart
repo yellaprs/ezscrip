@@ -43,19 +43,24 @@ class DaytileBuilder extends WatchingStatefulWidget {
 }
 
 class _DaytileBuilderState extends State<DaytileBuilder> {
-  DateTime date;
+  DateTime _date;
+  final DateTime _today = DateTime.now();
+ 
 
-  _DaytileBuilderState(this.date);
+  _DaytileBuilderState(this._date);
 
   @override
   void initState() {
+
+   
+   
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     List<Consultation> consultationList = watch(di<ConsultationModel>())
-        .consultationMap[DateFormat('ddMMMyyyy').format(date)]!;
+        .consultationMap[DateFormat('ddMMMyyyy').format(_date)]!;
 
     return TimelineTile(
         axis: TimelineAxis.vertical,
@@ -65,11 +70,11 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
         afterLineStyle: const LineStyle(color: Colors.grey, thickness: 3.0),
         hasIndicator: true,
         indicatorStyle: IndicatorStyle(
-          color: getIndicatorColor(date, consultationList.isEmpty, context),
+          color: getIndicatorColor(_date, consultationList.isEmpty, context),
           indicatorXY: 0.5,
           drawGap: true,
           indicator: buildDayViewHeaderLeading(
-              date, consultationList.isEmpty, context),
+              _date, consultationList.isEmpty, context),
         ),
         startChild: Container(
             alignment: Alignment.center,
@@ -77,15 +82,15 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
             height: 25,
             child: AutoSizeText(
                 DateFormat.E(GetIt.instance<LocaleModel>().getLocale.languageCode)
-                    .format(date),
+                    .format(_date),
                 key: Key(
                     DateFormat.E(GetIt.instance<LocaleModel>().getLocale.languageCode)
-                        .format(date)),
+                        .format(_date)),
                 style: TextStyle(
-                    fontSize: 10, color: getTextColor(date, true, context)))),
+                    fontSize: 10, color: getTextColor(_date, true, context)))),
         endChild: (consultationList.isNotEmpty)
             ? Container(
-                key: Key(DateFormat('ddMMMyyyy').format(date)),
+                key: Key(DateFormat('ddMMMyyyy').format(_date)),
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
                     border: Border(
@@ -102,14 +107,14 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                         .toList()))
             : SizedBox(
                 height: 50,
-                child: (DateTime.now().difference(date).inHours < 24 &&
-                        DateTime.now().difference(date).inHours > 0)
+                child: (DateTime.now().difference(_date).inHours < 24 &&
+                        DateTime.now().difference(_date).inHours > 0)
                     ? Flex(
                         direction: Axis.horizontal,
                         children: List.generate(
                             (MediaQuery.of(context).size.width / 10).floor() -
                                 10, (_) {
-                          return SizedBox(
+                          return const SizedBox(
                             width: 10,
                             height: 1,
                             child: DecoratedBox(
@@ -201,7 +206,6 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
     return color;
   }
 
-
   Widget _eventBuilder(Consultation consultation, BuildContext context) {
     return Card(
         shape: RoundedRectangleBorder(
@@ -254,27 +258,26 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                     ))));
   }
 
-
   void _showMessage(IconData icon, String message, Color color) {
     showFlash(
-      context: context,
-      duration: const Duration(seconds: 3),
-      builder: (_, controller) {
-        return Flash(
-          controller: controller,
-          position: FlashPosition.bottom,
-          child: FlashBar(
+        context: context,
+        duration: const Duration(seconds: 3),
+        builder: (_, controller) {
+          return Flash(
             controller: controller,
-            icon: Icon(
-              icon,
-              size: 36.0,
-              color: color,
+            position: FlashPosition.bottom,
+            child: FlashBar(
+              controller: controller,
+              icon: Icon(
+                icon,
+                size: 36.0,
+                color: color,
+              ),
+              content: Text(message),
             ),
-            content: Text(message),
-          ),
-        );
-      });
-}
+          );
+        });
+  }
 
   List<CustomSlidableAction> buildEventActions(
       Consultation consultation, BuildContext context) {
@@ -318,17 +321,17 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                 ),
               ])),
       onPressed: (context) async {
-
         pw.Document prescPdf;
         String? letterHead;
         Uint8List byteData;
         String? signatureSvg;
         String? format;
 
-        if ((await GetIt.instance<UserPrefs>().getUserType()) ==  UserType.Basic) {
-           int count = await GetIt.instance<UserPrefs>().getCounter();
-            if (count >= GlobalConfiguration().get(C.BASIC_PLAN_QUOTA)) {
-             _showMessage(
+        if ((await GetIt.instance<UserPrefs>().getUserType()) ==
+            UserType.Basic) {
+          int count = await GetIt.instance<UserPrefs>().getCounter();
+          if (count >= GlobalConfiguration().get(C.BASIC_PLAN_QUOTA)) {
+            _showMessage(
                 Icons.warning,
                 "Exceeded quota for Basic plan. Upgrade to premium version.",
                 Colors.red);
@@ -394,7 +397,6 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                 generatedFile: prescFile.path,
                 mode: Mode.View,
                 status: consultation.getStatus()));
-
       },
     );
   }
@@ -411,7 +413,7 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
           child: Stack(alignment: Alignment.topCenter, children: [
             const Icon(FontAwesome5Solid.notes_medical, size: 20),
             Padding(
-                padding: EdgeInsets.only(top: 30, left: 2, right: 2, bottom: 2),
+                padding: const EdgeInsets.only(top: 30, left: 2, right: 2, bottom: 2),
                 child: AutoSizeText(AppLocalizations.of(context)!.view,
                     semanticsLabel: semantic.S.HOME_VIEW_CONSULTATION_BUTTON,
                     minFontSize: 8,
@@ -419,9 +421,10 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
                     softWrap: true)),
           ])),
       onPressed: (context) async {
-        AppUser user =  await GetIt.instance<UserPrefs>().getUser();
+        AppUser user = await GetIt.instance<UserPrefs>().getUser();
         navService.pushNamed(Routes.ViewConsultation,
-            args: ConsultationPageArguments(consultation: consultation, user: user, isEditable: false));
+            args: ConsultationPageArguments(
+                consultation: consultation, user: user, isEditable: false));
       },
     );
   }
@@ -449,8 +452,7 @@ class _DaytileBuilderState extends State<DaytileBuilder> {
           child: Stack(alignment: Alignment.topCenter, children: [
             const Icon(Icons.edit, size: 25),
             Padding(
-              padding:
-                  const EdgeInsets.only(top: 30, left: 2, right: 2, bottom: 2),
+              padding: const EdgeInsets.only(top: 30, left: 2, right: 2, bottom: 2),
               child: AutoSizeText(AppLocalizations.of(context)!.edit,
                   semanticsLabel: semantic.S.HOME_EDIT_CONSULTATION_BUTTON,
                   minFontSize: 6,

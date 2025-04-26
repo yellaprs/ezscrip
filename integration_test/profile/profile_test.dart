@@ -4,6 +4,7 @@ import 'package:ezscrip/profile/model/appUser.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../consultation/common/consultation_common.dart';
+import '../logoff.dart';
 import '../setup.dart';
 import 'package:ezscrip/profile/view/profile_page.dart';
 import 'package:ezscrip/profile/view/view_profile_page.dart';
@@ -13,7 +14,7 @@ import 'package:patrol/patrol.dart';
 
 void main() {
   patrolTest(
-    'modify profile test',
+    'modify profile test', tags: ["profile"],
     ($) async {
       AppUser profile =
           await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
@@ -54,7 +55,7 @@ void main() {
       await $(K.clinicTextField).enterText(newProfile.getClinic());
       expect($(K.contactNoField), findsOneWidget);
       //await $(K.contactNoField).tap();
-      await $(K.contactNoField).enterText(newProfile.getContactNo());
+      await $(K.contactNoField).enterText(newProfile.getContactNo().substring(newProfile.getContactNo().lastIndexOf(")") + 1));
       expect($(K.saveButton), findsOneWidget);
       await $(K.saveButton).tap();
       await $(ViewProfilePage).waitUntilVisible();
@@ -70,6 +71,8 @@ void main() {
       expect($(K.backNavButton), findsOneWidget);
       await $(K.backNavButton).tap();
       await $(HomePage).waitUntilVisible();
+      await logoff($);
+      await $.native.pressHome();
     },
   );
 }

@@ -1,13 +1,11 @@
-import 'package:enum_to_string/enum_to_string.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:patrol/patrol.dart';
 import '../login.dart';
 import '../logoff.dart';
@@ -18,6 +16,7 @@ void main() {
 
   patrolTest(
     'Add Consultation with prescription 1 test ( 2 symtpms,  2 presctiption)',
+    tags:["consultation"], 
     ($) async {
 
       AppUser profile =
@@ -36,7 +35,7 @@ void main() {
         "Review after 4 months",
         "Review after 5 months",
         "Review after 6 months"
-            "Review after 7 months",
+        "Review after 7 months",
         "Review after 8 months"
       ];
 
@@ -67,16 +66,17 @@ void main() {
 
       for (int i = 0; i <= 2; i++) {
         await $(K.testsTile).tap();
-        if ($(K.testsTile).$('Investigations').$(K.tileStatusCollapsed).exists)
-          break;
+        if ($(K.testsTile).$('Investigations').$(K.tileStatusCollapsed).exists){
+           break;
+        }   
       }
 
       for (int i = 0; i <= 2; i++) {
         await $(K.notesTile).$('Notes').tap();
-        if ($(K.notesTile).$(K.tileStatusCollapsed).exists) break;
+        if ($(K.notesTile).$(K.tileStatusExpanded).exists) break;
       }
 
-      if (notes.length > 0) {
+      if (notes.isNotEmpty) {
         for (int i = 0; i < notes.length; i++) {
           await addNote($, notes.elementAt(i));
           
@@ -84,35 +84,31 @@ void main() {
       }
 
       expect($(K.notesTile).$(Row).$("maximum is 5"), findsOneWidget);
-
-      expect($(K.notlesList).$(Row).$("Review after 2 months"), findsOneWidget);
-
-      var finder = find.ancestor(
-        of: find.text("Review after 2 months"),
-        matching: find.byType(Row),
+      var finder = find.descendant(
+        of: $(K.notlesList).$(Row).at(0),
+        matching: find.byIcon(EvaIcons.closeCircleOutline),
       );
 
-      expect($(K.notlesList).$(finder).$(IconButton), findsOneWidget);
-
-      await $(K.notlesList).$(finder).$(IconButton).tap();
-
-      expect($(K.notlesList).$(Row).$("Review after 3 months"), findsOneWidget);
-
-      finder = find.ancestor(
-        of: find.text("Review after 3 months"),
-        matching: find.byType(Row),
+      expect($(finder), findsOneWidget);
+      await $(finder).tap();
+       
+      finder = find.descendant(
+        of: $(K.notlesList).$(Row).at(0),
+        matching: find.byIcon(EvaIcons.closeCircleOutline),
       );
+      expect($(finder), findsOneWidget);
+      await $(finder).tap();
 
-      expect($(K.notlesList).$(finder).$(IconButton), findsOneWidget);
-
-      await $(K.notlesList).$(finder).$(IconButton).tap();
-
+      finder = find.descendant(
+        of: $(K.notlesList).$(Row).at(0),
+        matching: find.byIcon(EvaIcons.closeCircleOutline),
+      );
+      expect($(finder), findsOneWidget);
+      await $(finder).tap();
+   
       expect($(K.notesTile).$(Row).$("maximum is 5"), findsNothing);
-
       await $(K.backNavButton).tap();
-
       expect($(HomePage), findsOneWidget);
-
       await logoff($);
 
       await $.native.pressHome();

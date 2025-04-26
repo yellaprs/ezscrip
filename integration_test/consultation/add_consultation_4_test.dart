@@ -1,4 +1,3 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_page.dart';
@@ -6,13 +5,11 @@ import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
 import 'package:patrol/patrol.dart';
 import '../login.dart';
@@ -24,7 +21,7 @@ void main() {
  
 
   patrolTest(
-    'Add Consultation with prescription 1 test',
+    'Add Consultation with prescription 1 test', tags:["consultation", "prescription"],
     ($) async {
 
       Consultation consultation = await loadTestDateConsultation(

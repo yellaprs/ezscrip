@@ -665,11 +665,11 @@ class IntroductionPageState extends State<IntroductionPage> {
     return Container(
         alignment: Alignment.center,
         height: MediaQuery.of(context).size.height * 0.45,
-        width: MediaQuery.of(context).size.width * 0.75,
+        width: MediaQuery.of(context).size.width * 0.6,
         margin: const EdgeInsets.all(5),
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 25),
             child: Semantics(
               identifier: Semantic.S.PIN_RESET_SECRET,
               child: AutoSizeText(

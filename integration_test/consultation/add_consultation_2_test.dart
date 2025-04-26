@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_page.dart';
@@ -8,16 +5,14 @@ import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/prescription/view/prescription_preview_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
 import 'package:patrol/patrol.dart';
+//import 'package:timeline_tile/timeline_tile.dart';
 import '../login.dart';
 import '../logoff.dart';
 import '../setup.dart';
@@ -26,11 +21,13 @@ import 'common/consultation_common.dart';
 void main() {
   patrolTest(
     'Add Consultation Page (3 symptons, 2 conditions, 3 tests, 3 prescriptions)',
+    tags: ["consultation", "prescription"],
     ($) async {
       Consultation consultation = await loadTestDateConsultation(
           "assets/test/${C.TEST_DATA_CONSULTATION_1}.json");
 
-      AppUser profile = await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
+      AppUser profile =
+          await loadTestDataProfile("assets/test/${C.TEST_DATA_PROFILE}.json");
 
       await createApp($, profile);
       await login($, "1111");
@@ -80,6 +77,77 @@ void main() {
           .$(Slidable)
           .$('Edit')
           .tap();
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo();
+
+      // expect($(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))),
+      // findsOneWidget);
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientName())
+      // .waitUntilExists();
+      // expect(
+      // $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientName()),
+      // findsOneWidget);
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .tap();
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .$('View')
+      // .tap();
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      //  .$(Column)
+      //  .$(Slidable)
+      //  .$(ListTile)
+      //  .$(consultation.getPatientName())
+      //  .$(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo(
+      //  view: $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).$(Column),
+      //  scrollDirection: AxisDirection.down,
+      //  dragDuration: const Duration(seconds: 15));
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientName())
+      // .waitUntilExists();
+      // expect(
+      // $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientNamer()),
+      // findsOneWidget);
+
+      // expect(
+          // $(K.timeLineKey)
+              // .$(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+              // .$(Column)
+              // .$(Slidable)
+              // .$(ListTile)
+              // .$(consultation.getPatientName()),
+          // findsOneWidget);
+
+      // var slidableFinder = find.ancestor(
+          // of: $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+              // .$(Column)
+              // .$(Slidable)
+              // .$(ListTile)
+              // .$(consultation.getPatientName()),
+          // matching: $(Slidable));
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .tap();
+
+      //await $(slidableFinder).tap();
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .$('Edit')
+      // .tap();
+      //await $(slidableFinder).$('Edit').tap();
+
       await $(ConsultationEditPage).waitUntilVisible();
 
       await $(ConsultationEditPage).waitUntilVisible();
@@ -100,8 +168,42 @@ void main() {
       await $(K.checkButton).tap();
 
       await $(HomePage).waitUntilVisible();
-      await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo();
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo();
+      //await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo();
 
+      // expect($(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))),
+      // findsOneWidget);
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientName())
+      // .waitUntilExists();
+
+      // expect(
+          // $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+              // .$(Column)
+              // .$(Slidable)
+              // .$(ListTile)
+              // .$(consultation.getPatientName()),
+          // findsOneWidget);
+
+      // expect(
+      // $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(ListTile)
+      // .$(consultation.getPatientName()),
+      // findsOneWidget);
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .tap();
+
+      //await $(slidableFinder).tap();
+
+      // await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
+      // .$(Slidable)
+      // .$('View')
+      // .tap();
+
+      await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))).scrollTo();
       expect($(Key(DateFormat('ddMMMyyyy').format(DateTime.now()))),
           findsOneWidget);
       await $(Key(DateFormat('ddMMMyyyy').format(DateTime.now())))
@@ -120,6 +222,9 @@ void main() {
           .$(Slidable)
           .$('View')
           .tap();
+
+      //await $(slidableFinder).$('View').tap();
+
       await viewConsultation(
           $,
           consultation.getPatientName(),

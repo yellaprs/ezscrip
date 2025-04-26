@@ -58,6 +58,7 @@ class _LetterheadSelectionPageState extends State<LetterheadSelectionPage> {
     actions.add(Semantics(
         identifier: semantic.S.PREFERNCES_BTN_CHECK,
         child: IconButton(
+          key: K.checkButton,
           focusNode: FocusNodes.savePrescriptionSettings,
           icon: Icon(
             Foundation.check,
@@ -159,10 +160,12 @@ class _LetterheadSelectionPageState extends State<LetterheadSelectionPage> {
                                             MediaQuery.of(context).size.height *
                                                 0.6,
                                         child: Card(
-                                          key: Key(
-                                              "${element.substring(element.lastIndexOf("/") + 1)}"),
                                           elevation: 4.0,
-                                          child: Image.asset(element,
+                                          child: Image.asset(
+                                              key: Key(element.substring(
+                                                  element.lastIndexOf("/") + 1,
+                                                  element.indexOf("."))),
+                                              element,
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
@@ -179,11 +182,9 @@ class _LetterheadSelectionPageState extends State<LetterheadSelectionPage> {
                                                 bottom: 30, right: 15),
                                             child: (element.trim() ==
                                                     _selectedFormat.trim())
-                                                ? Icon(Icons.check_circle,
+                                                ? const Icon(Icons.check_circle,
                                                     key: Key("Checked"),
-                                                    size: 25,
-                                                    semanticLabel:
-                                                        "${element.substring(element.lastIndexOf("/") + 1)}")
+                                                    size: 25)
                                                 : const Icon(
                                                     Icons.circle_outlined,
                                                     key: Key("Unchecked"),

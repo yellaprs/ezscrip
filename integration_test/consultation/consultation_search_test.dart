@@ -1,15 +1,12 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:ezscrip/consultation/model/consultation.dart';
 import 'package:ezscrip/consultation/view/add_consultation_page.dart';
 import 'package:ezscrip/consultation/view/consultation_search_page.dart';
 import 'package:ezscrip/home_page.dart';
 import 'package:ezscrip/profile/model/appUser.dart';
-import 'package:ezscrip/profile/model/userType.dart';
 import 'package:ezscrip/util/constants.dart';
 import 'package:ezscrip/util/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:intl/intl.dart';
 import 'package:patrol/patrol.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -22,6 +19,7 @@ void main() {
 
   patrolTest(
     'consultation search by patient name test',
+    tags:["consultation"],
     ($) async {
 
      Consultation consultation = await loadTestDateConsultation(

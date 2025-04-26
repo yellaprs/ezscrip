@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/consultation/model/consultation_model.dart';
 import 'package:ezscrip/profile/profile_routes.dart';
@@ -54,12 +53,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late DateTime _today;
   late ValueNotifier<DateTime> _focussedDate;
   late ScrollController _timeLineScrollController;
-  late GlobalKey _todayTileKey;
+  //late GlobalKey _todayTileKey;
   late ListObserverController observerController;
   //final InAppReview inAppReview = InAppReview.instance;
   final bool showDemo;
   late int initialScrollOffset;
-
+   late GlobalKey _todayTileKey;
   late SuperTooltipController _profileTooltipController,
       _preferencesTooltipController,
       _settingsTooltipController,
@@ -77,6 +76,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     _focussedDate = ValueNotifier<DateTime>(_today);
 
+  
     _todayTileKey =
         GlobalKey(debugLabel: DateFormat("ddMMMyyyy").format(_today));
 
@@ -319,12 +319,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   "Date:${DateFormat('ddMMMyyyy').format(date)}");
 
               return Container(
-                  key: (DateFormat("ddMMMyyyy").format(date) ==
+                       key: (DateFormat("ddMMMyyyy").format(date) ==
                           DateFormat("ddMMMyyyy").format(_today))
                       ? _todayTileKey
                       : GlobalKey(
                           debugLabel: DateFormat("ddMMMyyyy").format(date)),
-                  child: DaytileBuilder(date));
+                      child: DaytileBuilder(date));
             } else {
               return SpinKitFadingCircle(color: Colors.grey[100], size: 25);
             }
@@ -339,6 +339,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return ListViewObserver(
         controller: observerController,
         child: ListView.separated(
+          key: K.timeLineKey,
           padding: const EdgeInsets.all(5),
           itemCount: end.difference(start).inDays,
           controller: _timeLineScrollController,
@@ -363,6 +364,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           alignment: Alignment.centerLeft,
                           width: 60,
                           child: Column(children: [
+                            
                             AutoSizeText(
                                 DateFormat.MMM(GetIt.instance<LocaleModel>()
                                         .getLocale
@@ -383,9 +385,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 : Container(),
                           ])),
                       const Padding(
-                          padding: EdgeInsets.only(left: 60),
+                          padding: EdgeInsets.only(left: 75, bottom: 20),
                           child: Divider(thickness: 1.5)),
-                      buildTimeLineDayWidget(date)
+                      Container(
+                         padding: const EdgeInsets.only(top: 15),
+                         child:buildTimeLineDayWidget(date))
                     ]))
                 : Container();
           },
@@ -418,8 +422,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         closeButtonType: CloseButtonType.inside,
         onHide: () async {
           String demoDataFile = GlobalConfiguration().getValue(C.DEMO_DATA);
-
-          print("demoData : " + demoDataFile);
 
           Map<String, dynamic> testDataJson =
               await rootBundle.loadStructuredData(demoDataFile, (value) async {
@@ -730,8 +732,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           appBar: buildAppBarHeaderWidget(),
                           extendBodyBehindAppBar: true,
                           body: Container(
-                              key: K.timeLineKey,
-                              padding: EdgeInsets.only(top: 35, bottom: 20),
+                            
+                              padding: const EdgeInsets.only(top: 60, bottom: 20),
                               child: Focus(
                                   focusNode: FocusNodes.timeline,
                                   child: FutureBuilder<DateTime>(
@@ -744,10 +746,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 resultSnapshot.data!.month, 1),
                                             DateTime(DateTime.now().year,
                                                     DateTime.now().month + 1, 0)
-                                                .add(Duration(days: 1)),
+                                                .add(const Duration(days: 1)),
                                             _focussedDate.value);
                                       } else {
-                                        return CircularProgressIndicator();
+                                        return const CircularProgressIndicator();
                                       }
                                     },
                                   )))))

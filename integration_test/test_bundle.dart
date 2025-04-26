@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
 
 // START: GENERATED TEST IMPORTS
-import 'consultation/add_symptoms_limit_test.dart' as consultation__add_symptoms_limit_test;
+import 'consultation/add_consultation_2_test.dart' as consultation__add_consultation_2_test;
 // END: GENERATED TEST IMPORTS
 
 Future<void> main() async {
@@ -16,6 +16,6 @@ Future<void> main() async {
         debugDefaultTargetPlatformOverride;
 
   // START: GENERATED TEST GROUPS
-  group('consultation.add_symptoms_limit_test', consultation__add_symptoms_limit_test.main);
+  group('consultation.add_consultation_2_test', consultation__add_consultation_2_test.main);
   // END: GENERATED TEST GROUPS
 }

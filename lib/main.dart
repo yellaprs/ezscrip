@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:crypto/crypto.dart';
 import 'package:ezscrip/consultation/consultation_routes.dart';
 import 'package:ezscrip/consultation/model/durationType.dart';
@@ -363,6 +365,10 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   FlutterNativeSplash.remove();
+
+   await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );              
 
   runApp(ezscripApp(isPrefsSet, userType, prescCount));
 }
